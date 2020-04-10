@@ -129,6 +129,7 @@ public final class Novel implements Author, Audience {
         private final Map<Class<?>, ObjectDataReader<?>> additionalReaders;
         private Policies policies;
         private int revision;
+        private final Set<Integer> illegalModifiers;
 
         private Builder() {
             this.additionalFactories    = new LinkedList<>();
@@ -140,8 +141,6 @@ public final class Novel implements Author, Audience {
             this.illegalModifiers       = defaultIllegalModifiers();
         }
 
-
-        private final Set<Integer> illegalModifiers;
         public Builder withTransientFields(boolean allowed) {
             setFieldModifier(allowed, Modifier.TRANSIENT);
             return this;
