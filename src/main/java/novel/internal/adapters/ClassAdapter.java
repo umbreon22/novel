@@ -5,8 +5,9 @@ import novel.api.types.write.pens.DataPen;
 import novel.api.types.read.DataPaperReadException;
 import novel.api.types.adapt.ObjectDataAdapter;
 
+@SuppressWarnings("rawtypes")
 public class ClassAdapter implements ObjectDataAdapter<Class> {
-    @SuppressWarnings("unchecked")
+
     @Override
     public Class read(DataPaper paper) {
         String classCanonicalName = paper.strings();
