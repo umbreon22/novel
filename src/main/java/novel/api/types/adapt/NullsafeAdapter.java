@@ -2,7 +2,7 @@ package novel.api.types.adapt;
 
 import novel.api.types.read.DataPaper;
 import novel.api.types.read.DataPaperReadException;
-import novel.api.types.write.DataPen;
+import novel.api.types.write.pens.DataPen;
 
 /**
  * A wrapped class for {@link ObjectDataAdapter} that performs a null safe read/write.

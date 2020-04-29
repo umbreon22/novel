@@ -11,7 +11,7 @@ import novel.api.types.read.ObjectDataReader;
 import novel.api.types.read.Readable;
 import novel.api.types.token.TypeToken;
 import novel.api.types.write.CannotWrite;
-import novel.api.types.write.DataPen;
+import novel.api.types.write.pens.DataPen;
 import novel.api.types.write.ObjectDataWriter;
 import novel.api.types.write.Writeable;
 import novel.internal.registry.NovelAdapterRegistry;

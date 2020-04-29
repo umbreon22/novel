@@ -6,7 +6,7 @@ import novel.api.types.factory.AdapterFactory;
 import novel.api.types.token.$Gson$Types;
 import novel.api.types.token.TypeToken;
 import novel.api.types.read.DataPaper;
-import novel.api.types.write.DataPen;
+import novel.api.types.write.pens.DataPen;
 
 import java.lang.reflect.Type;
 import java.util.Collection;

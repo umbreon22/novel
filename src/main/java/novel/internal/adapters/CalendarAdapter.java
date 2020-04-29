@@ -1,7 +1,7 @@
 package novel.internal.adapters;
 
 import novel.api.types.read.DataPaper;
-import novel.api.types.write.DataPen;
+import novel.api.types.write.pens.DataPen;
 import novel.api.types.adapt.ObjectDataAdapter;
 
 import java.util.Calendar;

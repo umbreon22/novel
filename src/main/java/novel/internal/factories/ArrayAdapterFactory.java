@@ -7,7 +7,7 @@ import novel.api.types.token.$Gson$Types;
 import novel.api.types.token.TypeToken;
 import novel.api.types.read.DataPaper;
 import novel.api.types.read.ObjectDataReader;
-import novel.api.types.write.DataPen;
+import novel.api.types.write.pens.DataPen;
 import novel.api.types.write.ObjectDataWriter;
 
 import java.lang.reflect.Array;

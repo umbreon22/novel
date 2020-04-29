@@ -1,7 +1,7 @@
 package novel.api.streams;
 
 import novel.internal.util.Ignore;
-import novel.api.types.write.DataPen;
+import novel.api.types.write.pens.DataPen;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;

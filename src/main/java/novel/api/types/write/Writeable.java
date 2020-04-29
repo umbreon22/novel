@@ -2,6 +2,8 @@ package novel.api.types.write;
 
 import novel.api.Novel;
 import novel.api.types.token.Tokenable;
+import novel.api.types.write.pens.DataPen;
+
 import java.io.Serializable;
 
 /**

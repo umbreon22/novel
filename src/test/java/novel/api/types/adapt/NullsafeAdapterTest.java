@@ -6,7 +6,7 @@ import novel.testutil.TestPrimitives;
 import novel.api.types.token.TypeToken;
 import novel.api.types.read.DataPaper;
 import novel.api.types.read.DataPaperReadException;
-import novel.api.types.write.DataPen;
+import novel.api.types.write.pens.DataPen;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

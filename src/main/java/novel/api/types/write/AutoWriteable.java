@@ -1,5 +1,7 @@
 package novel.api.types.write;
 
+import novel.api.types.write.pens.DataPen;
+
 /**
  * Like an autobiography... this object writes itself!
  * Custom adapters CAN take priority over {@link AutoWriteable}s,

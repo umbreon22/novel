@@ -1,4 +1,4 @@
-package novel.api.types.write;
+package novel.api.types.write.pens;
 
 /**
  * This {@link DataPen} keeps a running count on how much data you'd output without doing any actual writing.

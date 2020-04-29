@@ -1,6 +1,6 @@
 package novel.testutil;
 
-import novel.api.types.write.DataPen;
+import novel.api.types.write.pens.DataPen;
 
 import java.util.LinkedList;
 import java.util.Queue;

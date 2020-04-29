@@ -3,7 +3,7 @@ package novel.internal.factories;
 import novel.api.Novel;
 import novel.api.types.factory.AdapterFactory;
 import novel.api.types.read.DataPaper;
-import novel.api.types.write.DataPen;
+import novel.api.types.write.pens.DataPen;
 import novel.api.types.adapt.ObjectDataAdapter;
 import novel.api.types.token.$Gson$Types;
 import novel.api.types.token.TypeToken;
@@ -27,7 +27,7 @@ public class MapAdapterFactory extends AdapterFactory {
         ObjectDataAdapter<?> keyAdapter = novel.contents().adapter(TypeToken.get(keyAndValueTypes[0]));
         ObjectDataAdapter<?> valueAdapter = novel.contents().adapter(TypeToken.get(keyAndValueTypes[1]));
         Supplier<Map<?,?>> constructor = MapSupplier.fromToken(typeToken);
-        @SuppressWarnings("unchecked")
+        @SuppressWarnings({"unchecked", "rawtypes"})
         ObjectDataAdapter<T> result = (ObjectDataAdapter<T>) new MapDataAdapter(keyAdapter, valueAdapter, constructor);
         return result;
     }
