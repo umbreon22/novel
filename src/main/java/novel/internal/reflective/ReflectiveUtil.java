@@ -50,6 +50,10 @@ public final class ReflectiveUtil {
             || field.isAnnotationPresent(Inked.class);
     }
 
+    public static boolean isNullsafe(Class<?> clazz) {
+        return clazz.isAnnotationPresent(Inked.class);
+    }
+
     public static boolean isAutoWriteable(Class<?> fieldType) {
         return AutoWriteable.class.isAssignableFrom(fieldType);
     }

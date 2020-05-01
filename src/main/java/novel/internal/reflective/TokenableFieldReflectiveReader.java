@@ -25,7 +25,7 @@ public final class TokenableFieldReflectiveReader<T> extends ReflectiveObjectRea
     }
 
     @Override
-    protected boolean isNullsafe(TokenableField tokenableField) {
+    protected boolean isFieldNullsafe(TokenableField tokenableField) {
         return tokenableField.isNullsafe();
     }
 

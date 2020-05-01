@@ -27,7 +27,7 @@ public final class FieldReflectiveObjectReader<T> extends ReflectiveObjectReader
     }
 
     @Override
-    protected boolean isNullsafe(Field field) {
+    protected boolean isFieldNullsafe(Field field) {
         return ReflectiveUtil.isNullsafe(field);
     }
 

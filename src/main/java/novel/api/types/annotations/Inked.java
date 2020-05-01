@@ -7,7 +7,12 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import static java.lang.annotation.ElementType.*;
+import static java.lang.annotation.ElementType.FIELD;
+import static java.lang.annotation.ElementType.LOCAL_VARIABLE;
+import static java.lang.annotation.ElementType.METHOD;
+import static java.lang.annotation.ElementType.PARAMETER;
+import static java.lang.annotation.ElementType.RECORD_COMPONENT;
+import static java.lang.annotation.ElementType.TYPE;
 
 /**
  * This annotation is used to bypass the null check in
@@ -18,7 +23,7 @@ import static java.lang.annotation.ElementType.*;
  * Primitives do not need this annotation and are inherently treated as {@link Inked}.
  */
 @Retention(RetentionPolicy.RUNTIME)
-@Target({FIELD, METHOD, PARAMETER, LOCAL_VARIABLE, RECORD_COMPONENT})
+@Target({TYPE, FIELD, METHOD, PARAMETER, LOCAL_VARIABLE, RECORD_COMPONENT})
 public @interface Inked {
     String description() default "";
 }

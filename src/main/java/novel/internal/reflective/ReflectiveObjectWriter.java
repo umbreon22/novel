@@ -10,9 +10,11 @@ public abstract class ReflectiveObjectWriter<T, F> implements ObjectDataWriter<T
 
     protected final Novel novel;
     private final Iterable<F> sourceFields;
+    private final boolean isClassNullsafe;
     public ReflectiveObjectWriter(Novel novel, TypeToken<T> source) {
         this.novel = novel;
         this.sourceFields = supplyFields(novel, source);
+        this.isClassNullsafe = ReflectiveUtil.isNullsafe(source.getRawType());
     }
 
     protected abstract Iterable<F> supplyFields(Novel novel, TypeToken<T> source);
@@ -36,12 +38,7 @@ public abstract class ReflectiveObjectWriter<T, F> implements ObjectDataWriter<T
      */
     @SuppressWarnings("unchecked")
     protected <WriteType> void writeField(DataPen<?> pen, F field, WriteType fieldObject) {
-        boolean shouldWrite = fieldObject != null;
-        if(!isNullsafe(field)) {
-            //Nullsafe fields are assumed to NEVER be null, skipping this boolean
-            pen.bools(shouldWrite);
-        }
-        if (shouldWrite) {
+       if (shouldWrite(pen, field, fieldObject)) {
             if (isAutoWriteable(field)) {
                 pen.objects((AutoWriteable) fieldObject);
             } else {
@@ -50,9 +47,23 @@ public abstract class ReflectiveObjectWriter<T, F> implements ObjectDataWriter<T
         }
     }
 
+    private <WriteType> boolean shouldWrite(DataPen<?> pen, F field, WriteType fieldObject) {
+        boolean shouldWrite = isNullsafe(field);
+        if(!shouldWrite) {//Nullsafe fields are assumed to NEVER be null, skipping this boolean
+            shouldWrite = fieldObject != null;
+            pen.bools(shouldWrite);
+        }
+        return shouldWrite;
+    }
+
     protected abstract TypeToken<?> tokenFor(F field);
 
     protected abstract boolean isAutoWriteable(F field);
 
-    protected abstract boolean isNullsafe(F field);
+    protected abstract boolean isFieldNullsafe(F field);
+
+    protected final boolean isNullsafe(F field) {
+        return isClassNullsafe || isFieldNullsafe(field);
+    }
+
 }

@@ -14,6 +14,7 @@ public abstract class ReflectiveObjectReader<T, F> implements ObjectDataReader<T
     protected final Novel novel;
     private final Iterable<F> sourceFields;
     private final Supplier<T> constructor;
+    private final boolean isClassNullsafe;
 
     public ReflectiveObjectReader(Novel novel, TypeToken<T> source) {
         this.novel = novel;
@@ -23,6 +24,7 @@ public abstract class ReflectiveObjectReader<T, F> implements ObjectDataReader<T
             T instance = createUnsafeInstance((Class<T>) source.getRawType());
             return instance;
         };
+        this.isClassNullsafe = ReflectiveUtil.isNullsafe(source.getRawType());
     }
 
     protected abstract Iterable<F> supplyFields(Novel novel, TypeToken<T> source);
@@ -42,17 +44,25 @@ public abstract class ReflectiveObjectReader<T, F> implements ObjectDataReader<T
     }
 
     private void readField(DataPaper paper, F field, T instance) throws IllegalAccessException {
-        if (isNullsafe(field) || paper.bools()) {
+        if (shouldRead(paper, field)) {
             var read = novel.read(paper, tokenFor(field));
             setInstance(field, instance, read);
         }
+    }
+
+    private boolean shouldRead(DataPaper paper, F field) {
+        return isNullsafe(field) || paper.bools();
     }
 
     protected abstract TypeToken<?> tokenFor(F field);
 
     protected abstract void setInstance(F field, T instance, Object read) throws IllegalAccessException;
 
-    protected abstract boolean isNullsafe(F field);
+    protected abstract boolean isFieldNullsafe(F field);
+
+    protected final boolean isNullsafe(F field) {
+        return isClassNullsafe || isFieldNullsafe(field);
+    }
 
     protected static <T> T createUnsafeInstance(Class<T> clazz) {
         return createUnsafeInstance(clazz, Object.class);

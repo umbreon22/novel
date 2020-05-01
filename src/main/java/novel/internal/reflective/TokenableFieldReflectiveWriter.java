@@ -31,7 +31,7 @@ public final class TokenableFieldReflectiveWriter<T> extends ReflectiveObjectWri
     }
 
     @Override
-    protected boolean isNullsafe(TokenableField field) {
+    protected boolean isFieldNullsafe(TokenableField field) {
         return field.isNullsafe();
     }
 }

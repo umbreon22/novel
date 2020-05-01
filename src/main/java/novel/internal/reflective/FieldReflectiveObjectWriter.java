@@ -34,7 +34,7 @@ public final class FieldReflectiveObjectWriter<T> extends ReflectiveObjectWriter
     }
 
     @Override
-    protected boolean isNullsafe(Field field) {
+    protected boolean isFieldNullsafe(Field field) {
         return ReflectiveUtil.isNullsafe(field);
     }
 }
