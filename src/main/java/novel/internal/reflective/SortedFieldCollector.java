@@ -17,8 +17,6 @@ import java.util.TreeSet;
  */
 public class SortedFieldCollector extends AbstractFieldCollector {
 
-    private static final Comparator<Field> BY_FOLIO_PRIORITY = new PrioritizedFieldComparator();
-
     private final Comparator<Field> fieldComparator;
     private final Novel novel;
     public SortedFieldCollector(Novel novel, Comparator<Field> fieldComparator) {
@@ -34,8 +32,9 @@ public class SortedFieldCollector extends AbstractFieldCollector {
      * Those with the same or no priority will be sorted
      * with a String comparison on {@link Field#getName()}
      */
-    public static SortedFieldCollector usingFolio(Novel novel) {
-        return new SortedFieldCollector(novel, BY_FOLIO_PRIORITY);
+    public static SortedFieldCollector usingFolio(Novel novel, Comparator<Field> fallback) {
+        //todo: maybe pass in a prioritized field comparator instead? we don't need to create extra instances, but we do want to enforce folio priority
+        return new SortedFieldCollector(novel, new PrioritizedFieldComparator(fallback));
     }
 
     /**

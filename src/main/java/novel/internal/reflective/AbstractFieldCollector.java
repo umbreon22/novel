@@ -22,7 +22,9 @@ public abstract class AbstractFieldCollector implements FieldCollector {
                 if(shouldThrow(field)) {
                     unsupportedTypes.add(field.getType());
                 } else {
-                    collectedFields.add(field);
+                    if(!collectedFields.add(field)) {
+                        //todo: maybe log this?
+                    }
                 }
             }
         }

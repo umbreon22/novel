@@ -7,17 +7,20 @@ import java.util.Comparator;
 
 /**
  * A {@link Comparator<Field>} using {@link Folio}.
- * Falls back on comparing {@link Field#getName()} using
- * {@link CharSequence#compare(CharSequence, CharSequence)}
+ * Falls back on {@link #fallback}
  * if {@link Folio#value()}s are equivalent.
  */
 class PrioritizedFieldComparator implements Comparator<Field> {
+    private final Comparator<Field> fallback;
+    PrioritizedFieldComparator(Comparator<Field> fallback) {
+        this.fallback = fallback;
+    }
 
     @Override
     public int compare(Field a, Field b) {
         int priority = Integer.compare(getPriority(a), getPriority(b));
         if(priority == 0) {
-            return CharSequence.compare(a.getName(), b.getName());
+            return fallback.compare(a, b);
         } else return priority;
     }
 

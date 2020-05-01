@@ -1,5 +1,6 @@
 package novel.api;
 
+import novel.api.types.annotations.Folio;
 import novel.api.types.read.Audience;
 import novel.api.types.write.Author;
 import novel.internal.reflective.SortedFieldCollector;
@@ -18,9 +19,11 @@ import novel.internal.registry.NovelAdapterRegistry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -43,12 +46,13 @@ public final class Novel implements Author, Audience {
         int revision,
         Iterable<Integer> illegalModifiers,
         Policies policies,
+        Comparator<Field> fallbackComparator,
         List<AdapterFactory> additionalFactories,
         Map<Class<?>, ObjectDataAdapter<?>> additionalAdapters,
         Map<Class<?>, ObjectDataWriter<?>> additionalWriters,
         Map<Class<?>, ObjectDataReader<?>> additionalReaders
     ) {
-        this.collector = SortedFieldCollector.usingFolio(this);
+        this.collector = SortedFieldCollector.usingFolio(this, fallbackComparator);
         this.censor = new FieldCensor(revision, illegalModifiers);//todo: poss in policies with more censor control?
         this.contents = new NovelAdapterRegistry(
         this, policies, additionalFactories, additionalAdapters, additionalWriters, additionalReaders
@@ -123,6 +127,9 @@ public final class Novel implements Author, Audience {
 
         private static final Logger logger = LoggerFactory.getLogger(Builder.class);
 
+        private static final Comparator<Field> COMPARING_FIELD_FOLIO_THEN_NAME = (a, b) -> CharSequence.compare(a.getName(), b.getName());
+        private static final Comparator<Field> COMPARING_FIELD_FOLIO_THEN_NOTHING = (a, b) -> 1;
+
         private final List<AdapterFactory> additionalFactories;
         private final Map<Class<?>, ObjectDataAdapter<?>> additionalAdapters;
         private final Map<Class<?>, ObjectDataWriter<?>> additionalWriters;
@@ -130,6 +137,7 @@ public final class Novel implements Author, Audience {
         private Policies policies;
         private int revision;
         private final Set<Integer> illegalModifiers;
+        private Comparator<Field> fallbackFieldComparator;
 
         private Builder() {
             this.additionalFactories    = new LinkedList<>();
@@ -139,6 +147,35 @@ public final class Novel implements Author, Audience {
             this.policies               = null;
             this.revision               = 0;
             this.illegalModifiers       = defaultIllegalModifiers();
+            this.fallbackFieldComparator = COMPARING_FIELD_FOLIO_THEN_NAME;
+        }
+
+        /**
+         * This is <b>DANGEROUS</b>!!!
+         * Removes any fallback comparator for {@link FieldCollector}.
+         * Java gives no guarantee on field order,
+         * but from my experience it's typically in declaration order.
+         * {@link Folio} comparisons will still be applied.
+         */
+        public Builder withoutFallbackOrdering() {
+            return withFallbackOrderingBy(COMPARING_FIELD_FOLIO_THEN_NOTHING);
+        }
+
+        /**
+         * Sets the fallback comparator to use field names.
+         */
+        public Builder withFallbackOrderingByName() {
+            return withFallbackOrderingBy(COMPARING_FIELD_FOLIO_THEN_NAME);
+        }
+
+        /**
+         * Sets the fallback comparator for when {@link Folio} is not used or equivalent.
+         */
+        public Builder withFallbackOrderingBy(Comparator<Field> fallbackComparator) {
+            this.fallbackFieldComparator = Objects.requireNonNull(
+                fallbackComparator, "Fallback comparator cannot be null."
+            );
+            return this;
         }
 
         public Builder withTransientFields(boolean allowed) {
@@ -251,6 +288,7 @@ public final class Novel implements Author, Audience {
                 revision,
                 illegalModifiers,
                 policies != null ? policies : Policies.withDefaults(),
+                fallbackFieldComparator,
                 !additionalFactories.isEmpty() ? additionalFactories : null,
                 !additionalAdapters.isEmpty() ? additionalAdapters : null,
                 !additionalWriters.isEmpty() ? additionalWriters : null,
