@@ -10,16 +10,16 @@ public class ClassAdapter implements ObjectDataAdapter<Class> {
 
     @Override
     public Class read(DataPaper paper) {
-        String classCanonicalName = paper.strings();
+        String className = paper.strings();
         try {
-            return Class.forName(classCanonicalName);
+            return Class.forName(className);
         } catch (ClassNotFoundException e) {
-            throw new DataPaperReadException("Could not load class for name (not found): " + classCanonicalName);
+            throw new DataPaperReadException("Could not load class for name (not found): " + className);
         }
     }
 
     @Override
     public void write(DataPen<?> pen, Class object) {
-        pen.strings(object.getCanonicalName());
+        pen.strings(object.getName());
     }
 }
