@@ -8,9 +8,9 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.util.Locale;
 
-class LocaleDataAdapterSimpleTest extends SimpleGoodBadTest<Locale> {
+class LocaleAdapterSimpleTest extends SimpleGoodBadTest<Locale> {
 
-    LocaleDataAdapterSimpleTest() {
+    LocaleAdapterSimpleTest() {
         super(new LocaleAdapter(), Locale.ITALIAN, stream-> {//todo
             throw new DataPaperReadException("I am not sure how to break the Locale constructor! Let's revisit.");
         });

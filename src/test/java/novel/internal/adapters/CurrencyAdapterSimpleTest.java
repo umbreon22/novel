@@ -5,8 +5,8 @@ import novel.testutil.SimpleGoodBadTest;
 import java.util.Currency;
 import java.util.Locale;
 
-class CurrencyDataAdapterSimpleTest extends SimpleGoodBadTest<Currency> {
-    CurrencyDataAdapterSimpleTest() {
+class CurrencyAdapterSimpleTest extends SimpleGoodBadTest<Currency> {
+    CurrencyAdapterSimpleTest() {
         super(new CurrencyAdapter(), Currency.getInstance(Locale.US), stream->stream.strings("owo whats this?"));
     }
 

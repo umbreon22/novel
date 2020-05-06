@@ -3,9 +3,9 @@ package novel.internal.adapters;
 import novel.testutil.SimpleGoodBadTest;
 import org.junit.jupiter.api.Assertions;
 
-class StringBuilderDataAdapterSimpleTest extends SimpleGoodBadTest<StringBuilder> {
+class StringBuilderAdapterSimpleTest extends SimpleGoodBadTest<StringBuilder> {
 
-    StringBuilderDataAdapterSimpleTest() {
+    StringBuilderAdapterSimpleTest() {
         super(new StringBuilderAdapter(), new StringBuilder("owo whats this"), stream->stream.ints(-1));
     }
 

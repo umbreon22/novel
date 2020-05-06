@@ -4,8 +4,8 @@ import novel.testutil.SimpleGoodBadTest;
 
 import java.math.BigDecimal;
 
-class BigDecimalDataAdapterSimpleTest extends SimpleGoodBadTest<BigDecimal> {
-    BigDecimalDataAdapterSimpleTest() {
+class BigDecimalAdapterSimpleTest extends SimpleGoodBadTest<BigDecimal> {
+    BigDecimalAdapterSimpleTest() {
         super(new BigDecimalAdapter(), BigDecimal.valueOf(Long.MAX_VALUE), stream->stream.strings("big boi"));
     }
 }

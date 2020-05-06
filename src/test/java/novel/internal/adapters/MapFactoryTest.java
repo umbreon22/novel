@@ -14,7 +14,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-public class MapDataFactoryTest {
+public class MapFactoryTest {
 
     @Test
     void simpleIOTest() throws IOException {

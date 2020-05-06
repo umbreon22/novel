@@ -6,8 +6,8 @@ import org.junit.jupiter.api.Assertions;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.atomic.AtomicLong;
 
-class AtomicLongDataAdapterSimpleTest extends SimpleGoodBadTest<AtomicLong> {
-    AtomicLongDataAdapterSimpleTest() {
+class AtomicLongAdapterSimpleTest extends SimpleGoodBadTest<AtomicLong> {
+    AtomicLongAdapterSimpleTest() {
         super(new AtomicLongAdapter(), new AtomicLong(ThreadLocalRandom.current().nextLong()), stream->stream.strings("big boi"));
     }
 

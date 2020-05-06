@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.util.*;
 import java.util.function.Supplier;
 
-public class CollectionDataFactoryTest {
+public class CollectionFactoryTest {
 
     @Test
     void simpleIOTest() throws IOException {

@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.Objects;
 
-class ArrayDataFactoryTest extends TestWithStreams<Object> {
+class ArrayFactoryTest extends TestWithStreams<Object> {
 
     private final Novel novel = Novel.newBuilder().build();
     private final ArrayAdapterFactory factory = new ArrayAdapterFactory();

@@ -7,8 +7,8 @@ import novel.api.types.adapt.ObjectDataAdapter;
 
 import java.util.function.Function;
 
-public abstract class ObjectToStringDataAdapter<T> implements ObjectDataAdapter<T> {
-    ObjectToStringDataAdapter(Function<String, T> constructor) {
+public abstract class ObjectToStringAdapter<T> implements ObjectDataAdapter<T> {
+    ObjectToStringAdapter(Function<String, T> constructor) {
         this.constructor = constructor;
     }
 

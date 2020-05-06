@@ -6,8 +6,8 @@ import org.junit.jupiter.api.Assertions;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.atomic.AtomicInteger;
 
-class AtomicIntegerDataAdapterSimpleTest extends SimpleGoodBadTest<AtomicInteger> {
-    AtomicIntegerDataAdapterSimpleTest() {
+class AtomicIntegerAdapterSimpleTest extends SimpleGoodBadTest<AtomicInteger> {
+    AtomicIntegerAdapterSimpleTest() {
         super(new AtomicIntegerAdapter(), new AtomicInteger(ThreadLocalRandom.current().nextInt()), stream->stream.strings("big boi"));
     }
 

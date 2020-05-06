@@ -3,9 +3,9 @@ package novel.internal.adapters;
 import novel.testutil.SimpleGoodBadTest;
 import org.junit.jupiter.api.Assertions;
 
-class StringBufferDataAdapterSimpleTest extends SimpleGoodBadTest<StringBuffer> {
+class StringBufferAdapterSimpleTest extends SimpleGoodBadTest<StringBuffer> {
 
-    StringBufferDataAdapterSimpleTest() {
+    StringBufferAdapterSimpleTest() {
         super(new StringBufferAdapter(), new StringBuffer("owo whats this"), stream->stream.longs(-1L));
     }
 

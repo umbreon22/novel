@@ -5,8 +5,8 @@ import org.junit.jupiter.api.Assertions;
 
 import java.util.Calendar;
 
-class CalendarDataAdapterSimpleTest extends SimpleGoodBadTest<Calendar> {
-    CalendarDataAdapterSimpleTest() {
+class CalendarAdapterSimpleTest extends SimpleGoodBadTest<Calendar> {
+    CalendarAdapterSimpleTest() {
         super(new CalendarAdapter(), Calendar.getInstance(), stream->stream.strings("owo whats this?"));
     }
 
