@@ -4,7 +4,8 @@ import novel.api.Novel;
 import novel.api.types.adapt.Novelable;
 import novel.api.types.annotations.Folio;
 import novel.api.types.annotations.Inked;
-import novel.testutil.DataPenQueue;
+import novel.api.types.write.Writeable;
+import novel.internal.testutil.DataPenQueue;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

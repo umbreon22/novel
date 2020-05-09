@@ -1,6 +1,6 @@
 package novel.internal.adapters;
 
-import novel.testutil.SimpleGoodBadTest;
+import novel.internal.testutil.SimpleGoodBadTest;
 
 import java.math.BigDecimal;
 

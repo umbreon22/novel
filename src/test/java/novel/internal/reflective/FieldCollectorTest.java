@@ -2,8 +2,8 @@ package novel.internal.reflective;
 
 import novel.api.FieldCensor;
 import novel.api.FieldCollector;
-import novel.testutil.FieldFilter;
-import novel.testutil.FieldsWithModifiers;
+import novel.internal.testutil.FieldFilter;
+import novel.internal.testutil.FieldsWithModifiers;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

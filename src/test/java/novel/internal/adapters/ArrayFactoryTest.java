@@ -1,6 +1,6 @@
 package novel.internal.adapters;
 
-import novel.testutil.TestWithStreams;
+import novel.internal.testutil.TestWithStreams;
 import novel.api.Novel;
 import novel.internal.factories.ArrayAdapterFactory;
 import novel.api.streams.NovelPaperStream;

@@ -1,4 +1,4 @@
-package novel.testutil;
+package novel.internal.testutil;
 
 public class TestPrimitives {
 

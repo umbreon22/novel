@@ -1,4 +1,4 @@
-package novel.testutil;
+package novel.internal.testutil;
 
 import novel.api.streams.NovelFileStream;
 import org.junit.jupiter.api.Assertions;

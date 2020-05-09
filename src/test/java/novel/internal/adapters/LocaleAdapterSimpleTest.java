@@ -1,6 +1,6 @@
 package novel.internal.adapters;
 
-import novel.testutil.SimpleGoodBadTest;
+import novel.internal.testutil.SimpleGoodBadTest;
 import novel.api.types.read.DataPaperReadException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

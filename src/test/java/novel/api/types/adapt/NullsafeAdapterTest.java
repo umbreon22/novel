@@ -1,8 +1,8 @@
 package novel.api.types.adapt;
 
 import novel.api.Novel;
-import novel.testutil.DataPenQueue;
-import novel.testutil.TestPrimitives;
+import novel.internal.testutil.DataPenQueue;
+import novel.internal.testutil.TestPrimitives;
 import novel.api.types.token.TypeToken;
 import novel.api.types.read.DataPaper;
 import novel.api.types.read.DataPaperReadException;

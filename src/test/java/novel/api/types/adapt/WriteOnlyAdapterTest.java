@@ -1,6 +1,6 @@
 package novel.api.types.adapt;
 
-import novel.testutil.DataPenQueue;
+import novel.internal.testutil.DataPenQueue;
 import novel.api.types.read.CannotRead;
 import novel.api.types.token.Tokenable;
 import novel.api.types.write.ObjectDataWriter;

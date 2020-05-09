@@ -1,4 +1,4 @@
-package novel.testutil;
+package novel.internal.testutil;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;

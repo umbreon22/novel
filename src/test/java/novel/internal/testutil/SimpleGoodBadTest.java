@@ -1,4 +1,4 @@
-package novel.testutil;
+package novel.internal.testutil;
 
 import novel.api.streams.NovelPenStream;
 import novel.api.types.read.DataPaperReadException;

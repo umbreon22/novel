@@ -1,4 +1,4 @@
-package novel.testutil;
+package novel.internal.testutil;
 
 import novel.api.streams.NovelPaperStream;
 import novel.api.streams.NovelPenStream;

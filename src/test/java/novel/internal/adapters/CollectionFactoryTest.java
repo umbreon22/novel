@@ -34,6 +34,7 @@ public class CollectionFactoryTest {
         B,
         C
     }
+
     private static class Dummy implements Novelable {
 
         List<Character> a = List.of('a');

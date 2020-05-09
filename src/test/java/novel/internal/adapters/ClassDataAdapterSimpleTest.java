@@ -3,8 +3,8 @@ package novel.internal.adapters;
 import novel.api.Novel;
 import novel.api.types.adapt.Novelable;
 import novel.api.types.token.TypeToken;
-import novel.testutil.DataPenQueue;
-import novel.testutil.SimpleGoodBadTest;
+import novel.internal.testutil.DataPenQueue;
+import novel.internal.testutil.SimpleGoodBadTest;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

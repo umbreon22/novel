@@ -1,7 +1,7 @@
 package novel.api.types.read;
 
-import novel.testutil.DataPaperQueue;
-import novel.testutil.DataPenQueue;
+import novel.internal.testutil.DataPaperQueue;
+import novel.internal.testutil.DataPenQueue;
 import novel.api.types.write.AutoWriteable;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
