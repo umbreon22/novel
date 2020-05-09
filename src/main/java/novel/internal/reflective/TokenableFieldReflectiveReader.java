@@ -3,6 +3,7 @@ package novel.internal.reflective;
 import novel.api.Novel;
 import novel.api.types.token.TypeToken;
 
+@Deprecated(forRemoval = true)//Needs performance testing against HandledField classes before removal.
 public final class TokenableFieldReflectiveReader<T> extends ReflectiveObjectReader<T, TokenableField> {
 
     public TokenableFieldReflectiveReader(Novel novel, TypeToken<T> source) {

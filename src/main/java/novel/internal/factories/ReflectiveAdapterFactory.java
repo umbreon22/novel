@@ -1,8 +1,6 @@
 package novel.internal.factories;
 
 import novel.api.Novel;
-import novel.internal.reflective.TokenableFieldReflectiveReader;
-import novel.internal.reflective.TokenableFieldReflectiveWriter;
 import novel.internal.reflective.ReflectiveObjectReader;
 import novel.internal.reflective.ReflectiveObjectWriter;
 import novel.api.types.adapt.ObjectDataAdapter;
@@ -12,6 +10,9 @@ import novel.api.types.read.Readable;
 import novel.api.types.token.TypeToken;
 import novel.api.types.write.ObjectDataWriter;
 import novel.api.types.write.Writeable;
+import novel.internal.reflective.TokenableHandleReflectiveReader;
+import novel.internal.reflective.TokenableHandleReflectiveWriter;
+
 
 /**
  * Adapter factory for the {@link novel.internal.reflective} package
@@ -26,10 +27,10 @@ public class ReflectiveAdapterFactory extends AdapterFactory {
         boolean isReadable = Readable.class.isAssignableFrom(rawType);
         boolean isWriteable = Writeable.class.isAssignableFrom(rawType);
         ObjectDataReader<T> reflectiveReader = isReadable
-                ? new TokenableFieldReflectiveReader<>(novel, typeToken)
+                ? new TokenableHandleReflectiveReader<>(novel, typeToken)
                 : null;
         ObjectDataWriter<T> reflectiveWriter = isWriteable
-                ? new TokenableFieldReflectiveWriter<>(novel, typeToken)
+                ? new TokenableHandleReflectiveWriter<>(novel, typeToken)
                 : null;
         if (isReadable || isWriteable) {
             return ObjectDataAdapter.tryWrappingAdapter(typeToken, reflectiveReader, reflectiveWriter);

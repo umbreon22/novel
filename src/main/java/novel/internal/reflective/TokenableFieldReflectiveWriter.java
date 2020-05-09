@@ -4,6 +4,7 @@ import novel.api.Novel;
 import novel.api.types.token.TypeToken;
 import novel.api.types.write.Writeable;
 
+@Deprecated(forRemoval = true)//Needs performance testing against HandledField classes before removal.
 public final class TokenableFieldReflectiveWriter<T> extends ReflectiveObjectWriter<T, TokenableField> {
 
     public TokenableFieldReflectiveWriter(Novel novel, TypeToken<T> source) {
