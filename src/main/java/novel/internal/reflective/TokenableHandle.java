@@ -20,7 +20,7 @@ public final class TokenableHandle implements ReflectiveHandle, Tokenable {
         this.token = token;
         this.isAutoWriteable = ReflectiveUtil.isAutoWriteable(token.getRawType());
         this.isNullsafe = ReflectiveUtil.isNullsafe(field);
-        this.handle = Handles.acquire(field, token.getRawType());
+        this.handle = Handles.acquire(field);
     }
 
     @Override
