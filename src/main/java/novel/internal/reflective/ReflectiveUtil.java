@@ -67,7 +67,9 @@ public final class ReflectiveUtil {
         } else if(a != null && b != null && a.getClass() == b.getClass()) {
             try {
                 for (Field field : a.getClass().getFields()) {
-                    field.trySetAccessible();
+                    if(!field.trySetAccessible()) {
+                        throw new IllegalStateException("Could not access field " + field.getName());
+                    }
                     boolean equals = Objects.equals(field.get(a), field.get(b));
                     if(!equals) return false;
                 }
