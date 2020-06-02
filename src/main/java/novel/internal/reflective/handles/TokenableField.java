@@ -1,11 +1,12 @@
-package novel.internal.reflective;
+package novel.internal.reflective.handles;
 
 import novel.api.types.token.Tokenable;
 import novel.api.types.token.TypeToken;
+import novel.internal.reflective.ReflectiveUtil;
 
 import java.lang.reflect.Field;
 
-class TokenableField implements ReflectiveHandle, Tokenable {
+public class TokenableField implements ReflectiveHandle, Tokenable {
 
     private final Field field;
     private final TypeToken<?> token;
@@ -28,7 +29,7 @@ class TokenableField implements ReflectiveHandle, Tokenable {
         return token;
     }
 
-    Field field() {
+    public Field field() {
         return field;
     }
 

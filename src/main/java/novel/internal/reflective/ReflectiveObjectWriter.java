@@ -25,12 +25,12 @@ public abstract class ReflectiveObjectWriter<T, F> implements ObjectDataWriter<T
             for (var field : sourceFields) {
                 writeField(pen, field, memberFrom(field, object));
             }
-        } catch (IllegalAccessException e) {//todo: custom exception?
+        } catch (Throwable e) {//todo: custom exception?
             throw new IllegalStateException(e);
         }
     }
 
-    protected abstract Object memberFrom(F field, T object) throws IllegalAccessException;
+    protected abstract Object memberFrom(F field, T object) throws Throwable;
 
     /**
      * Writes a bool, true if field object exists, false if it's null.

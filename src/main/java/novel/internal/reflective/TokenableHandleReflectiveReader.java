@@ -2,6 +2,7 @@ package novel.internal.reflective;
 
 import novel.api.Novel;
 import novel.api.types.token.TypeToken;
+import novel.internal.reflective.handles.TokenableHandle;
 
 public final class TokenableHandleReflectiveReader<T> extends ReflectiveObjectReader<T, TokenableHandle> {
 
@@ -20,7 +21,7 @@ public final class TokenableHandleReflectiveReader<T> extends ReflectiveObjectRe
     }
 
     @Override
-    protected void setInstance(TokenableHandle handle, T instance, Object read) throws IllegalAccessException {
+    protected void setInstance(TokenableHandle handle, T instance, Object read) throws Throwable {
         handle.set(instance, read);
     }
 

@@ -29,7 +29,6 @@ public abstract class ReflectiveObjectReader<T, F> implements ObjectDataReader<T
 
     protected abstract Iterable<F> supplyFields(Novel novel, TypeToken<T> source);
 
-    @SuppressWarnings("unchecked")
     @Override
     public T read(DataPaper paper) {
         try {
@@ -38,12 +37,12 @@ public abstract class ReflectiveObjectReader<T, F> implements ObjectDataReader<T
                 readField(paper, field, instance);
             }
             return instance;
-        } catch (IllegalAccessException e) {//todo: generate custom exception
+        } catch (Throwable e) {//todo: generate custom exception
             throw new IllegalArgumentException(e);
         }
     }
 
-    private void readField(DataPaper paper, F field, T instance) throws IllegalAccessException {
+    private void readField(DataPaper paper, F field, T instance) throws Throwable {
         if (shouldRead(paper, field)) {
             var read = novel.read(paper, tokenFor(field));
             setInstance(field, instance, read);
@@ -56,7 +55,7 @@ public abstract class ReflectiveObjectReader<T, F> implements ObjectDataReader<T
 
     protected abstract TypeToken<?> tokenFor(F field);
 
-    protected abstract void setInstance(F field, T instance, Object read) throws IllegalAccessException;
+    protected abstract void setInstance(F field, T instance, Object read) throws Throwable;
 
     protected abstract boolean isFieldNullsafe(F field);
 

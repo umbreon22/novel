@@ -1,7 +1,8 @@
-package novel.internal.reflective;
+package novel.internal.reflective.handles;
 
 import novel.api.types.token.Tokenable;
 import novel.api.types.token.TypeToken;
+import novel.internal.reflective.ReflectiveUtil;
 
 import java.lang.reflect.Field;
 
@@ -24,12 +25,12 @@ public final class TokenableHandle implements ReflectiveHandle, Tokenable {
     }
 
     @Override
-    public void set(Object instance, Object memberValue) throws IllegalAccessException {
+    public void set(Object instance, Object memberValue) throws Throwable {
         handle.set(instance, memberValue);
     }
 
     @Override
-    public Object get(Object instance) throws IllegalAccessException {
+    public Object get(Object instance) throws Throwable {
         return handle.get(instance);
     }
 

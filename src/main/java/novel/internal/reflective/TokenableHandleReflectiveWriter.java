@@ -3,6 +3,7 @@ package novel.internal.reflective;
 import novel.api.Novel;
 import novel.api.types.token.TypeToken;
 import novel.api.types.write.Writeable;
+import novel.internal.reflective.handles.TokenableHandle;
 
 public final class TokenableHandleReflectiveWriter<T> extends ReflectiveObjectWriter<T, TokenableHandle> {
 
@@ -16,7 +17,7 @@ public final class TokenableHandleReflectiveWriter<T> extends ReflectiveObjectWr
     }
 
     @Override
-    protected Object memberFrom(TokenableHandle field, T object) throws IllegalAccessException {
+    protected Object memberFrom(TokenableHandle field, T object) throws Throwable {
         return field.get(object);
     }
 

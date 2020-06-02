@@ -1,4 +1,4 @@
-package novel.internal.reflective;
+package novel.internal.reflective.handles;
 
 import java.lang.reflect.Field;
 
