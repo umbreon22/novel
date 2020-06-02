@@ -19,11 +19,7 @@ public abstract class ReflectiveObjectReader<T, F> implements ObjectDataReader<T
     public ReflectiveObjectReader(Novel novel, TypeToken<T> source) {
         this.novel = novel;
         this.sourceFields = supplyFields(novel, source);
-        this.constructor = () -> {
-            @SuppressWarnings("unchecked")
-            T instance = createUnsafeInstance((Class<T>) source.getRawType());
-            return instance;
-        };
+        this.constructor = new UnsafeInstanceConstructor(source.getRawType());
         this.isClassNullsafe = ReflectiveUtil.isNullsafe(source.getRawType());
     }
 
@@ -61,29 +57,6 @@ public abstract class ReflectiveObjectReader<T, F> implements ObjectDataReader<T
 
     protected final boolean isNullsafe(F field) {
         return isClassNullsafe || isFieldNullsafe(field);
-    }
-
-    protected static <T> T createUnsafeInstance(Class<T> clazz) {
-        return createUnsafeInstance(clazz, Object.class);
-    }
-
-    //not sure about this chief
-    protected static <T> T createUnsafeInstance(Class<T> clazz, Class<? super T> withConstructor) {
-        if(clazz.isInterface()) {//sighs ~~ should *probably* never happen? maybe unless a Readable is directly passed in?
-            //todo: lets unit test this later
-            //todo: revisit how to handle interfaces internally?
-            return null;
-        }
-        try {
-            ReflectionFactory rf = ReflectionFactory.getReflectionFactory();
-            Constructor<? super T> usingConstructor = withConstructor.getDeclaredConstructor();
-            Constructor<?> intConstr = rf.newConstructorForSerialization(clazz, usingConstructor);
-            return clazz.cast(intConstr.newInstance());
-        } catch (RuntimeException e) {
-            throw e;
-        } catch (Exception e) {
-            throw new IllegalStateException("Cannot create object", e);
-        }
     }
 
 }
