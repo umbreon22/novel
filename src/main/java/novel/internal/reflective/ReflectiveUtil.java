@@ -45,7 +45,7 @@ public final class ReflectiveUtil {
      * If a field is marked {@link Inked}, we consider it nullsafe.
      * We also treat primitives as {@link Inked}.
      */
-    static boolean isNullsafe(Field field) {
+    public static boolean isNullsafe(Field field) {
         return field.getType().isPrimitive()
             || field.isAnnotationPresent(Inked.class);
     }
