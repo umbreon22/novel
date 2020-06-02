@@ -15,6 +15,7 @@
             --enable-preview
             --add-opens java.base/java.lang=novel
             --add-opens java.base/java.util=novel
+            --add-opens java.base/java.lang.invoke=novel
         </vm.args>
     </properties>
     <dependencies>
