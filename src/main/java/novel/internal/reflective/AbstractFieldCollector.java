@@ -15,6 +15,9 @@ abstract class AbstractFieldCollector implements FieldCollector {
     private static final Logger log = LoggerFactory.getLogger(AbstractFieldCollector.class);
 
     protected final void gatherFields(Collection<Field> collectedFields, Class<?> superClass, Class<?> currentClass) {
+        if(currentClass.isInterface()) {
+            return;
+        }
         if(ReflectiveUtil.hasSuperclassOf(superClass, currentClass)){
             gatherFields(collectedFields, superClass, currentClass.getSuperclass());
         }
