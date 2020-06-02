@@ -215,21 +215,21 @@ public final class Novel implements Author, Audience {
 
 
         public <T> Builder withAdapter(ObjectDataAdapter<T> adapter, Class<? super T> clazz) {
-            if (additionalAdapters.putIfAbsent(clazz, adapter) != null) {
+            if (adapter != null && clazz != null && additionalAdapters.putIfAbsent(clazz, adapter) != null) {
                 logger.debug("Replacing {} adapter with {}", clazz.getSimpleName(), adapter);
             }
             return this;
         }
 
         public <T> Builder withWriter(ObjectDataWriter<T> writer, Class<? super T> clazz) {
-            if (additionalWriters.putIfAbsent(clazz, writer) != null) {
+            if (writer != null && clazz != null &&  additionalWriters.putIfAbsent(clazz, writer) != null) {
                 logger.debug("Replacing {} writer with {}", clazz.getSimpleName(), writer);
             }
             return this;
         }
 
         public <T> Builder withReader(ObjectDataReader<T> reader, Class<? super T> clazz) {
-            if (additionalReaders.putIfAbsent(clazz, reader) != null) {
+            if (reader != null && clazz != null && additionalReaders.putIfAbsent(clazz, reader) != null) {
                 logger.debug("Replacing {} reader with {}", clazz.getSimpleName(), reader);
             }
             return this;
