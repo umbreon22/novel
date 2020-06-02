@@ -1,4 +1,4 @@
-package novel.internal.adapters;
+package novel.internal.factories;
 
 import novel.api.Novel;
 import novel.api.streams.NovelPaperStream;
