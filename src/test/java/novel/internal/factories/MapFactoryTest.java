@@ -37,8 +37,8 @@ public class MapFactoryTest {
         @Override
         public boolean equals(Object o) {
             if (this == o) return true;
-            if (!(o instanceof Dummy dummy)) return false;
-            return dummy.map.equals(map);
+            if (!(o instanceof Dummy)) return false;
+            return ((Dummy)o).map.equals(map);
         }
     }
 

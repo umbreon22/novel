@@ -18,8 +18,8 @@ public class DataPaperQueue implements DataPaper {
 
     @Override
     public int ints() {
-        if(queue.poll() instanceof Integer i) {
-            return i;
+        if(queue.peek() instanceof Integer) {
+            return (int) queue.poll();
         } else {
             throw new IllegalStateException("Cannot poll ints");
         }
@@ -27,8 +27,8 @@ public class DataPaperQueue implements DataPaper {
 
     @Override
     public short shorts() {
-        if(queue.poll() instanceof Short s) {
-            return s;
+        if(queue.peek() instanceof Short) {
+            return (short) queue.poll();
         } else {
             throw new IllegalStateException("Cannot poll shorts");
         }
@@ -36,8 +36,8 @@ public class DataPaperQueue implements DataPaper {
 
     @Override
     public long longs() {
-        if(queue.poll() instanceof Long l) {
-            return l;
+        if(queue.peek() instanceof Long) {
+            return (long) queue.poll();
         } else {
             throw new IllegalStateException("Cannot poll longs");
         }
@@ -45,8 +45,8 @@ public class DataPaperQueue implements DataPaper {
 
     @Override
     public String strings() {
-        if(queue.poll() instanceof String str) {
-            return str;
+        if(queue.peek() instanceof String) {
+            return (String) queue.poll();
         } else {
             throw new IllegalStateException("Cannot poll strings");
         }
@@ -54,8 +54,8 @@ public class DataPaperQueue implements DataPaper {
 
     @Override
     public boolean bools() {
-        if(queue.poll() instanceof Boolean bool) {
-            return bool;
+        if(queue.peek() instanceof Boolean) {
+            return (boolean) queue.poll();
         } else {
             throw new IllegalStateException("Cannot poll bools");
         }
@@ -63,8 +63,8 @@ public class DataPaperQueue implements DataPaper {
 
     @Override
     public double doubles() {
-        if(queue.poll() instanceof Double d) {
-            return d;
+        if(queue.peek() instanceof Double) {
+            return (double) queue.poll();
         } else {
             throw new IllegalStateException("Cannot poll doubles");
         }
@@ -72,8 +72,8 @@ public class DataPaperQueue implements DataPaper {
 
     @Override
     public float floats() {
-        if(queue.poll() instanceof Float f) {
-            return f;
+        if(queue.peek() instanceof Float) {
+            return (float) queue.poll();
         } else {
             throw new IllegalStateException("Cannot poll floats");
         }
@@ -81,8 +81,8 @@ public class DataPaperQueue implements DataPaper {
 
     @Override
     public byte bytes() {
-        if(queue.poll() instanceof Byte b) {
-            return b;
+        if(queue.peek() instanceof Byte) {
+            return (byte) queue.poll();
         } else {
             throw new IllegalStateException("Cannot poll bytes");
         }
@@ -90,8 +90,8 @@ public class DataPaperQueue implements DataPaper {
 
     @Override
     public char chars() {
-        if(queue.poll() instanceof Character c) {
-            return c;
+        if(queue.peek() instanceof Character) {
+            return (char) queue.poll();
         } else {
             throw new IllegalStateException("Cannot poll bytes");
         }

@@ -8,10 +8,9 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 import static java.lang.annotation.ElementType.FIELD;
-import static java.lang.annotation.ElementType.RECORD_COMPONENT;
 
 @Retention(RetentionPolicy.RUNTIME)
-@Target({FIELD, RECORD_COMPONENT})
+@Target({FIELD})
 public @interface Folio {
     /**
      * This value is used in comparison with other fields

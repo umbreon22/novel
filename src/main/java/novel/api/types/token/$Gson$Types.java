@@ -139,11 +139,11 @@ public final class $Gson$Types {
             // type is a normal class.
             return (Class<?>) type;
 
-        } else if (type instanceof ParameterizedType parameterizedType) {
+        } else if (type instanceof ParameterizedType) {
             // I'm not exactly sure why getRawType() returns Type instead of Class.
             // Neal isn't either but suspects some pathological case related
             // to nested classes exists.
-            Type rawType = parameterizedType.getRawType();
+            Type rawType = ((ParameterizedType)type).getRawType();
             checkArgument(rawType instanceof Class);
             return (Class<?>) rawType;
         } else if (type instanceof GenericArrayType) {
@@ -176,32 +176,40 @@ public final class $Gson$Types {
         } else if (a instanceof Class) {
             // Class already specifies equals().
             return a.equals(b);
-        } else if (a instanceof ParameterizedType pa) {
-            if (!(b instanceof ParameterizedType pb)) {
+        } else if (a instanceof ParameterizedType) {
+            if (!(b instanceof ParameterizedType)) {
                 return false;
             }
             // TODO: save a .clone() call
+            ParameterizedType pa = (ParameterizedType) a;
+            ParameterizedType pb = (ParameterizedType) b;
             return equal(pa.getOwnerType(), pb.getOwnerType())
                     && pa.getRawType().equals(pb.getRawType())
                     && Arrays.equals(pa.getActualTypeArguments(), pb.getActualTypeArguments());
 
-        } else if (a instanceof GenericArrayType ga) {
-            if (!(b instanceof GenericArrayType gb)) {
+        } else if (a instanceof GenericArrayType) {
+            if (!(b instanceof GenericArrayType)) {
                 return false;
             }
+            GenericArrayType ga = (GenericArrayType) a;
+            GenericArrayType gb = (GenericArrayType) b;
             return equals(ga.getGenericComponentType(), gb.getGenericComponentType());
 
-        } else if (a instanceof WildcardType wa) {
-            if (!(b instanceof WildcardType wb)) {
+        } else if (a instanceof WildcardType) {
+            if (!(b instanceof WildcardType)) {
                 return false;
             }
+            WildcardType wa = (WildcardType) a;
+            WildcardType wb = (WildcardType) b;
             return Arrays.equals(wa.getUpperBounds(), wb.getUpperBounds())
                     && Arrays.equals(wa.getLowerBounds(), wb.getLowerBounds());
 
-        } else if (a instanceof TypeVariable<?> va) {
-            if (!(b instanceof TypeVariable<?> vb)) {
+        } else if (a instanceof TypeVariable<?>) {
+            if (!(b instanceof TypeVariable<?>)) {
                 return false;
             }
+            TypeVariable<?> va = (TypeVariable<?>) a;
+            TypeVariable<?> vb = (TypeVariable<?>) b;
             return va.getGenericDeclaration() == vb.getGenericDeclaration()
                     && va.getName().equals(vb.getName());
         } else {
@@ -322,8 +330,8 @@ public final class $Gson$Types {
         }
         Type mapType = getSupertype(context, contextRawType, Map.class);
         // TODO: strip wildcards?
-        if (mapType instanceof ParameterizedType mapParameterizedType) {
-            return mapParameterizedType.getActualTypeArguments();
+        if (mapType instanceof ParameterizedType) {
+            return ((ParameterizedType)mapType).getActualTypeArguments();
         }
         return new Type[] { Object.class, Object.class };
     }
@@ -340,7 +348,8 @@ public final class $Gson$Types {
     ) {
         //this implementation is made a little more complicated in an attempt to avoid object-creation
         while (true) {
-            if (toResolve instanceof TypeVariable<?> typeVariable) {
+            if (toResolve instanceof TypeVariable<?>) {
+                TypeVariable<?> typeVariable = (TypeVariable<?>)toResolve;
                 if (visitedTypeVariables.contains(typeVariable)) {
                     //cannot reduce due to infinite recursion
                     return toResolve;
@@ -351,19 +360,22 @@ public final class $Gson$Types {
                 if (toResolve == typeVariable) {
                     return toResolve;
                 }
-            } else if (toResolve instanceof Class<?> original && ((Class<?>) toResolve).isArray()) {
+            } else if (toResolve instanceof Class<?> && ((Class<?>) toResolve).isArray()) {
+                Class<?> original = (Class<?>) toResolve;
                 Type componentType = original.getComponentType();
                 Type newComponentType = resolve(context, contextRawType, componentType, visitedTypeVariables);
                 return componentType == newComponentType
                         ? original
                         : arrayOf(newComponentType);
-            } else if (toResolve instanceof GenericArrayType original) {
+            } else if (toResolve instanceof GenericArrayType) {
+                GenericArrayType original = (GenericArrayType) toResolve;
                 Type componentType = original.getGenericComponentType();
                 Type newComponentType = resolve(context, contextRawType, componentType, visitedTypeVariables);
                 return componentType == newComponentType
                         ? original
                         : arrayOf(newComponentType);
-            } else if (toResolve instanceof ParameterizedType original) {
+            } else if (toResolve instanceof ParameterizedType) {
+                ParameterizedType original = (ParameterizedType) toResolve;
                 Type ownerType = original.getOwnerType();
                 Type newOwnerType = resolve(context, contextRawType, ownerType, visitedTypeVariables);
                 boolean changed = newOwnerType != ownerType;
@@ -381,7 +393,8 @@ public final class $Gson$Types {
                 return changed
                         ? newParameterizedTypeWithOwner(newOwnerType, original.getRawType(), args)
                         : original;
-            } else if (toResolve instanceof WildcardType original) {
+            } else if (toResolve instanceof WildcardType) {
+                WildcardType original = (WildcardType) toResolve;
                 Type[] originalLowerBound = original.getLowerBounds();
                 Type[] originalUpperBound = original.getUpperBounds();
                 if (originalLowerBound.length == 1) {

@@ -51,7 +51,8 @@ class ArrayFactoryTest extends TestWithStreams<Object> {
         @Override
         public boolean equals(Object o) {
             if (this == o) return true;
-            if (!(o instanceof WeirdClass that)) return false;
+            if (!(o instanceof WeirdClass)) return false;
+            WeirdClass that = (WeirdClass)o;
             return b == that.b &&
                     Objects.equals(a, that.a);
         }

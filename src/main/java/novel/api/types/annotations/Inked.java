@@ -11,7 +11,6 @@ import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.ElementType.LOCAL_VARIABLE;
 import static java.lang.annotation.ElementType.METHOD;
 import static java.lang.annotation.ElementType.PARAMETER;
-import static java.lang.annotation.ElementType.RECORD_COMPONENT;
 import static java.lang.annotation.ElementType.TYPE;
 
 /**
@@ -23,7 +22,7 @@ import static java.lang.annotation.ElementType.TYPE;
  * Primitives do not need this annotation and are inherently treated as {@link Inked}.
  */
 @Retention(RetentionPolicy.RUNTIME)
-@Target({TYPE, FIELD, METHOD, PARAMETER, LOCAL_VARIABLE, RECORD_COMPONENT})
+@Target({TYPE, FIELD, METHOD, PARAMETER, LOCAL_VARIABLE})
 public @interface Inked {
     String description() default "";
 }

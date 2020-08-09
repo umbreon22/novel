@@ -13,7 +13,7 @@ public class EnumAdapter<T extends Enum<T>> implements ObjectDataAdapter<T> {
         this.enumConstants = enumClass.getEnumConstants();
         if(enumConstants == null) {
             throw new IllegalArgumentException(
-                "EnumConstants for %s is null.".formatted(enumClass.getCanonicalName())
+                String.format("EnumConstants for %s is null.", enumClass.getCanonicalName())
             );
         }
     }

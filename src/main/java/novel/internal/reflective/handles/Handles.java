@@ -57,7 +57,7 @@ final class Handles {
     }
 
     private static String addOpensString(Class<?> type) {
-        return "--add-opens %s/%s=%s".formatted(
+        return String.format("--add-opens %s/%s=%s",
             type.getModule().getName(), type.getPackageName(), thisModule.getName()
         );
     }
