@@ -1,5 +1,8 @@
 package novel.api.types.write.pens;
 
+import novel.api.types.write.writers.BoolDataWriter;
+
+import java.util.Objects;
 import java.util.function.Supplier;
 
 public interface BoolPen<Pen> {
@@ -46,6 +49,31 @@ public interface BoolPen<Pen> {
      */
     default Pen bools(Iterable<Boolean> booleans) {
         for(boolean b : booleans) bools(b);
+        return parameterizedThis();
+    }
+
+    /**
+     * Writes a {@link boolean} using the provided {@code booleanWriter}
+     * @param b a boolean.
+     * @param boolWriter a {@link BoolDataWriter} instance
+     * @return {@code parameterizedThis()}
+     */
+    default Pen bools(boolean b, BoolDataWriter boolWriter) {
+        Objects.requireNonNull(boolWriter).write(this, b);
+        return parameterizedThis();
+    }
+
+    /**
+     * Writes a {@link boolean[]} using the provided {@code booleanWriter}
+     * @param booleans a boolean array
+     * @param boolWriter a {@link BoolDataWriter} instance
+     * @return {@code parameterizedThis()}
+     */
+    default Pen bools(boolean[] booleans, BoolDataWriter boolWriter) {
+        Objects.requireNonNull(boolWriter);
+        for(boolean b : booleans) {
+            boolWriter.write(this, b);
+        }
         return parameterizedThis();
     }
 

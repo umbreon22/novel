@@ -3,7 +3,7 @@ package novel.api;
 import novel.api.types.adapt.ObjectDataAdapter;
 import novel.api.types.read.ObjectDataReader;
 import novel.api.types.token.TypeToken;
-import novel.api.types.write.ObjectDataWriter;
+import novel.api.types.write.writers.ObjectDataWriter;
 
 public interface AdapterRepository {
 

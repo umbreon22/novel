@@ -3,7 +3,7 @@ package novel.api.types.adapt;
 import novel.internal.testutil.DataPenQueue;
 import novel.api.types.read.CannotRead;
 import novel.api.types.token.Tokenable;
-import novel.api.types.write.ObjectDataWriter;
+import novel.api.types.write.writers.ObjectDataWriter;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

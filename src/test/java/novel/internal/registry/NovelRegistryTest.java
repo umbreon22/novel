@@ -6,7 +6,7 @@ import novel.api.types.read.Readable;
 import novel.api.types.read.DataPaper;
 import novel.api.types.read.ObjectDataReader;
 import novel.api.types.write.pens.DataPen;
-import novel.api.types.write.ObjectDataWriter;
+import novel.api.types.write.writers.ObjectDataWriter;
 import novel.api.types.write.AutoWriteable;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;

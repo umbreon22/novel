@@ -10,7 +10,7 @@ import novel.api.types.read.DataPaper;
 import novel.api.types.read.ObjectDataReader;
 import novel.api.types.write.DataPenWriteException;
 import novel.api.types.write.pens.DataPen;
-import novel.api.types.write.ObjectDataWriter;
+import novel.api.types.write.writers.ObjectDataWriter;
 
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;

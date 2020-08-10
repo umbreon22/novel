@@ -1,5 +1,8 @@
 package novel.api.types.write.pens;
 
+import novel.api.types.write.writers.ObjectDataWriter;
+import novel.api.types.write.writers.StringDataWriter;
+
 import java.util.Objects;
 import java.util.function.Supplier;
 
@@ -82,6 +85,31 @@ public interface StringPen<Pen> {
      */
     default Pen strings(Iterable<? extends CharSequence> strings) {
         for(CharSequence s : strings) strings(s);
+        return parameterizedThis();
+    }
+
+    /**
+     * Writes a {@link CharSequence} using the provided {@code stringWriter}
+     * @param s a {@link CharSequence}.
+     * @param stringWriter a {@link StringDataWriter} instance
+     * @return {@code parameterizedThis()}
+     */
+    default Pen strings(CharSequence s, StringDataWriter stringWriter) {
+        Objects.requireNonNull(stringWriter).write(this, Objects.toString(s));
+        return parameterizedThis();
+    }
+
+    /**
+     * Writes a {@link CharSequence[]} using the provided {@code stringWriter}
+     * @param strings a CharSequence array
+     * @param stringWriter a {@link StringDataWriter} instance
+     * @return {@code parameterizedThis()}
+     */
+    default Pen strings(CharSequence[] strings, StringDataWriter stringWriter) {
+        Objects.requireNonNull(stringWriter);
+        for(CharSequence s : strings) {
+            stringWriter.write(this, Objects.toString(s));
+        }
         return parameterizedThis();
     }
 

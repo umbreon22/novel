@@ -1,7 +1,7 @@
 package novel.api.types.factory;
 
 import novel.api.Novel;
-import novel.api.types.write.ObjectDataWriter;
+import novel.api.types.write.writers.ObjectDataWriter;
 import novel.api.types.token.TypeToken;
 
 public interface WriterFactory {

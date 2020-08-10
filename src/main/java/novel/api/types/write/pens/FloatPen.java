@@ -1,5 +1,8 @@
 package novel.api.types.write.pens;
 
+import novel.api.types.write.writers.FloatDataWriter;
+
+import java.util.Objects;
 import java.util.function.Supplier;
 
 public interface FloatPen<Pen> {
@@ -23,7 +26,7 @@ public interface FloatPen<Pen> {
 
     /**
      * Writes {@link float[]}s.
-     * @param floats a varargs array of doubles
+     * @param floats a varargs array of floats
      * @return {@link #parameterizedThis()}
      */
     default Pen floats(float[]... floats) {
@@ -49,6 +52,31 @@ public interface FloatPen<Pen> {
         return parameterizedThis();
     }
 
+    /**
+     * Writes a {@link float} using the provided {@code floatWriter}
+     * @param f a float.
+     * @param floatWriter a {@link FloatDataWriter} instance
+     * @return {@code parameterizedThis()}
+     */
+    default Pen floats(float f, FloatDataWriter floatWriter) {
+        Objects.requireNonNull(floatWriter).write(this, f);
+        return parameterizedThis();
+    }
+
+    /**
+     * Writes a {@link float[]} using the provided {@code floatWriter}
+     * @param floats a float array
+     * @param floatWriter a {@link FloatDataWriter} instance
+     * @return {@code parameterizedThis()}
+     */
+    default Pen floats(float[] floats, FloatDataWriter floatWriter) {
+        Objects.requireNonNull(floatWriter);
+        for(float f : floats) {
+            floatWriter.write(this, f);
+        }
+        return parameterizedThis();
+    }
+    
     /**
      * Returns {@code this} cast as your defined type parameter, {@link Pen}
      * @return {@code this) cast as {@link Pen}

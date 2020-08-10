@@ -3,7 +3,7 @@ package novel.api;
 import novel.api.types.adapt.Novelable;
 import novel.api.types.adapt.ObjectDataAdapter;
 import novel.api.types.read.ObjectDataReader;
-import novel.api.types.write.ObjectDataWriter;
+import novel.api.types.write.writers.ObjectDataWriter;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

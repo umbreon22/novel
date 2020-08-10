@@ -3,7 +3,7 @@ package novel.api.types.adapt;
 import novel.api.types.read.CannotRead;
 import novel.api.types.token.TypeToken;
 import novel.api.types.write.pens.DataPen;
-import novel.api.types.write.ObjectDataWriter;
+import novel.api.types.write.writers.ObjectDataWriter;
 /**
  * This Adapter will <b>FAIL</b> on read operations.
  * @see ObjectDataWriter

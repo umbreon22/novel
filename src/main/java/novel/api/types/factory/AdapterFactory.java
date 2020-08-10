@@ -3,7 +3,7 @@ package novel.api.types.factory;
 import novel.api.Novel;
 import novel.api.types.adapt.ObjectDataAdapter;
 import novel.api.types.read.ObjectDataReader;
-import novel.api.types.write.ObjectDataWriter;
+import novel.api.types.write.writers.ObjectDataWriter;
 import novel.api.types.token.TypeToken;
 
 public abstract class AdapterFactory implements ReaderFactory, WriterFactory {

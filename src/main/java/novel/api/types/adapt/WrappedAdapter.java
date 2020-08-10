@@ -3,7 +3,7 @@ package novel.api.types.adapt;
 import novel.api.types.read.DataPaper;
 import novel.api.types.read.ObjectDataReader;
 import novel.api.types.write.pens.DataPen;
-import novel.api.types.write.ObjectDataWriter;
+import novel.api.types.write.writers.ObjectDataWriter;
 
 import java.util.Objects;
 

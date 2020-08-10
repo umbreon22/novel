@@ -1,5 +1,9 @@
 package novel.api.types.write.pens;
 
+import novel.api.types.write.writers.ByteDataWriter;
+import novel.api.types.write.writers.ShortDataWriter;
+
+import java.util.Objects;
 import java.util.function.Supplier;
 
 public interface BytePen<Pen> {
@@ -46,6 +50,31 @@ public interface BytePen<Pen> {
      */
     default Pen bytes(Iterable<Byte> bytes) {
         for(byte b : bytes) bytes(b);
+        return parameterizedThis();
+    }
+
+    /**
+     * Writes a {@link byte} using the provided {@code byteWriter}
+     * @param b a byte.
+     * @param byteWriter a {@link ByteDataWriter} instance
+     * @return {@code parameterizedThis()}
+     */
+    default Pen bytes(byte b, ByteDataWriter byteWriter) {
+        Objects.requireNonNull(byteWriter).write(this, b);
+        return parameterizedThis();
+    }
+
+    /**
+     * Writes a {@link byte[]} using the provided {@code byteWriter}
+     * @param bytes a byte array
+     * @param byteWriter a {@link ByteDataWriter} instance
+     * @return {@code parameterizedThis()}
+     */
+    default Pen bytes(byte[] bytes, ByteDataWriter byteWriter) {
+        Objects.requireNonNull(byteWriter);
+        for(byte b : bytes) {
+            byteWriter.write(this, b);
+        }
         return parameterizedThis();
     }
 

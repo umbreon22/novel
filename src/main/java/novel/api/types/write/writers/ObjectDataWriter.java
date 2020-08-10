@@ -1,4 +1,4 @@
-package novel.api.types.write;
+package novel.api.types.write.writers;
 
 import novel.api.types.write.pens.DataPen;
 

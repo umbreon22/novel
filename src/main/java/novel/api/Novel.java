@@ -13,7 +13,7 @@ import novel.api.types.read.Readable;
 import novel.api.types.token.TypeToken;
 import novel.api.types.write.CannotWrite;
 import novel.api.types.write.pens.DataPen;
-import novel.api.types.write.ObjectDataWriter;
+import novel.api.types.write.writers.ObjectDataWriter;
 import novel.api.types.write.Writeable;
 import novel.internal.registry.NovelAdapterRegistry;
 import org.slf4j.Logger;
@@ -128,7 +128,7 @@ public final class Novel implements Author, Audience {
         private static final Logger logger = LoggerFactory.getLogger(Builder.class);
 
         private static final Comparator<Field> COMPARING_FIELD_FOLIO_THEN_NAME = (a, b) -> CharSequence.compare(a.getName(), b.getName());
-       
+
         @SuppressWarnings("ComparatorMethodParameterNotUsed")
         private static final Comparator<Field> COMPARING_FIELD_FOLIO_THEN_NOTHING = (a, b) -> 1;
 

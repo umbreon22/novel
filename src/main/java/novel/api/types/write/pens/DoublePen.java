@@ -1,5 +1,8 @@
 package novel.api.types.write.pens;
 
+import novel.api.types.write.writers.DoubleDataWriter;
+
+import java.util.Objects;
 import java.util.function.Supplier;
 
 public interface DoublePen<Pen> {
@@ -48,6 +51,31 @@ public interface DoublePen<Pen> {
         return parameterizedThis();
     }
 
+    /**
+     * Writes a {@link double} using the provided {@code doubleWriter}
+     * @param d a double.
+     * @param doubleWriter a {@link DoubleDataWriter} instance
+     * @return {@code parameterizedThis()}
+     */
+    default Pen doubles(double d, DoubleDataWriter doubleWriter) {
+        Objects.requireNonNull(doubleWriter).write(this, d);
+        return parameterizedThis();
+    }
+
+    /**
+     * Writes a {@link double[]} using the provided {@code doubleWriter}
+     * @param doubles a double array
+     * @param doubleWriter a {@link DoubleDataWriter} instance
+     * @return {@code parameterizedThis()}
+     */
+    default Pen doubles(double[] doubles, DoubleDataWriter doubleWriter) {
+        Objects.requireNonNull(doubleWriter);
+        for(double d : doubles) {
+            doubleWriter.write(this, d);
+        }
+        return parameterizedThis();
+    }
+    
     /**
      * Returns {@code this} cast as your defined type parameter, {@link Pen}
      * @return {@code this) cast as {@link Pen}

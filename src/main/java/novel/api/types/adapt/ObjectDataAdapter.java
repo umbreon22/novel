@@ -4,7 +4,7 @@ import novel.api.types.read.CannotRead;
 import novel.api.types.token.TypeToken;
 import novel.api.types.read.ObjectDataReader;
 import novel.api.types.write.CannotWrite;
-import novel.api.types.write.ObjectDataWriter;
+import novel.api.types.write.writers.ObjectDataWriter;
 
 /**
  * An adapter can read and write.

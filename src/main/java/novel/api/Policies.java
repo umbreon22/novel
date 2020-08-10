@@ -1,7 +1,6 @@
 package novel.api;
 
-import novel.api.types.read.ObjectDataReader;
-import novel.api.types.write.ObjectDataWriter;
+import novel.api.types.write.writers.ObjectDataWriter;
 import novel.internal.registry.NovelAdapterRegistry;
 
 /**
@@ -25,7 +24,7 @@ public class Policies {
 
     /**
      * When registering individual {@link novel.api.types.read.ObjectDataReader}s
-     * and {@link novel.api.types.write.ObjectDataWriter}s,
+     * and {@link ObjectDataWriter}s,
      * you may want to merge an individually registered reader
      * with an individually registered writer as a WrappedAdapter
      * if possible.

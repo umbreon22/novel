@@ -1,5 +1,8 @@
 package novel.api.types.write.pens;
 
+import novel.api.types.write.writers.IntDataWriter;
+
+import java.util.Objects;
 import java.util.function.Supplier;
 
 public interface IntPen<Pen> {
@@ -46,6 +49,31 @@ public interface IntPen<Pen> {
      */
     default Pen ints(Iterable<Integer> ints) {
         for(int i : ints) ints(i);
+        return parameterizedThis();
+    }
+
+    /**
+     * Writes an {@link int} using the provided {@code intWriter}
+     * @param i an int.
+     * @param intWriter a {@link IntDataWriter} instance
+     * @return {@code parameterizedThis()}
+     */
+    default Pen ints(int i, IntDataWriter intWriter) {
+        Objects.requireNonNull(intWriter).write(this, i);
+        return parameterizedThis();
+    }
+
+    /**
+     * Writes an {@link int[]} using the provided {@code intWriter}
+     * @param ints an int array
+     * @param intWriter a {@link IntDataWriter} instance
+     * @return {@code parameterizedThis()}
+     */
+    default Pen ints(int[] ints, IntDataWriter intWriter) {
+        Objects.requireNonNull(intWriter);
+        for(int object : ints) {
+            intWriter.write(this, object);
+        }
         return parameterizedThis();
     }
 

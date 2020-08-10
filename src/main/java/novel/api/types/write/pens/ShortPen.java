@@ -1,5 +1,9 @@
 package novel.api.types.write.pens;
 
+import novel.api.types.write.writers.IntDataWriter;
+import novel.api.types.write.writers.ShortDataWriter;
+
+import java.util.Objects;
 import java.util.function.Supplier;
 
 public interface ShortPen<Pen> {
@@ -46,6 +50,31 @@ public interface ShortPen<Pen> {
      */
     default Pen shorts(Iterable<Short> shorts) {
         for(short s : shorts) shorts(s);
+        return parameterizedThis();
+    }
+
+    /**
+     * Writes a {@link short} using the provided {@code shortWriter}
+     * @param s a short.
+     * @param shortWriter a {@link ShortDataWriter} instance
+     * @return {@code parameterizedThis()}
+     */
+    default Pen shorts(short s, ShortDataWriter shortWriter) {
+        Objects.requireNonNull(shortWriter).write(this, s);
+        return parameterizedThis();
+    }
+
+    /**
+     * Writes a {@link short[]} using the provided {@code shortWriter}
+     * @param shorts a short array
+     * @param shortWriter a {@link ShortDataWriter} instance
+     * @return {@code parameterizedThis()}
+     */
+    default Pen shorts(short[] shorts, ShortDataWriter shortWriter) {
+        Objects.requireNonNull(shortWriter);
+        for(short s : shorts) {
+            shortWriter.write(this, s);
+        }
         return parameterizedThis();
     }
 

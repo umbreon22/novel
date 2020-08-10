@@ -4,7 +4,7 @@ import novel.api.Novel;
 import novel.api.types.token.TypeToken;
 import novel.api.types.write.AutoWriteable;
 import novel.api.types.write.pens.DataPen;
-import novel.api.types.write.ObjectDataWriter;
+import novel.api.types.write.writers.ObjectDataWriter;
 
 public abstract class ReflectiveObjectWriter<T, F> implements ObjectDataWriter<T> {
 

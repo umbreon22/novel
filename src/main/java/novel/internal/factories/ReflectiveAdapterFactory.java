@@ -8,7 +8,7 @@ import novel.api.types.factory.AdapterFactory;
 import novel.api.types.read.ObjectDataReader;
 import novel.api.types.read.Readable;
 import novel.api.types.token.TypeToken;
-import novel.api.types.write.ObjectDataWriter;
+import novel.api.types.write.writers.ObjectDataWriter;
 import novel.api.types.write.Writeable;
 import novel.internal.reflective.TokenableHandleReflectiveReader;
 import novel.internal.reflective.TokenableHandleReflectiveWriter;

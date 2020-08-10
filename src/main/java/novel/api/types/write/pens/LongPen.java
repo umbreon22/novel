@@ -1,5 +1,8 @@
 package novel.api.types.write.pens;
 
+import novel.api.types.write.writers.LongDataWriter;
+
+import java.util.Objects;
 import java.util.function.Supplier;
 
 public interface LongPen<Pen> {
@@ -46,6 +49,31 @@ public interface LongPen<Pen> {
      */
     default Pen longs(Iterable<Long> longs) {
         for(long l : longs) longs(l);
+        return parameterizedThis();
+    }
+
+    /**
+     * Writes a {@link long} using the provided {@code longWriter}
+     * @param l a long.
+     * @param longWriter a {@link LongDataWriter} instance
+     * @return {@code parameterizedThis()}
+     */
+    default Pen longs(long l, LongDataWriter longWriter) {
+        Objects.requireNonNull(longWriter).write(this, l);
+        return parameterizedThis();
+    }
+
+    /**
+     * Writes a {@link long[]} using the provided {@code longWriter}
+     * @param longs a long array
+     * @param longWriter a {@link LongDataWriter} instance
+     * @return {@code parameterizedThis()}
+     */
+    default Pen longs(long[] longs, LongDataWriter longWriter) {
+        Objects.requireNonNull(longWriter);
+        for(long l : longs) {
+            longWriter.write(this, l);
+        }
         return parameterizedThis();
     }
 
