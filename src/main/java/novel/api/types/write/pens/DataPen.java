@@ -60,10 +60,10 @@ public interface DataPen<Pen extends DataPen<Pen>> extends
 
     /**
      * Writes an {@link Iterable} of autowriteables.
-     * @param objects a {@link Iterable<AutoWriteable>}
+     * @param objects a {@link Iterable<? extends AutoWriteable>}
      * @return {@code parameterizedThis()}
      */
-    default Pen objects(Iterable<AutoWriteable> objects) {
+    default Pen objects(Iterable<? extends AutoWriteable> objects) {
         for(AutoWriteable o : objects) objects(o);
         return parameterizedThis();
     }
