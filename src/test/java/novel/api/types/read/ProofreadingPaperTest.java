@@ -1,7 +1,9 @@
 package novel.api.types.read;
 
+import novel.api.types.adapt.Novelable;
 import novel.api.types.read.validators.*;
 import novel.api.types.write.AutoWriteable;
+import novel.api.types.write.pens.DataPen;
 import novel.internal.testutil.DataPenQueue;
 import novel.internal.testutil.ProofreadingPaperQueue;
 import org.junit.jupiter.api.Assertions;
@@ -10,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.function.Function;
+import java.util.stream.Stream;
 
 public class ProofreadingPaperTest {
 
@@ -105,7 +108,7 @@ public class ProofreadingPaperTest {
         AutoWriteable write = pen->pen.strings((Object[]) data);
         var paper = newPaper(pen->pen.objects(write));
         TypeValidator<String> validator = Objects::nonNull;
-        Assertions.assertArrayEquals(paper.objects(DataPaper::strings, data.length, validator), data);
+        Assertions.assertArrayEquals(paper.objects(DataPaper::strings, data.length, String.class, validator), data);
         Assertions.assertEquals(Arrays.toString(data), newPaper(pen -> pen.strings(Arrays.toString(data))).strings(validator));
     }
 
@@ -120,6 +123,43 @@ public class ProofreadingPaperTest {
             read[i] = paper.objects(readers[i], Objects::nonNull);
         }
         Assertions.assertArrayEquals(read, data);
+    }
+
+    static class TestObject implements Novelable, AutoWriteable {
+        String str;
+        TestObject(String str) {
+            this.str = str;
+        }
+
+        @Override
+        public void write(DataPen<?> output) {
+            output.strings(str);
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            TestObject that = (TestObject) o;
+            return Objects.equals(str, that.str);
+        }
+
+        @Override
+        public String toString() {
+            return str;
+        }
+    }
+
+    @Test
+    void zygonsTest() {
+        ObjectDataReader<TestObject> reader = paper -> new TestObject(paper.strings());
+        TestObject[] zygonIsCool = Stream.of("zygon", "is", "cool").map(TestObject::new).toArray(TestObject[]::new);
+        ProofreadingPaper paper = newPaper(pen->pen.objects(zygonIsCool));
+        TestObject[] data = paper.objects(reader, zygonIsCool.length, TestObject.class, Objects::nonNull);
+        Assertions.assertArrayEquals(zygonIsCool, data);
+        paper = newPaper(pen->pen.strings((Object[])zygonIsCool));
+        TestObject[] data2 = paper.objects(reader, zygonIsCool.length, TestObject[]::new, Objects::nonNull);
+        Assertions.assertArrayEquals(zygonIsCool, data2);
     }
 
 }
