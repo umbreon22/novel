@@ -1,0 +1,27 @@
+package novel.api.types.read.validators;
+
+import java.util.Objects;
+import java.util.function.Predicate;
+
+@FunctionalInterface
+public interface BooleanValidator extends TypeValidator<Boolean> {
+
+    @Override
+    default BooleanValidator negate() {
+        return transform(TypeValidator.super.negate());
+    }
+
+    @Override
+    default BooleanValidator and(Predicate<? super Boolean> other) {
+        return transform(TypeValidator.super.and(other));
+    }
+
+    @Override
+    default BooleanValidator or(Predicate<? super Boolean> other) {
+        return transform(TypeValidator.super.or(other));
+    }
+
+    private BooleanValidator transform(Predicate<? super Boolean> predicate) {
+        return Objects.requireNonNull(predicate, "transformed predicate cannot be null.")::test;
+    }
+}
