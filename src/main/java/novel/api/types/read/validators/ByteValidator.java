@@ -37,7 +37,7 @@ public interface ByteValidator extends IntValidator {
     }
 
     /**
-     * Calling transform will not preserve any changes to {@link #validate(byte)}
+     * Calling transform will not preserve any overridden methods.
      */
     private ByteValidator transform(IntPredicate predicate) {
         return predicate::test;

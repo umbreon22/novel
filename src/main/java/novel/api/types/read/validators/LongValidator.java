@@ -29,6 +29,9 @@ public interface LongValidator extends LongPredicate {
         return transform(LongPredicate.super.or(other));
     }
 
+    /**
+     * Calling transform will not preserve any overridden methods.
+     */
     private LongValidator transform(LongPredicate predicate) {
         return Objects.requireNonNull(predicate)::test;
     }

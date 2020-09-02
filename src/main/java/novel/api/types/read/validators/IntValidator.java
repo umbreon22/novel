@@ -29,7 +29,7 @@ public interface IntValidator extends IntPredicate {
     }
 
     /**
-     * Calling transform will not preserve any changes to {@link #validate(int)}
+     * Calling transform will not preserve any overridden methods.
      */
     private IntValidator transform(IntPredicate predicate) {
         return predicate::test;

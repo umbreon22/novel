@@ -28,6 +28,9 @@ public interface DoubleValidator extends DoublePredicate {
         return transform(DoublePredicate.super.or(other));
     }
 
+    /**
+     * Calling transform will not preserve any overridden methods.
+     */
     private DoubleValidator transform(DoublePredicate predicate) {
         return predicate::test;
     }

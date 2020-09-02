@@ -21,6 +21,9 @@ public interface BooleanValidator extends TypeValidator<Boolean> {
         return transform(TypeValidator.super.or(other));
     }
 
+    /**
+     * Calling transform will not preserve any overridden methods.
+     */
     private BooleanValidator transform(Predicate<? super Boolean> predicate) {
         return Objects.requireNonNull(predicate, "transformed predicate cannot be null.")::test;
     }

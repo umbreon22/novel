@@ -32,7 +32,7 @@ public interface ShortValidator extends IntValidator {
     }
 
     /**
-     * Calling transform will not preserve any changes to {@link #validate(short)}
+     * Calling transform will not preserve any overridden methods.
      */
     private ShortValidator transform(IntPredicate predicate) {
         return predicate::test;

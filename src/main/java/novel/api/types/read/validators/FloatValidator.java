@@ -36,6 +36,9 @@ public interface FloatValidator extends DoubleValidator {
         return transform(DoubleValidator.super.or(other));
     }
 
+    /**
+     * Calling transform will not preserve any overridden methods.
+     */
     private FloatValidator transform(DoublePredicate predicate) {
         return predicate::test;
     }

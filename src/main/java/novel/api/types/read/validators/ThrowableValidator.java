@@ -54,6 +54,9 @@ public interface ThrowableValidator<T> extends Predicate<T> {
         return transform(Predicate.super.or(other));
     }
 
+    /**
+     * Calling transform will not preserve any overridden methods.
+     */
     private ThrowableValidator<T> transform(Predicate<? super T> predicate) {
         return Objects.requireNonNull(predicate, "transformed predicate cannot be null.")::test;
     }

@@ -38,7 +38,7 @@ public interface CharValidator extends IntValidator {
     }
 
     /**
-     * Calling transform will not preserve any changes to {@link #validate(char)}
+     * Calling transform will not preserve any overridden methods.
      */
     private CharValidator transform(IntPredicate predicate) {
         return predicate::test;
