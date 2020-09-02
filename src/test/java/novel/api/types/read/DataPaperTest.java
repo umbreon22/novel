@@ -81,8 +81,9 @@ public class DataPaperTest {
         stringObjectsTest("hello", "goodbye");
     }
 
-    <T> void stringObjectsTest(T... data) {
-        AutoWriteable write = pen->pen.strings(data);
+    @SafeVarargs
+    final <T> void stringObjectsTest(T... data) {
+        AutoWriteable write = pen->pen.strings((Object[])data);
         DataPaper paper = newPaper(pen->pen.objects(write));
         Assertions.assertArrayEquals(paper.objects(DataPaper::strings, data.length), data);
     }
