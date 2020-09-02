@@ -5,6 +5,7 @@ open module novel {
 
     exports novel.api;
     exports novel.api.types.read;
+    exports novel.api.types.read.validators;
     exports novel.api.types.write;
     exports novel.api.types.write.pens;
     exports novel.api.types.write.writers;
