@@ -1,5 +1,9 @@
 package novel.api.types.read;
 
+import java.lang.reflect.Array;
+import java.util.Objects;
+import java.util.function.Function;
+
 /**
  * Novel's data input interface.
  * You read what's on the paper!
@@ -92,13 +96,21 @@ public interface DataPaper {
         return reader.read(this);
     }
 
-    @SuppressWarnings("unchecked")
-    default <T> T[] objects(ObjectDataReader<? extends T> reader, int arrayLength) {
-        T[] t = (T[]) new Object[arrayLength];
+    default <T> T[] objects(ObjectDataReader<? extends T> reader, T[] output) {
+        int arrayLength = Objects.requireNonNull(output, "output array cannot be null").length;
         for(int i = 0; i < arrayLength; i++) {
-            t[i] = objects(reader);
+            output[i] = objects(reader);
         }
-        return t;
+        return output;
+    }
+
+    @SuppressWarnings("unchecked")
+    default <T> T[] objects(ObjectDataReader<? extends T> reader, int length, Class<T> componentType) {
+        return objects(reader, (T[]) Array.newInstance(componentType, length));
+    }
+
+    default <T> T[] objects(ObjectDataReader<? extends T> reader, int length, Function<Integer, T[]> constructor) {
+        return objects(reader, constructor.apply(length));
     }
 
     void skip(int byteSize);

@@ -2,7 +2,9 @@ package novel.api.types.read;
 
 import novel.api.types.read.validators.*;
 
+import java.lang.reflect.Array;
 import java.util.Objects;
+import java.util.function.Function;
 
 /**
  * A {@link DataPaper} with validation support!
@@ -139,14 +141,21 @@ public interface ProofreadingPaper extends DataPaper {
         return validateValidator("objects", typeValidator).validate(reader.read(this));
     }
 
-    @SuppressWarnings("unchecked")
-    default <T> T[] objects(ObjectDataReader<? extends T> reader, int arrayLength, TypeValidator<T> typeValidator) {
+    default <T> T[] objects(ObjectDataReader<? extends T> reader, T[] output, TypeValidator<T> typeValidator) {
         validateValidator("objects[]", typeValidator);
-        T[] t = (T[]) new Object[arrayLength];
-        for(int i = 0; i < arrayLength; i++) {
-            t[i] = typeValidator.validate(objects(reader));
+        for(int i = 0; i < Objects.requireNonNull(output, "output array cannot be null").length; i++) {
+            output[i] = typeValidator.validate(objects(reader));
         }
-        return t;
+        return output;
+    }
+
+    @SuppressWarnings("unchecked")
+    default <T> T[] objects(ObjectDataReader<? extends T> reader, int length, Class<T> componentType, TypeValidator<T> typeValidator) {
+        return objects(reader, (T[]) Array.newInstance(componentType, length), typeValidator);
+    }
+
+    default <T> T[] objects(ObjectDataReader<? extends T> reader, int length, Function<Integer, T[]> constructor, TypeValidator<T> typeValidator) {
+        return objects(reader, constructor.apply(length), typeValidator);
     }
 
     void skip(int byteSize);

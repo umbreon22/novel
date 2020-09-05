@@ -1,12 +1,16 @@
 package novel.api.types.read;
 
+import novel.api.types.adapt.Novelable;
+import novel.api.types.write.pens.DataPen;
 import novel.internal.testutil.DataPaperQueue;
 import novel.internal.testutil.DataPenQueue;
 import novel.api.types.write.AutoWriteable;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.Objects;
 import java.util.function.Function;
+import java.util.stream.Stream;
 
 public class DataPaperTest {
 
@@ -85,7 +89,8 @@ public class DataPaperTest {
     final <T> void stringObjectsTest(T... data) {
         AutoWriteable write = pen->pen.strings((Object[])data);
         DataPaper paper = newPaper(pen->pen.objects(write));
-        Assertions.assertArrayEquals(paper.objects(DataPaper::strings, data.length), data);
+        String[] read = paper.objects(DataPaper::strings, data.length, String[]::new);
+        Assertions.assertArrayEquals(read, data);
     }
 
     @Test
@@ -99,6 +104,44 @@ public class DataPaperTest {
             read[i] = paper.objects(readers[i]);
         }
         Assertions.assertArrayEquals(read, data);
+    }
+
+    static class TestObject implements Novelable, AutoWriteable {
+        String str;
+        TestObject(String str) {
+            this.str = str;
+        }
+
+        @Override
+        public void write(DataPen<?> output) {
+            output.strings(str);
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            TestObject that = (TestObject) o;
+            return Objects.equals(str, that.str);
+        }
+
+        @Override
+        public String toString() {
+            return str;
+        }
+    }
+
+    @Test
+    void zygonsTest() {
+        ObjectDataReader<TestObject> reader = paper -> new TestObject(paper.strings());
+        TestObject[] zygonIsCool = Stream.of("zygon", "is", "cool").map(TestObject::new).toArray(TestObject[]::new);
+        DataPaper paper = newPaper(pen->pen.objects(zygonIsCool));
+        TestObject[] data = paper.objects(reader, zygonIsCool.length, TestObject[]::new);
+        Assertions.assertArrayEquals(zygonIsCool, data);
+
+        paper = newPaper(pen->pen.strings((Object[])zygonIsCool));
+        TestObject[] data2 = paper.objects(reader, zygonIsCool.length, TestObject.class);
+        Assertions.assertArrayEquals(zygonIsCool, data2);
     }
 
 }
