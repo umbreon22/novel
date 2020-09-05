@@ -1,7 +1,5 @@
 package novel.api.types.read;
 
-import novel.api.types.read.DataPaper;
-import novel.api.types.read.Readable;
 import novel.api.types.token.Tokenable;
 import novel.api.types.token.TypeToken;
 
