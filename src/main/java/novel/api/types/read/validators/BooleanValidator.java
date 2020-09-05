@@ -1,6 +1,5 @@
 package novel.api.types.read.validators;
 
-import java.util.Objects;
 import java.util.function.Predicate;
 
 @FunctionalInterface
@@ -25,6 +24,6 @@ public interface BooleanValidator extends TypeValidator<Boolean> {
      * Calling transform will not preserve any overridden methods.
      */
     private BooleanValidator transform(Predicate<? super Boolean> predicate) {
-        return Objects.requireNonNull(predicate, "transformed predicate cannot be null.")::test;
+        return predicate::test;
     }
 }

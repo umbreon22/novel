@@ -1,6 +1,5 @@
 package novel.api.types.read.validators;
 
-import java.util.Objects;
 import java.util.function.Predicate;
 
 public interface ThrowableValidator<T> extends Predicate<T> {
@@ -36,8 +35,6 @@ public interface ThrowableValidator<T> extends Predicate<T> {
         );
     }
 
-
-
     default String category(T data) {
         return data == null ? "data" : data.getClass().getSimpleName();
     }
@@ -58,7 +55,7 @@ public interface ThrowableValidator<T> extends Predicate<T> {
      * Calling transform will not preserve any overridden methods.
      */
     private ThrowableValidator<T> transform(Predicate<? super T> predicate) {
-        return Objects.requireNonNull(predicate, "transformed predicate cannot be null.")::test;
+        return predicate::test;
     }
 
 }

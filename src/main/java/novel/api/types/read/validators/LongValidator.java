@@ -33,6 +33,6 @@ public interface LongValidator extends LongPredicate {
      * Calling transform will not preserve any overridden methods.
      */
     private LongValidator transform(LongPredicate predicate) {
-        return Objects.requireNonNull(predicate)::test;
+        return predicate::test;
     }
 }
