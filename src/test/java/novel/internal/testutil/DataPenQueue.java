@@ -17,6 +17,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.function.Supplier;
 import java.util.stream.IntStream;
+import java.util.stream.LongStream;
 import java.util.stream.Stream;
 
 public class DataPenQueue implements DataPen {
@@ -201,6 +202,18 @@ public class DataPenQueue implements DataPen {
 
     @Override
     public DataPenQueue longs(Iterable<Long> longs) {
+        DataPen.super.longs(longs);
+        return this;
+    }
+
+    @Override
+    public DataPenQueue longs(Stream<Long> longs) {
+        DataPen.super.longs(longs);
+        return this;
+    }
+
+    @Override
+    public DataPenQueue longs(LongStream longs) {
         DataPen.super.longs(longs);
         return this;
     }
