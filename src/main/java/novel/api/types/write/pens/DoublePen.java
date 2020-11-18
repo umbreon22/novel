@@ -41,6 +41,7 @@ public interface DoublePen {
     default DoublePen doubles(Supplier<Double> doubles) {
         return doubles(doubles.get());
     }
+
     /**
      * Writes an {@link Iterable} of doubles.
      * @param doubles a {@link Iterable<Double>}
