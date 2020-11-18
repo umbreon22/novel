@@ -65,7 +65,7 @@ public interface LongPen {
     }
 
     /**
-     * Writes an {@link LongStream}.
+     * Writes a {@link LongStream}.
      * @param longs a {@link LongStream}
      * @return {@code this}
      */
