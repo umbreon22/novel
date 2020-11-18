@@ -4,6 +4,8 @@ import novel.api.types.write.writers.FloatDataWriter;
 
 import java.util.Objects;
 import java.util.function.Supplier;
+import java.util.stream.DoubleStream;
+import java.util.stream.Stream;
 
 public interface FloatPen {
 
@@ -49,6 +51,26 @@ public interface FloatPen {
      */
     default FloatPen floats(Iterable<Float> floats) {
         for(float f : floats) floats(f);
+        return this;
+    }
+
+    /**
+     * Writes a {@link Stream<Float>} as floats.
+     * @param floats a {@link Stream<Float>}
+     * @return {@code this}
+     */
+    default FloatPen floats(Stream<Float> floats) {
+        floats.forEach(this::floats);
+        return this;
+    }
+
+    /**
+     * Writes a {@link DoubleStream} as floats.
+     * @param doubles a {@link DoubleStream}
+     * @return {@code this}
+     */
+    default FloatPen floats(DoubleStream doubles) {
+        doubles.forEach(d -> this.floats((float) d));
         return this;
     }
 
