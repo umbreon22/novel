@@ -14,6 +14,8 @@ import novel.api.types.write.writers.StringDataWriter;
 
 import java.util.Objects;
 import java.util.function.Supplier;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 /**
  * Novel's data output interface. You write on paper with a pen!
@@ -336,6 +338,18 @@ public interface DataPen extends
 
     @Override
     default DataPen ints(Iterable<Integer> ints) {
+        IntPen.super.ints(ints);
+        return this;
+    }
+
+    @Override
+    default DataPen ints(Stream<Integer> ints) {
+        IntPen.super.ints(ints);
+        return this;
+    }
+
+    @Override
+    default DataPen ints(IntStream ints) {
         IntPen.super.ints(ints);
         return this;
     }
