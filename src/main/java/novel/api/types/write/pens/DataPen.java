@@ -318,6 +318,18 @@ public interface DataPen extends
     }
 
     @Override
+    default DataPen floats(Stream<Float> floats) {
+        FloatPen.super.floats(floats);
+        return this;
+    }
+
+    @Override
+    default DataPen floats(DoubleStream doubles) {
+        FloatPen.super.floats(doubles);
+        return this;
+    }
+
+    @Override
     default DataPen floats(float f, FloatDataWriter floatWriter) {
         FloatPen.super.floats(f, floatWriter);
         return this;
