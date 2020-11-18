@@ -16,6 +16,7 @@ import novel.api.types.write.writers.StringDataWriter;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.function.Supplier;
+import java.util.stream.DoubleStream;
 import java.util.stream.IntStream;
 import java.util.stream.LongStream;
 import java.util.stream.Stream;
@@ -340,6 +341,18 @@ public class DataPenQueue implements DataPen {
 
     @Override
     public DataPenQueue doubles(Iterable<Double> doubles) {
+        DataPen.super.doubles(doubles);
+        return this;
+    }
+
+    @Override
+    public DataPenQueue doubles(Stream<Double> doubles) {
+        DataPen.super.doubles(doubles);
+        return this;
+    }
+
+    @Override
+    public DataPenQueue doubles(DoubleStream doubles) {
         DataPen.super.doubles(doubles);
         return this;
     }
