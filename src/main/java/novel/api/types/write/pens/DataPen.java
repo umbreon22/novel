@@ -15,6 +15,7 @@ import novel.api.types.write.writers.StringDataWriter;
 import java.util.Objects;
 import java.util.function.Supplier;
 import java.util.stream.IntStream;
+import java.util.stream.LongStream;
 import java.util.stream.Stream;
 
 /**
@@ -389,6 +390,18 @@ public interface DataPen extends
 
     @Override
     default DataPen longs(Iterable<Long> longs) {
+        LongPen.super.longs(longs);
+        return this;
+    }
+
+    @Override
+    default DataPen longs(Stream<Long> longs) {
+        LongPen.super.longs(longs);
+        return this;
+    }
+    
+    @Override
+    default DataPen longs(LongStream longs) {
         LongPen.super.longs(longs);
         return this;
     }
