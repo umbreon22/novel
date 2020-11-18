@@ -113,7 +113,7 @@ public class DataPaperTest {
         }
 
         @Override
-        public void write(DataPen<?> output) {
+        public void write(DataPen output) {
             output.strings(str);
         }
 

@@ -10,10 +10,10 @@ import novel.api.types.write.pens.ShortPen;
 public interface ByteDataWriter extends ObjectDataWriter<Number> {
 
     @Override
-    default void write(DataPen<?> pen, Number object) {
+    default void write(DataPen pen, Number object) {
         write(pen, object.byteValue());
     }
 
-    void write(BytePen<?> pen, byte object);
+    void write(BytePen pen, byte object);
 
 }

@@ -41,7 +41,7 @@ public class NovelWrapperAdapterFactory extends AdapterFactory {
         }
 
         @Override
-        public void write(DataPen<?> pen, NovelableWrapper<E> wrapper) {
+        public void write(DataPen pen, NovelableWrapper<E> wrapper) {
             elementAdapter.write(pen, wrapper.unwrap());
         }
     }

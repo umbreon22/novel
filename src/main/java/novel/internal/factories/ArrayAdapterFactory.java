@@ -89,7 +89,7 @@ public class ArrayAdapterFactory extends AdapterFactory {
 
         @SuppressWarnings("unchecked")
         @Override
-        public void write(DataPen<?> pen, ArrayType array) {
+        public void write(DataPen pen, ArrayType array) {
             try {
                 int length = (int) arrayLengthHandle.invoke(array);
                 pen.ints(length);
@@ -106,7 +106,7 @@ public class ArrayAdapterFactory extends AdapterFactory {
         }
 
         @SuppressWarnings("unchecked")
-        private void writeArrayReflective(DataPen<?> pen, ArrayType array) {
+        private void writeArrayReflective(DataPen pen, ArrayType array) {
             int length = Array.getLength(array);
             pen.ints(length);
             for(int i = 0; i < length; i++) {
@@ -144,7 +144,7 @@ public class ArrayAdapterFactory extends AdapterFactory {
         }
 
         @Override
-        public void write(DataPen<?> pen, ComponentType[] array) {
+        public void write(DataPen pen, ComponentType[] array) {
             pen.ints(array.length);
             for (ComponentType type : array) {
                 componentWriter.write(pen, type);
@@ -182,7 +182,7 @@ public class ArrayAdapterFactory extends AdapterFactory {
 
         @SuppressWarnings("unchecked")
         @Override
-        public void write(DataPen<?> pen, ArrayType array) {
+        public void write(DataPen pen, ArrayType array) {
             int length = Array.getLength(array);
             pen.ints(length);
             for(int i = 0; i < length; i++) {

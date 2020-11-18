@@ -10,10 +10,10 @@ import novel.api.types.write.pens.DoublePen;
 public interface DoubleDataWriter extends ObjectDataWriter<Number> {
 
     @Override
-    default void write(DataPen<?> pen, Number object) {
+    default void write(DataPen pen, Number object) {
         write(pen, object.doubleValue());
     }
 
-    void write(DoublePen<?> pen, double object);
+    void write(DoublePen pen, double object);
 
 }

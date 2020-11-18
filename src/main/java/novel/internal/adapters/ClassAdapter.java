@@ -19,7 +19,7 @@ public class ClassAdapter implements ObjectDataAdapter<Class> {
     }
 
     @Override
-    public void write(DataPen<?> pen, Class object) {
+    public void write(DataPen pen, Class object) {
         pen.strings(object.getName());
     }
 }

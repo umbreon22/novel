@@ -7,7 +7,7 @@ import novel.api.types.write.writers.ObjectDataWriter;
 public interface CannotWrite<T> extends ObjectDataWriter<T> {
 
     @Override
-    default void write(DataPen<?> pen, T object) {
+    default void write(DataPen pen, T object) {
         throw new UnsupportedOperationException("Cannot write " + token());
     }
 

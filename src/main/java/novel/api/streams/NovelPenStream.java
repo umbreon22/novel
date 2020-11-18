@@ -12,7 +12,7 @@ import java.io.OutputStream;
  * Wraps an {@link OutputStream} with {@link DataPen} capability.
  * todo: move to its own module?
  */
-public class NovelPenStream extends ObjectOutputStream implements DataPen<NovelPenStream> {
+public class NovelPenStream extends ObjectOutputStream implements DataPen {
 
     public NovelPenStream(OutputStream out) throws IOException {
         super(out);

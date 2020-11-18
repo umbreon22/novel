@@ -26,7 +26,7 @@ public class EnumAdapter<T extends Enum<T>> implements ObjectDataAdapter<T> {
     }
 
     @Override
-    public void write(DataPen<?> pen, T object) {
+    public void write(DataPen pen, T object) {
         pen.ints(object.ordinal());
     }
 

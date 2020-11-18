@@ -38,7 +38,7 @@ final class WrappedAdapter<T> implements ObjectDataAdapter<T> {
     }
 
     @Override
-    public void write(DataPen<?> pen, T object) {
+    public void write(DataPen pen, T object) {
         writer.write(pen, object);
     }
 

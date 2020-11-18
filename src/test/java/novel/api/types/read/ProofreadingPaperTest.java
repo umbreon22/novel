@@ -132,7 +132,7 @@ public class ProofreadingPaperTest {
         }
 
         @Override
-        public void write(DataPen<?> output) {
+        public void write(DataPen output) {
             output.strings(str);
         }
 

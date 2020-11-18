@@ -10,10 +10,11 @@ import novel.api.types.write.pens.StringPen;
 public interface StringDataWriter extends ObjectDataWriter<CharSequence> {
 
     @Override
-    default void write(DataPen<?> pen, CharSequence object) {
-        write((StringPen<?>) pen, object.toString());
+    default void write(DataPen pen, CharSequence object) {
+        //this is okay because every DataPen is a StringPen
+        write((StringPen) pen, object.toString());
     }
 
-    void write(StringPen<?> pen, String object);
+    void write(StringPen pen, String object);
 
 }

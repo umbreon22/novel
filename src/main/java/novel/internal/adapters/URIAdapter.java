@@ -22,7 +22,7 @@ public class URIAdapter implements ObjectDataAdapter<URI> {
     }
 
     @Override
-    public void write(DataPen<?> pen, URI uri) {
+    public void write(DataPen pen, URI uri) {
         pen.strings(uri.toString());
     }
 }

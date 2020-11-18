@@ -17,7 +17,7 @@ public class BitSetAdapter implements ObjectDataAdapter<BitSet> {
     }
 
     @Override
-    public void write(DataPen<?> pen, BitSet bitset) {
+    public void write(DataPen pen, BitSet bitset) {
         byte[] byteArray = bitset.toByteArray();
         pen.ints(byteArray.length).bytes(byteArray);
     }

@@ -8,8 +8,8 @@ import novel.api.types.write.pens.IntPen;
  */
 public interface IntDataWriter extends ObjectDataWriter<Number> {
     @Override
-    default void write(DataPen<?> pen, Number object) {
+    default void write(DataPen pen, Number object) {
         write(pen, object.intValue());
     }
-    void write(IntPen<?> pen, int object);
+    void write(IntPen pen, int object);
 }

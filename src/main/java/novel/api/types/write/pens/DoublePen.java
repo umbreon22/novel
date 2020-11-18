@@ -5,83 +5,75 @@ import novel.api.types.write.writers.DoubleDataWriter;
 import java.util.Objects;
 import java.util.function.Supplier;
 
-public interface DoublePen<Pen> {
+public interface DoublePen {
 
     /**
      * Writes a double.
      * @param d a double
-     * @return {@link #parameterizedThis()}
+     * @return {@code this}
      */
-    Pen doubles(double d);
+    DoublePen doubles(double d);
 
     /**
      * Writes doubles.
      * @param doubles a varargs array of doubles
-     * @return {@link #parameterizedThis()}
+     * @return {@code this}
      */
-    default Pen doubles(double... doubles) {
+    default DoublePen doubles(double... doubles) {
         for(double d : doubles) doubles(d);
-        return parameterizedThis();
+        return this;
     }
 
     /**
      * Writes {@link double[]}s.
      * @param doubles a varargs array of {@link double[]}s
-     * @return {@link #parameterizedThis()}
+     * @return {@code this}
      */
-    default Pen doubles(double[]... doubles) {
+    default DoublePen doubles(double[]... doubles) {
         for(double[] d : doubles) doubles(d);
-        return parameterizedThis();
+        return this;
     }
 
     /**
      * @see #doubles(double)
-     * @return {@link #parameterizedThis()}
+     * @return {@code this}
      */
-    default Pen doubles(Supplier<Double> doubles) {
+    default DoublePen doubles(Supplier<Double> doubles) {
         return doubles(doubles.get());
     }
     /**
      * Writes an {@link Iterable} of doubles.
      * @param doubles a {@link Iterable<Double>}
-     * @return {@link #parameterizedThis()}
+     * @return {@code this}
      */
-    default Pen doubles(Iterable<Double> doubles) {
+    default DoublePen doubles(Iterable<Double> doubles) {
         for(double d : doubles) doubles(d);
-        return parameterizedThis();
+        return this;
     }
 
     /**
      * Writes a {@link double} using the provided {@code doubleWriter}
      * @param d a double.
      * @param doubleWriter a {@link DoubleDataWriter} instance
-     * @return {@code parameterizedThis()}
+     * @return {@code this}
      */
-    default Pen doubles(double d, DoubleDataWriter doubleWriter) {
+    default DoublePen doubles(double d, DoubleDataWriter doubleWriter) {
         Objects.requireNonNull(doubleWriter).write(this, d);
-        return parameterizedThis();
+        return this;
     }
 
     /**
      * Writes a {@link double[]} using the provided {@code doubleWriter}
      * @param doubles a double array
      * @param doubleWriter a {@link DoubleDataWriter} instance
-     * @return {@code parameterizedThis()}
+     * @return {@code this}
      */
-    default Pen doubles(double[] doubles, DoubleDataWriter doubleWriter) {
+    default DoublePen doubles(double[] doubles, DoubleDataWriter doubleWriter) {
         Objects.requireNonNull(doubleWriter);
         for(double d : doubles) {
             doubleWriter.write(this, d);
         }
-        return parameterizedThis();
+        return this;
     }
     
-    /**
-     * Returns {@code this} cast as your defined type parameter, {@link Pen}
-     * @return {@code this) cast as {@link Pen}
-     */
-    @SuppressWarnings("unchecked")
-    private Pen parameterizedThis() {
-        return (Pen) this;
-    }
 }

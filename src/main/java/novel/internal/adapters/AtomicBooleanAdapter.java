@@ -16,7 +16,7 @@ public class AtomicBooleanAdapter implements ObjectDataAdapter<AtomicBoolean> {
     }
 
     @Override
-    public void write(DataPen<?> pen, AtomicBoolean atomic) {
+    public void write(DataPen pen, AtomicBoolean atomic) {
         pen.bools(atomic.get());
     }
 }

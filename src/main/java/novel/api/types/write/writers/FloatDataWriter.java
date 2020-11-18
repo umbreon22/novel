@@ -10,10 +10,10 @@ import novel.api.types.write.pens.FloatPen;
 public interface FloatDataWriter extends ObjectDataWriter<Number> {
 
     @Override
-    default void write(DataPen<?> pen, Number object) {
+    default void write(DataPen pen, Number object) {
         write(pen, object.floatValue());
     }
 
-    void write(FloatPen<?> pen, float object);
+    void write(FloatPen pen, float object);
 
 }

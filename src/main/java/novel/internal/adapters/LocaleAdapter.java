@@ -25,14 +25,14 @@ public class LocaleAdapter implements ObjectDataAdapter<Locale> {
     }
 
     @Override
-    public void write(DataPen<?> pen, Locale locale) {
+    public void write(DataPen pen, Locale locale) {
         pen.strings(locale.getLanguage());
         if(writeNullableString(pen, locale.getCountry())) {
             writeNullableString(pen, locale.getVariant());
         }
     }
 
-    private static boolean writeNullableString(DataPen<?> pen, String string) {
+    private static boolean writeNullableString(DataPen pen, String string) {
         if(string != null && !string.isEmpty()) {
             pen.bools(true).strings(string);
             return true;

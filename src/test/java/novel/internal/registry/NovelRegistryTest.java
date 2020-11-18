@@ -35,7 +35,7 @@ class NovelRegistryTest {
         }
 
         @Override
-        public void write(DataPen<?> writer) {
+        public void write(DataPen writer) {
             writer.strings(whoIsCute);
         }
     }

@@ -10,10 +10,10 @@ import novel.api.types.write.pens.StringPen;
 public interface BoolDataWriter extends ObjectDataWriter<Boolean> {
 
     @Override
-    default void write(DataPen<?> pen, Boolean object) {
-        write((BoolPen<?>) pen, object);
+    default void write(DataPen pen, Boolean object) {
+        write((BoolPen) pen, object);
     }
 
-    void write(BoolPen<?> pen, boolean b);
+    void write(BoolPen pen, boolean b);
 
 }

@@ -16,7 +16,7 @@ public class AtomicLongAdapter implements ObjectDataAdapter<AtomicLong> {
     }
 
     @Override
-    public void write(DataPen<?> pen, AtomicLong atomic) {
+    public void write(DataPen pen, AtomicLong atomic) {
         pen.longs(atomic.get());
     }
 }
