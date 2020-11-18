@@ -4,6 +4,8 @@ import novel.api.types.write.writers.LongDataWriter;
 
 import java.util.Objects;
 import java.util.function.Supplier;
+import java.util.stream.LongStream;
+import java.util.stream.Stream;
 
 public interface LongPen {
 
@@ -49,6 +51,26 @@ public interface LongPen {
      */
     default LongPen longs(Iterable<Long> longs) {
         for(long l : longs) longs(l);
+        return this;
+    }
+
+    /**
+     * Writes a {@link Stream <Long>} of longs.
+     * @param longs a {@link Stream<Long>}
+     * @return {@code this}
+     */
+    default LongPen longs(Stream<Long> longs) {
+        longs.forEach(this::longs);
+        return this;
+    }
+
+    /**
+     * Writes an {@link LongStream}.
+     * @param longs a {@link LongStream}
+     * @return {@code this}
+     */
+    default LongPen longs(LongStream longs) {
+        longs.forEach(this::longs);
         return this;
     }
 
