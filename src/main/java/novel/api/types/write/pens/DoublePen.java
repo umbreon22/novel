@@ -4,6 +4,8 @@ import novel.api.types.write.writers.DoubleDataWriter;
 
 import java.util.Objects;
 import java.util.function.Supplier;
+import java.util.stream.DoubleStream;
+import java.util.stream.Stream;
 
 public interface DoublePen {
 
@@ -49,6 +51,26 @@ public interface DoublePen {
      */
     default DoublePen doubles(Iterable<Double> doubles) {
         for(double d : doubles) doubles(d);
+        return this;
+    }
+
+    /**
+     * Writes a {@link Stream<Double>} as doubles.
+     * @param doubles a {@link Stream<Double>}
+     * @return {@code this}
+     */
+    default DoublePen doubles(Stream<Double> doubles) {
+        doubles.forEach(this::doubles);
+        return this;
+    }
+
+    /**
+     * Writes a {@link DoubleStream} as doubles.
+     * @param doubles a {@link DoubleStream}
+     * @return {@code this}
+     */
+    default DoublePen doubles(DoubleStream doubles) {
+        doubles.forEach(this::doubles);
         return this;
     }
 
