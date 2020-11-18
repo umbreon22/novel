@@ -4,6 +4,8 @@ import novel.api.types.write.writers.IntDataWriter;
 
 import java.util.Objects;
 import java.util.function.Supplier;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public interface IntPen {
 
@@ -49,6 +51,26 @@ public interface IntPen {
      */
     default IntPen ints(Iterable<Integer> ints) {
         for(int i : ints) ints(i);
+        return this;
+    }
+
+    /**
+     * Writes a {@link Stream<Integer>} of integers.
+     * @param integers a {@link Stream<Integer>}
+     * @return {@code this}
+     */
+    default IntPen ints(Stream<Integer> integers) {
+        integers.forEach(this::ints);
+        return this;
+    }
+
+    /**
+     * Writes an {@link IntStream}.
+     * @param ints a {@link IntStream}
+     * @return {@code this}
+     */
+    default IntPen ints(IntStream ints) {
+        ints.forEach(this::ints);
         return this;
     }
 
