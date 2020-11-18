@@ -14,6 +14,7 @@ import novel.api.types.write.writers.StringDataWriter;
 
 import java.util.Objects;
 import java.util.function.Supplier;
+import java.util.stream.DoubleStream;
 import java.util.stream.IntStream;
 import java.util.stream.LongStream;
 import java.util.stream.Stream;
@@ -261,6 +262,18 @@ public interface DataPen extends
 
     @Override
     default DataPen doubles(Iterable<Double> doubles) {
+        DoublePen.super.doubles(doubles);
+        return this;
+    }
+
+    @Override
+    default DataPen doubles(Stream<Double> doubles) {
+        DoublePen.super.doubles(doubles);
+        return this;
+    }
+
+    @Override
+    default DataPen doubles(DoubleStream doubles) {
         DoublePen.super.doubles(doubles);
         return this;
     }
