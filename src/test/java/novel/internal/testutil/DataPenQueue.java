@@ -16,6 +16,8 @@ import novel.api.types.write.writers.StringDataWriter;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.function.Supplier;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class DataPenQueue implements DataPen {
 
@@ -145,6 +147,18 @@ public class DataPenQueue implements DataPen {
 
     @Override
     public DataPenQueue ints(Iterable<Integer> ints) {
+        DataPen.super.ints(ints);
+        return this;
+    }
+
+    @Override
+    public DataPenQueue ints(Stream<Integer> ints) {
+        DataPen.super.ints(ints);
+        return this;
+    }
+
+    @Override
+    public DataPenQueue ints(IntStream ints) {
         DataPen.super.ints(ints);
         return this;
     }
