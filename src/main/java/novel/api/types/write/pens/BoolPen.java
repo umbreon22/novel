@@ -4,6 +4,7 @@ import novel.api.types.write.writers.BoolDataWriter;
 
 import java.util.Objects;
 import java.util.function.Supplier;
+import java.util.stream.Stream;
 
 public interface BoolPen {
 
@@ -76,4 +77,15 @@ public interface BoolPen {
         }
         return this;
     }
+
+    /**
+     * Writes a {@link Stream <Boolean>} as booleans.
+     * @param bools a {@link Stream<Boolean>}
+     * @return {@code this}
+     */
+    default BoolPen bools(Stream<Boolean> bools) {
+        bools.forEach(this::bools);
+        return this;
+    }
+
 }
