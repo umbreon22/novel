@@ -173,6 +173,18 @@ public interface DataPen extends
     }
 
     @Override
+    default DataPen bools(Stream<Boolean> booleans) {
+        BoolPen.super.bools(booleans);
+        return this;
+    }
+
+    @Override
+    default DataPen bools(Stream<Boolean> booleans, BoolDataWriter boolWriter) {
+        BoolPen.super.bools(booleans, boolWriter);
+        return this;
+    }
+
+    @Override
     default DataPen bools(boolean b, BoolDataWriter boolWriter) {
         BoolPen.super.bools(b, boolWriter);
         return this;

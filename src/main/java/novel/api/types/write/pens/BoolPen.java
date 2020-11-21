@@ -88,4 +88,15 @@ public interface BoolPen {
         return this;
     }
 
+    /**
+     * Writes a {@link Stream <Boolean>} using the provided {@code booleanWriter}
+     * @param bools a {@link Stream<Boolean>}
+     * @param boolWriter a {@link BoolDataWriter} instance
+     * @return {@code this}
+     */
+    default BoolPen bools(Stream<Boolean> bools, BoolDataWriter boolWriter) {
+        bools.forEach(b -> boolWriter.write(this, b));
+        return this;
+    }
+
 }

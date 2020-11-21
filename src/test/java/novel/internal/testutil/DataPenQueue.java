@@ -130,6 +130,12 @@ public class DataPenQueue implements DataPen {
     }
 
     @Override
+    public DataPenQueue bools(Stream<Boolean> booleans, BoolDataWriter boolWriter) {
+        DataPen.super.bools(booleans, boolWriter);
+        return this;
+    }
+
+    @Override
     public DataPenQueue bools(boolean b, BoolDataWriter boolWriter) {
         DataPen.super.bools(b, boolWriter);
         return this;
