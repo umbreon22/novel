@@ -4,6 +4,8 @@ import novel.api.types.write.writers.ByteDataWriter;
 
 import java.util.Objects;
 import java.util.function.Supplier;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public interface BytePen {
 
@@ -74,6 +76,26 @@ public interface BytePen {
         for(byte b : bytes) {
             byteWriter.write(this, b);
         }
+        return this;
+    }
+
+    /**
+     * Writes a {@link Stream} using {@link Number#byteValue()}
+     * @param numbers a {@link Stream}
+     * @return {@code this}
+     */
+    default BytePen bytes(Stream<? extends Number> numbers) {
+        numbers.forEach(number->this.bytes(number.byteValue()));
+        return this;
+    }
+
+    /**
+     * Writes an {@link IntStream} as bytes.
+     * @param ints a {@link IntStream}
+     * @return {@code this}
+     */
+    default BytePen bytes(IntStream ints) {
+        ints.forEach(i->this.bytes((byte)i));
         return this;
     }
 
