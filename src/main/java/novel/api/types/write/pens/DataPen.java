@@ -267,8 +267,8 @@ public interface DataPen extends
     }
 
     @Override
-    default DataPen doubles(Stream<Double> doubles) {
-        DoublePen.super.doubles(doubles);
+    default DataPen doubles(Stream<? extends Number> numbers) {
+        DoublePen.super.doubles(numbers);
         return this;
     }
 
@@ -318,8 +318,8 @@ public interface DataPen extends
     }
 
     @Override
-    default DataPen floats(Stream<Float> floats) {
-        FloatPen.super.floats(floats);
+    default DataPen floats(Stream<? extends Number> numbers) {
+        FloatPen.super.floats(numbers);
         return this;
     }
 
@@ -369,8 +369,8 @@ public interface DataPen extends
     }
 
     @Override
-    default DataPen ints(Stream<Integer> ints) {
-        IntPen.super.ints(ints);
+    default DataPen ints(Stream<? extends Number> numbers) {
+        IntPen.super.ints(numbers);
         return this;
     }
 
@@ -420,8 +420,8 @@ public interface DataPen extends
     }
 
     @Override
-    default DataPen longs(Stream<Long> longs) {
-        LongPen.super.longs(longs);
+    default DataPen longs(Stream<? extends Number> numbers) {
+        LongPen.super.longs(numbers);
         return this;
     }
     

@@ -55,12 +55,12 @@ public interface FloatPen {
     }
 
     /**
-     * Writes a {@link Stream<Float>} as floats.
-     * @param floats a {@link Stream<Float>}
+     * Writes a {@link Stream} using {@link Number#floatValue()}.
+     * @param numbers a {@link Stream} of {@link Number}s.
      * @return {@code this}
      */
-    default FloatPen floats(Stream<Float> floats) {
-        floats.forEach(this::floats);
+    default FloatPen floats(Stream<? extends Number> numbers) {
+        numbers.forEach(number -> this.floats(number.floatValue()));
         return this;
     }
 

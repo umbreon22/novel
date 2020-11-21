@@ -55,12 +55,12 @@ public interface LongPen {
     }
 
     /**
-     * Writes a {@link Stream <Long>} of longs.
-     * @param longs a {@link Stream<Long>}
+     * Writes a {@link Stream} using {@link Number#longValue()}.
+     * @param numbers a {@link Stream} of {@link Number}s.
      * @return {@code this}
      */
-    default LongPen longs(Stream<Long> longs) {
-        longs.forEach(this::longs);
+    default LongPen longs(Stream<? extends Number> numbers) {
+        numbers.forEach(number -> this.longs(number.longValue()));
         return this;
     }
 

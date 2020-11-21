@@ -55,12 +55,12 @@ public interface DoublePen {
     }
 
     /**
-     * Writes a {@link Stream<Double>} as doubles.
-     * @param doubles a {@link Stream<Double>}
+     * Writes a {@link Stream} using {@link Number#doubleValue()}.
+     * @param numbers a {@link Stream} of {@link Number}s
      * @return {@code this}
      */
-    default DoublePen doubles(Stream<Double> doubles) {
-        doubles.forEach(this::doubles);
+    default DoublePen doubles(Stream<? extends Number> numbers) {
+        numbers.forEach(number->this.doubles(number.doubleValue()));
         return this;
     }
 

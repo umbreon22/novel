@@ -154,8 +154,8 @@ public class DataPenQueue implements DataPen {
     }
 
     @Override
-    public DataPenQueue ints(Stream<Integer> ints) {
-        DataPen.super.ints(ints);
+    public DataPenQueue ints(Stream<? extends Number> numbers) {
+        DataPen.super.ints(numbers);
         return this;
     }
 
@@ -208,8 +208,8 @@ public class DataPenQueue implements DataPen {
     }
 
     @Override
-    public DataPenQueue longs(Stream<Long> longs) {
-        DataPen.super.longs(longs);
+    public DataPenQueue longs(Stream<? extends Number> nums) {
+        DataPen.super.longs(nums);
         return this;
     }
 
@@ -304,8 +304,8 @@ public class DataPenQueue implements DataPen {
     }
 
     @Override
-    public DataPenQueue floats(Stream<Float> floats) {
-        DataPen.super.floats(floats);
+    public DataPenQueue floats(Stream<? extends Number> nums) {
+        DataPen.super.floats(nums);
         return this;
     }
 
@@ -358,8 +358,8 @@ public class DataPenQueue implements DataPen {
     }
 
     @Override
-    public DataPenQueue doubles(Stream<Double> doubles) {
-        DataPen.super.doubles(doubles);
+    public DataPenQueue doubles(Stream<? extends Number> nums) {
+        DataPen.super.doubles(nums);
         return this;
     }
 
@@ -510,6 +510,18 @@ public class DataPenQueue implements DataPen {
     @Override
     public DataPenQueue bytes(Iterable<Byte> bytes) {
         DataPen.super.bytes(bytes);
+        return this;
+    }
+
+    @Override
+    public DataPenQueue bytes(Stream<? extends Number> numbers) {
+        DataPen.super.bytes(numbers);
+        return this;
+    }
+
+    @Override
+    public DataPenQueue bytes(IntStream ints) {
+        DataPen.super.bytes(ints);
         return this;
     }
 

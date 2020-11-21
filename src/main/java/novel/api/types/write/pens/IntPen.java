@@ -55,12 +55,12 @@ public interface IntPen {
     }
 
     /**
-     * Writes a {@link Stream<Integer>} of integers.
-     * @param integers a {@link Stream<Integer>}
+     * Writes a {@link Stream} using {@link Number#intValue()}
+     * @param numbers a {@link Stream} of {@link Number}s.
      * @return {@code this}
      */
-    default IntPen ints(Stream<Integer> integers) {
-        integers.forEach(this::ints);
+    default IntPen ints(Stream<? extends Number> numbers) {
+        numbers.forEach(number->this.ints(number.byteValue()));
         return this;
     }
 
