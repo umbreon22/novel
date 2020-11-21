@@ -71,12 +71,22 @@ public interface DataPen extends
     }
 
     /**
-     * Writes an {@link Iterable} of autowriteables.
-     * @param objects a {@link Iterable<? extends AutoWriteable>}
+     * Writes an {@link Iterable} of {@link AutoWriteable}s.
+     * @param objects a {@link Iterable}
      * @return {@code this}
      */
     default DataPen objects(Iterable<? extends AutoWriteable> objects) {
         for(AutoWriteable o : objects) objects(o);
+        return this;
+    }
+
+    /**
+     * Writes an {@link Stream} of {@link AutoWriteable}s.
+     * @param objects a {@link Iterable}
+     * @return {@code this}
+     */
+    default DataPen objects(Stream<? extends AutoWriteable> objects) {
+        objects.forEach(this::objects);
         return this;
     }
 
@@ -119,6 +129,19 @@ public interface DataPen extends
         for(T object : objects) {
             writer.write(this, object);
         }
+        return this;
+    }
+
+    /**
+     * Writes a {@link Stream<T>} using the provided {@code writer}
+     * @param objects an iterable of objects of type {@code T}
+     * @param writer a {@link ObjectDataWriter<T>} instance
+     * @param <T> {@code object}'s type
+     * @return {@code this}
+     */
+    default <T> DataPen objects(Stream<T> objects, ObjectDataWriter<T> writer) {
+        Objects.requireNonNull(writer);
+        objects.forEach(object -> writer.write(this, object));
         return this;
     }
 
@@ -223,6 +246,12 @@ public interface DataPen extends
 
     @Override
     default DataPen chars(Iterable<Character> chars) {
+        CharPen.super.chars(chars);
+        return this;
+    }
+
+    @Override
+    default DataPen chars(Stream<Character> chars) {
         CharPen.super.chars(chars);
         return this;
     }
@@ -471,6 +500,12 @@ public interface DataPen extends
     }
 
     @Override
+    default DataPen shorts(Stream<? extends Number> shorts) {
+        ShortPen.super.shorts(shorts);
+        return this;
+    }
+
+    @Override
     default DataPen shorts(short s, ShortDataWriter shortWriter) {
         ShortPen.super.shorts(s, shortWriter);
         return this;
@@ -523,6 +558,12 @@ public interface DataPen extends
 
     @Override
     default DataPen strings(Iterable<? extends CharSequence> strings) {
+        StringPen.super.strings(strings);
+        return this;
+    }
+
+    @Override
+    default DataPen strings(Stream<? extends CharSequence> strings) {
         StringPen.super.strings(strings);
         return this;
     }

@@ -64,6 +64,12 @@ public class DataPenQueue implements DataPen {
     }
 
     @Override
+    public DataPenQueue objects(Stream<? extends AutoWriteable> objects) {
+        DataPen.super.objects(objects);
+        return this;
+    }
+
+    @Override
     public <T> DataPenQueue objects(T object, ObjectDataWriter<T> writer) {
         DataPen.super.objects(object, writer);
         return this;
@@ -77,6 +83,12 @@ public class DataPenQueue implements DataPen {
 
     @Override
     public <T> DataPenQueue objects(Iterable<T> objects, ObjectDataWriter<T> writer) {
+        DataPen.super.objects(objects, writer);
+        return this;
+    }
+
+    @Override
+    public <T> DataPenQueue objects(Stream<T> objects, ObjectDataWriter<T> writer) {
         DataPen.super.objects(objects, writer);
         return this;
     }
@@ -268,6 +280,12 @@ public class DataPenQueue implements DataPen {
     }
 
     @Override
+    public DataPenQueue shorts(Stream<? extends Number> numbers) {
+        DataPen.super.shorts(numbers);
+        return this;
+    }
+
+    @Override
     public DataPenQueue shorts(short s, ShortDataWriter shortWriter) {
         DataPen.super.shorts(s, shortWriter);
         return this;
@@ -436,6 +454,12 @@ public class DataPenQueue implements DataPen {
     }
 
     @Override
+    public DataPenQueue strings(Stream<? extends CharSequence> strings) {
+        DataPen.super.strings(strings);
+        return this;
+    }
+
+    @Override
     public DataPenQueue strings(CharSequence s, StringDataWriter stringWriter) {
         DataPen.super.strings(s, stringWriter);
         return this;
@@ -473,6 +497,12 @@ public class DataPenQueue implements DataPen {
 
     @Override
     public DataPenQueue chars(Iterable<Character> chars) {
+        DataPen.super.chars(chars);
+        return this;
+    }
+
+    @Override
+    public DataPenQueue chars(Stream<Character> chars) {
         DataPen.super.chars(chars);
         return this;
     }
