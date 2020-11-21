@@ -4,6 +4,7 @@ import novel.api.types.write.writers.CharDataWriter;
 
 import java.util.Objects;
 import java.util.function.Supplier;
+import java.util.stream.Stream;
 
 public interface CharPen {
 
@@ -49,6 +50,16 @@ public interface CharPen {
      */
     default CharPen chars(Iterable<Character> chars) {
         for(char c : chars) chars(c);
+        return this;
+    }
+
+    /**
+     * Writes a {@link Stream<Character>}.
+     * @param chars a {@link Stream<Character>}
+     * @return {@code this}
+     */
+    default CharPen chars(Stream<Character> chars) {
+        chars.forEach(this::chars);
         return this;
     }
 
