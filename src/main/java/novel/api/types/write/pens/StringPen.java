@@ -4,6 +4,7 @@ import novel.api.types.write.writers.StringDataWriter;
 
 import java.util.Objects;
 import java.util.function.Supplier;
+import java.util.stream.Stream;
 
 public interface StringPen {
 
@@ -84,6 +85,16 @@ public interface StringPen {
      */
     default StringPen strings(Iterable<? extends CharSequence> strings) {
         for(CharSequence s : strings) strings(s);
+        return this;
+    }
+
+    /**
+     * Writes an {@link Iterable} of strings.
+     * @param strings a {@link Iterable<CharSequence>}
+     * @return {@code this}
+     */
+    default StringPen strings(Stream<? extends CharSequence> strings) {
+        strings.forEach(this::strings);
         return this;
     }
 
