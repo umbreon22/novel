@@ -54,12 +54,33 @@ public interface CharPen {
     }
 
     /**
+     * Writes an {@link Iterable} of chars with {@link CharDataWriter}
+     * @param chars a {@link Iterable<Character>}
+     * @param charWriter a {@link CharDataWriter}
+     * @return {@code this}
+     */
+    default CharPen chars(Iterable<Character> chars, CharDataWriter charWriter) {
+        for(char c : chars) chars(c, charWriter);
+        return this;
+    }
+
+    /**
      * Writes a {@link Stream<Character>}.
      * @param chars a {@link Stream<Character>}
      * @return {@code this}
      */
     default CharPen chars(Stream<Character> chars) {
         chars.forEach(this::chars);
+        return this;
+    }
+
+    /**
+     * Writes a {@link Stream<Character>}.
+     * @param chars a {@link Stream<Character>}
+     * @return {@code this}
+     */
+    default CharPen chars(Stream<Character> chars, CharDataWriter charWriter) {
+        chars.forEach(c -> charWriter.write(this, c));
         return this;
     }
 
