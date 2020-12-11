@@ -30,6 +30,7 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.Properties;
+import java.util.stream.Stream;
 
 /**
  * Static methods for working with types.
@@ -298,6 +299,14 @@ public final class $Gson$Types {
      */
     public static Type getCollectionElementType(Type context, Class<?> contextRawType) {
        return getElementType(context, contextRawType, Collection.class);
+    }
+
+    /**
+     * Returns the element type of this collection type.
+     * @throws IllegalArgumentException if this type is not a {@link Stream}.
+     */
+    public static Type getStreamElementType(Type context, Class<?> contextRawType) {
+        return getElementType(context, contextRawType, Stream.class);
     }
 
     /**
