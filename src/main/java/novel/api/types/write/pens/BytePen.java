@@ -4,7 +4,9 @@ import novel.api.types.write.writers.ByteDataWriter;
 
 import java.util.Objects;
 import java.util.function.Supplier;
+import java.util.stream.DoubleStream;
 import java.util.stream.IntStream;
+import java.util.stream.LongStream;
 import java.util.stream.Stream;
 
 public interface BytePen {
@@ -90,6 +92,16 @@ public interface BytePen {
     }
 
     /**
+     * Writes a {@link Stream} using {@link Number#byteValue()}
+     * @param numbers a {@link Stream}
+     * @return {@code this}
+     */
+    default BytePen bytes(Stream<? extends Number> numbers, ByteDataWriter byteWriter) {
+        numbers.forEach(number -> byteWriter.write(this, number.byteValue()));
+        return this;
+    }
+
+    /**
      * Writes an {@link IntStream} as bytes.
      * @param ints a {@link IntStream}
      * @return {@code this}
@@ -98,5 +110,59 @@ public interface BytePen {
         ints.forEach(i->this.bytes((byte)i));
         return this;
     }
+
+    /**
+     * Writes an {@link IntStream} using a {@link ByteDataWriter}
+     * @param ints a {@link LongStream}
+     * @param byteWriter a {@link ByteDataWriter} instance
+     * @return {@code this}
+     */
+    default BytePen bytes(IntStream ints, ByteDataWriter byteWriter) {
+        ints.forEach(i -> byteWriter.write(this, (byte)i));
+        return this;
+    }
+
+	/**
+	 * Writes an {@link LongStream} as bytes
+	 * @param longs a {@link LongStream}
+	 * @return {@code this}
+	 */
+	default BytePen bytes(LongStream longs) {
+		longs.forEach(l -> this.bytes((byte)l));
+		return this;
+	}
+
+	/**
+	 * Writes an {@link LongStream} using a {@link ByteDataWriter}
+	 * @param longs a {@link LongStream}
+	 * @param byteWriter a {@link ByteDataWriter} instance
+	 * @return {@code this}
+	 */
+	default BytePen bytes(LongStream longs, ByteDataWriter byteWriter) {
+		longs.forEach(l -> byteWriter.write(this, (byte)l));
+		return this;
+	}
+
+	/**
+	 * Writes an {@link DoubleStream} as bytes
+	 * @param doubles a {@link DoubleStream}
+	 * @return {@code this}
+	 */
+	default BytePen bytes(DoubleStream doubles) {
+		doubles.forEach(d -> this.bytes((byte)d));
+		return this;
+	}
+
+	/**
+	 * Writes an {@link DoubleStream} using a {@link ByteDataWriter}
+	 * @param doubles a {@link DoubleStream}
+	 * @param byteWriter a {@link ByteDataWriter} instance
+	 * @return {@code this}
+	 */
+	default BytePen bytes(DoubleStream doubles, ByteDataWriter byteWriter) {
+		doubles.forEach(d -> byteWriter.write(this, (byte)d));
+		return this;
+	}
+
 
 }

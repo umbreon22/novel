@@ -562,6 +562,12 @@ public class DataPenQueue implements DataPen {
     }
 
     @Override
+    public DataPenQueue bytes(Stream<? extends Number> numbers, ByteDataWriter byteWriter) {
+        DataPen.super.bytes(numbers, byteWriter);
+        return this;
+    }
+
+    @Override
     public DataPenQueue bytes(IntStream ints) {
         DataPen.super.bytes(ints);
         return this;
@@ -576,6 +582,36 @@ public class DataPenQueue implements DataPen {
     @Override
     public DataPenQueue bytes(byte[] bytes, ByteDataWriter byteWriter) {
         DataPen.super.bytes(bytes, byteWriter);
+        return this;
+    }
+
+    @Override
+    public DataPenQueue bytes(IntStream ints, ByteDataWriter byteWriter) {
+        DataPen.super.bytes(ints, byteWriter);
+        return this;
+    }
+
+    @Override
+    public DataPenQueue bytes(LongStream longs) {
+        DataPen.super.bytes(longs);
+        return this;
+    }
+
+    @Override
+    public DataPenQueue bytes(LongStream longs, ByteDataWriter byteWriter) {
+        DataPen.super.bytes(longs, byteWriter);
+        return this;
+    }
+
+    @Override
+    public DataPenQueue bytes(DoubleStream doubles) {
+        DataPen.super.bytes(doubles);
+        return this;
+    }
+
+    @Override
+    public DataPenQueue bytes(DoubleStream doubles, ByteDataWriter byteWriter) {
+        DataPen.super.bytes(doubles, byteWriter);
         return this;
     }
 }

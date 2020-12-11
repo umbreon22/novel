@@ -224,6 +224,54 @@ public interface DataPen extends
     }
 
     @Override
+    default DataPen bytes(Stream<? extends Number> numbers) {
+        BytePen.super.bytes(numbers);
+        return this;
+    }
+
+    @Override
+    default DataPen bytes(Stream<? extends Number> numbers, ByteDataWriter byteWriter) {
+        BytePen.super.bytes(numbers, byteWriter);
+        return this;
+    }
+
+    @Override
+    default DataPen bytes(IntStream ints) {
+        BytePen.super.bytes(ints);
+        return this;
+    }
+
+    @Override
+    default DataPen bytes(IntStream ints, ByteDataWriter byteWriter) {
+        BytePen.super.bytes(ints, byteWriter);
+        return this;
+    }
+
+    @Override
+    default DataPen bytes(LongStream longs) {
+        BytePen.super.bytes(longs);
+        return this;
+    }
+
+    @Override
+    default DataPen bytes(LongStream longs, ByteDataWriter byteWriter) {
+        BytePen.super.bytes(longs, byteWriter);
+        return this;
+    }
+
+    @Override
+    default DataPen bytes(DoubleStream doubles) {
+        BytePen.super.bytes(doubles);
+        return this;
+    }
+
+    @Override
+    default DataPen bytes(DoubleStream doubles, ByteDataWriter byteWriter) {
+        BytePen.super.bytes(doubles, byteWriter);
+        return this;
+    }
+
+    @Override
     default DataPen bytes(byte b, ByteDataWriter byteWriter) {
         BytePen.super.bytes(b, byteWriter);
         return this;
