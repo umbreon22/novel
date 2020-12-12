@@ -224,6 +224,12 @@ public interface DataPen extends
     }
 
     @Override
+    default DataPen bytes(Iterable<Byte> bytes, ByteDataWriter byteDataWriter) {
+        BytePen.super.bytes(bytes, byteDataWriter);
+        return this;
+    }
+
+    @Override
     default DataPen bytes(Stream<? extends Number> numbers) {
         BytePen.super.bytes(numbers);
         return this;

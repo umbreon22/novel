@@ -55,6 +55,16 @@ public interface BytePen {
         for(byte b : bytes) bytes(b);
         return this;
     }
+	/**
+	 * Writes an {@link Iterable} of bytes using {@code byteDataWriter}
+	 * @param bytes a {@link Iterable<Byte>}
+	 * @param byteDataWriter a {@link ByteDataWriter} instance
+	 * @return {@code this}
+	 */
+	default BytePen bytes(Iterable<Byte> bytes, ByteDataWriter byteDataWriter) {
+		for(byte b : bytes) bytes(b, byteDataWriter);
+		return this;
+	}
 
     /**
      * Writes a {@link byte} using the provided {@code byteWriter}

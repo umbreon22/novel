@@ -604,6 +604,12 @@ public class DataPenQueue implements DataPen {
     }
 
     @Override
+    public DataPenQueue bytes(Iterable<Byte> bytes, ByteDataWriter byteDataWriter) {
+        DataPen.super.bytes(bytes, byteDataWriter);
+        return this;
+    }
+
+    @Override
     public DataPenQueue bytes(Stream<? extends Number> numbers) {
         DataPen.super.bytes(numbers);
         return this;
