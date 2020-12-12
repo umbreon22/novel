@@ -305,6 +305,54 @@ public interface DataPen extends
     }
 
     @Override
+    default DataPen chars(Iterable<Character> chars, CharDataWriter charWriter) {
+        CharPen.super.chars(chars, charWriter);
+        return this;
+    }
+
+    @Override
+    default DataPen chars(Stream<Character> chars, CharDataWriter charWriter) {
+        CharPen.super.chars(chars, charWriter);
+        return this;
+    }
+
+    @Override
+    default DataPen chars(IntStream ints) {
+        CharPen.super.chars(ints);
+        return this;
+    }
+
+    @Override
+    default DataPen chars(IntStream ints, CharDataWriter charWriter) {
+        CharPen.super.chars(ints, charWriter);
+        return this;
+    }
+
+    @Override
+    default DataPen chars(LongStream longs) {
+        CharPen.super.chars(longs);
+        return this;
+    }
+
+    @Override
+    default DataPen chars(LongStream longs, CharDataWriter charWriter) {
+        CharPen.super.chars(longs, charWriter);
+        return this;
+    }
+
+    @Override
+    default DataPen chars(DoubleStream doubles) {
+        CharPen.super.chars(doubles);
+        return this;
+    }
+
+    @Override
+    default DataPen chars(DoubleStream doubles, CharDataWriter charWriter) {
+        CharPen.super.chars(doubles, charWriter);
+        return this;
+    }
+
+    @Override
     default DataPen chars(Iterable<Character> chars) {
         CharPen.super.chars(chars);
         return this;
