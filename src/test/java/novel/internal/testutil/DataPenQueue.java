@@ -478,42 +478,6 @@ public class DataPenQueue implements DataPen {
     }
 
     @Override
-    public DataPenQueue chars(IntStream ints) {
-        DataPen.super.chars(ints);
-        return this;
-    }
-
-    @Override
-    public DataPenQueue chars(IntStream ints, CharDataWriter charWriter) {
-        DataPen.super.chars(ints, charWriter);
-        return this;
-    }
-
-    @Override
-    public DataPenQueue chars(LongStream longs) {
-        DataPen.super.chars(longs);
-        return this;
-    }
-
-    @Override
-    public DataPenQueue chars(LongStream longs, CharDataWriter charWriter) {
-        DataPen.super.chars(longs, charWriter);
-        return this;
-    }
-
-    @Override
-    public DataPenQueue chars(DoubleStream doubles) {
-        DataPen.super.chars(doubles);
-        return this;
-    }
-
-    @Override
-    public DataPenQueue chars(DoubleStream doubles, CharDataWriter charWriter) {
-        DataPen.super.chars(doubles, charWriter);
-        return this;
-    }
-
-    @Override
     public DataPenQueue strings(CharSequence s, StringDataWriter stringWriter) {
         DataPen.super.strings(s, stringWriter);
         return this;
@@ -622,12 +586,6 @@ public class DataPenQueue implements DataPen {
     }
 
     @Override
-    public DataPenQueue bytes(IntStream ints) {
-        DataPen.super.bytes(ints);
-        return this;
-    }
-
-    @Override
     public DataPenQueue bytes(byte b, ByteDataWriter byteWriter) {
         DataPen.super.bytes(b, byteWriter);
         return this;
@@ -639,33 +597,4 @@ public class DataPenQueue implements DataPen {
         return this;
     }
 
-    @Override
-    public DataPenQueue bytes(IntStream ints, ByteDataWriter byteWriter) {
-        DataPen.super.bytes(ints, byteWriter);
-        return this;
-    }
-
-    @Override
-    public DataPenQueue bytes(LongStream longs) {
-        DataPen.super.bytes(longs);
-        return this;
-    }
-
-    @Override
-    public DataPenQueue bytes(LongStream longs, ByteDataWriter byteWriter) {
-        DataPen.super.bytes(longs, byteWriter);
-        return this;
-    }
-
-    @Override
-    public DataPenQueue bytes(DoubleStream doubles) {
-        DataPen.super.bytes(doubles);
-        return this;
-    }
-
-    @Override
-    public DataPenQueue bytes(DoubleStream doubles, ByteDataWriter byteWriter) {
-        DataPen.super.bytes(doubles, byteWriter);
-        return this;
-    }
 }

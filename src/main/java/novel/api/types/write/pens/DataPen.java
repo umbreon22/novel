@@ -242,42 +242,6 @@ public interface DataPen extends
     }
 
     @Override
-    default DataPen bytes(IntStream ints) {
-        BytePen.super.bytes(ints);
-        return this;
-    }
-
-    @Override
-    default DataPen bytes(IntStream ints, ByteDataWriter byteWriter) {
-        BytePen.super.bytes(ints, byteWriter);
-        return this;
-    }
-
-    @Override
-    default DataPen bytes(LongStream longs) {
-        BytePen.super.bytes(longs);
-        return this;
-    }
-
-    @Override
-    default DataPen bytes(LongStream longs, ByteDataWriter byteWriter) {
-        BytePen.super.bytes(longs, byteWriter);
-        return this;
-    }
-
-    @Override
-    default DataPen bytes(DoubleStream doubles) {
-        BytePen.super.bytes(doubles);
-        return this;
-    }
-
-    @Override
-    default DataPen bytes(DoubleStream doubles, ByteDataWriter byteWriter) {
-        BytePen.super.bytes(doubles, byteWriter);
-        return this;
-    }
-
-    @Override
     default DataPen bytes(byte b, ByteDataWriter byteWriter) {
         BytePen.super.bytes(b, byteWriter);
         return this;
@@ -319,42 +283,6 @@ public interface DataPen extends
     @Override
     default DataPen chars(Stream<Character> chars, CharDataWriter charWriter) {
         CharPen.super.chars(chars, charWriter);
-        return this;
-    }
-
-    @Override
-    default DataPen chars(IntStream ints) {
-        CharPen.super.chars(ints);
-        return this;
-    }
-
-    @Override
-    default DataPen chars(IntStream ints, CharDataWriter charWriter) {
-        CharPen.super.chars(ints, charWriter);
-        return this;
-    }
-
-    @Override
-    default DataPen chars(LongStream longs) {
-        CharPen.super.chars(longs);
-        return this;
-    }
-
-    @Override
-    default DataPen chars(LongStream longs, CharDataWriter charWriter) {
-        CharPen.super.chars(longs, charWriter);
-        return this;
-    }
-
-    @Override
-    default DataPen chars(DoubleStream doubles) {
-        CharPen.super.chars(doubles);
-        return this;
-    }
-
-    @Override
-    default DataPen chars(DoubleStream doubles, CharDataWriter charWriter) {
-        CharPen.super.chars(doubles, charWriter);
         return this;
     }
 

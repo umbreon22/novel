@@ -4,9 +4,6 @@ import novel.api.types.write.writers.CharDataWriter;
 
 import java.util.Objects;
 import java.util.function.Supplier;
-import java.util.stream.DoubleStream;
-import java.util.stream.IntStream;
-import java.util.stream.LongStream;
 import java.util.stream.Stream;
 
 public interface CharPen {
@@ -109,69 +106,6 @@ public interface CharPen {
         for(char c : chars) {
             charWriter.write(this, c);
         }
-        return this;
-    }
-
-    /**
-     * Writes an {@link IntStream} as chars.
-     * @param ints a {@link IntStream}
-     * @return {@code this}
-     */
-    default CharPen chars(IntStream ints) {
-        ints.forEach(i->this.chars((char)i));
-        return this;
-    }
-
-    /**
-     * Writes an {@link IntStream} using a {@link CharDataWriter}
-     * @param ints a {@link IntStream}
-     * @param charWriter a {@link CharDataWriter} instance
-     * @return {@code this}
-     */
-    default CharPen chars(IntStream ints, CharDataWriter charWriter) {
-        ints.forEach(i -> charWriter.write(this, (char) i));
-        return this;
-    }
-
-    /**
-     * Writes an {@link LongStream} as chars
-     * @param longs a {@link LongStream}
-     * @return {@code this}
-     */
-    default CharPen chars(LongStream longs) {
-        longs.forEach(l -> this.chars((char)l));
-        return this;
-    }
-
-    /**
-     * Writes a {@link LongStream} using a {@link CharDataWriter}
-     * @param longs a {@link LongStream}
-     * @param charWriter a {@link CharDataWriter} instance
-     * @return {@code this}
-     */
-    default CharPen chars(LongStream longs, CharDataWriter charWriter) {
-        longs.forEach(l -> charWriter.write(this, (char) l));
-        return this;
-    }
-
-    /**
-     * Writes a {@link DoubleStream} as chars
-     * @param doubles a {@link DoubleStream}
-     * @return {@code this}
-     */
-    default CharPen chars(DoubleStream doubles) {
-        doubles.forEach(d -> this.chars((char)d));
-        return this;
-    }
-
-    /**
-     * Writes a {@link DoubleStream} using a {@link CharDataWriter}
-     * @param doubles a {@link DoubleStream}
-     * @param charWriter a {@link CharDataWriter} instance
-     * @return {@code this}
-     */
-    default CharPen chars(DoubleStream doubles, CharDataWriter charWriter) {
-        doubles.forEach(d -> charWriter.write(this, (char)d));
         return this;
     }
 
