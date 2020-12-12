@@ -133,7 +133,7 @@ public interface BytePen {
     }
 
 	/**
-	 * Writes an {@link LongStream} as bytes
+	 * Writes a {@link LongStream} as bytes
 	 * @param longs a {@link LongStream}
 	 * @return {@code this}
 	 */
@@ -143,7 +143,7 @@ public interface BytePen {
 	}
 
 	/**
-	 * Writes an {@link LongStream} using a {@link ByteDataWriter}
+	 * Writes a {@link LongStream} using a {@link ByteDataWriter}
 	 * @param longs a {@link LongStream}
 	 * @param byteWriter a {@link ByteDataWriter} instance
 	 * @return {@code this}
@@ -154,7 +154,7 @@ public interface BytePen {
 	}
 
 	/**
-	 * Writes an {@link DoubleStream} as bytes
+	 * Writes a {@link DoubleStream} as bytes
 	 * @param doubles a {@link DoubleStream}
 	 * @return {@code this}
 	 */
@@ -164,7 +164,7 @@ public interface BytePen {
 	}
 
 	/**
-	 * Writes an {@link DoubleStream} using a {@link ByteDataWriter}
+	 * Writes a {@link DoubleStream} using a {@link ByteDataWriter}
 	 * @param doubles a {@link DoubleStream}
 	 * @param byteWriter a {@link ByteDataWriter} instance
 	 * @return {@code this}
