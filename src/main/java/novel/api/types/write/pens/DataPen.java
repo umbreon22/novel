@@ -218,14 +218,14 @@ public interface DataPen extends
     }
 
     @Override
-    default DataPen bytes(Iterable<Byte> bytes) {
-        BytePen.super.bytes(bytes);
+    default DataPen bytes(Iterable<? extends Number> numbers) {
+        BytePen.super.bytes(numbers);
         return this;
     }
 
     @Override
-    default DataPen bytes(Iterable<Byte> bytes, ByteDataWriter byteDataWriter) {
-        BytePen.super.bytes(bytes, byteDataWriter);
+    default DataPen bytes(Iterable<? extends Number> numbers, ByteDataWriter byteDataWriter) {
+        BytePen.super.bytes(numbers, byteDataWriter);
         return this;
     }
 

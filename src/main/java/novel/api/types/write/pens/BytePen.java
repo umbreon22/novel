@@ -44,22 +44,22 @@ public interface BytePen {
     }
 
     /**
-     * Writes an {@link Iterable} of bytes.
-     * @param bytes a {@link Iterable<Byte>}
+     * Writes an {@link Iterable} of numbers as bytes.
+     * @param numbers a {@link Iterable} of numbers.
      * @return {@code this}
      */
-    default BytePen bytes(Iterable<Byte> bytes) {
-        for(byte b : bytes) bytes(b);
+    default BytePen bytes(Iterable<? extends Number> numbers) {
+        for(Number b : numbers) bytes(b.byteValue());
         return this;
     }
 	/**
-	 * Writes an {@link Iterable} of bytes using {@code byteDataWriter}
-	 * @param bytes a {@link Iterable<Byte>}
+	 * Writes an {@link Iterable} of numbers using {@code byteDataWriter}
+	 * @param numbers a {@link Iterable<Number>}
 	 * @param byteDataWriter a {@link ByteDataWriter} instance
 	 * @return {@code this}
 	 */
-	default BytePen bytes(Iterable<Byte> bytes, ByteDataWriter byteDataWriter) {
-		for(byte b : bytes) bytes(b, byteDataWriter);
+	default BytePen bytes(Iterable<? extends Number> numbers, ByteDataWriter byteDataWriter) {
+		for(Number b : numbers) bytes(b.byteValue(), byteDataWriter);
 		return this;
 	}
 

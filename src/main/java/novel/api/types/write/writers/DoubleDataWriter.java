@@ -1,6 +1,5 @@
 package novel.api.types.write.writers;
 
-import novel.api.types.write.pens.BytePen;
 import novel.api.types.write.pens.DataPen;
 import novel.api.types.write.pens.DoublePen;
 
