@@ -383,14 +383,32 @@ public interface DataPen extends
     }
 
     @Override
-    default DataPen floats(Iterable<Float> floats) {
-        FloatPen.super.floats(floats);
+    default DataPen floats(Iterable<? extends Number> numbers) {
+        FloatPen.super.floats(numbers);
+        return this;
+    }
+
+    @Override
+    default DataPen floats(Iterable<? extends Number> numbers, FloatDataWriter floatDataWriter) {
+        FloatPen.super.floats(numbers, floatDataWriter);
         return this;
     }
 
     @Override
     default DataPen floats(Stream<? extends Number> numbers) {
         FloatPen.super.floats(numbers);
+        return this;
+    }
+
+    @Override
+    default DataPen floats(Stream<? extends Number> numbers, FloatDataWriter floatDataWriter) {
+        FloatPen.super.floats(numbers, floatDataWriter);
+        return this;
+    }
+
+    @Override
+    default DataPen floats(DoubleStream doubles, FloatDataWriter floatDataWriter) {
+        FloatPen.super.floats(doubles, floatDataWriter);
         return this;
     }
 

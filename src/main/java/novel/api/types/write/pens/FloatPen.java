@@ -46,11 +46,20 @@ public interface FloatPen {
 
     /**
      * Writes an {@link Iterable} of chars.
-     * @param floats a {@link Iterable<Character>}
+     * @param numbers a {@link Iterable<Character>}
      * @return {@code this}
      */
-    default FloatPen floats(Iterable<Float> floats) {
-        for(float f : floats) floats(f);
+    default FloatPen floats(Iterable<? extends Number> numbers) {
+        for(Number num : numbers) floats(num.floatValue());
+        return this;
+    }
+    /**
+     * Writes an {@link Iterable} of chars.
+     * @param numbers a {@link Iterable<Character>}
+     * @return {@code this}
+     */
+    default FloatPen floats(Iterable<? extends Number> numbers, FloatDataWriter floatDataWriter) {
+        for(Number num : numbers) floats(num.floatValue(), floatDataWriter);
         return this;
     }
 
@@ -65,12 +74,35 @@ public interface FloatPen {
     }
 
     /**
+     * Writes a {@link Stream} using {@code floatDataWriter}.
+     * @param numbers a {@link Stream} of {@link Number}s.
+     * @param floatDataWriter a {@link FloatDataWriter}
+     * @return {@code this}
+     */
+    default FloatPen floats(Stream<? extends Number> numbers, FloatDataWriter floatDataWriter) {
+        numbers.forEach(number -> this.floats(number.floatValue(), floatDataWriter));
+        return this;
+    }
+
+
+    /**
      * Writes a {@link DoubleStream} as floats.
      * @param doubles a {@link DoubleStream}
      * @return {@code this}
      */
     default FloatPen floats(DoubleStream doubles) {
         doubles.forEach(d -> this.floats((float) d));
+        return this;
+    }
+
+    /**
+     * Writes a {@link DoubleStream} using {@code floatDataWriter}.
+     * @param doubles a {@link DoubleStream}
+     * @param floatDataWriter a {@link FloatDataWriter}
+     * @return {@code this}
+     */
+    default FloatPen floats(DoubleStream doubles, FloatDataWriter floatDataWriter) {
+        doubles.forEach(number -> this.floats((float) number, floatDataWriter));
         return this;
     }
 

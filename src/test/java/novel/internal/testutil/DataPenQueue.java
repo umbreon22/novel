@@ -328,14 +328,32 @@ public class DataPenQueue implements DataPen {
     }
 
     @Override
-    public DataPenQueue floats(Iterable<Float> floats) {
-        DataPen.super.floats(floats);
+    public DataPenQueue floats(Iterable<? extends Number> numbers) {
+        DataPen.super.floats(numbers);
         return this;
     }
 
     @Override
     public DataPenQueue floats(Stream<? extends Number> nums) {
         DataPen.super.floats(nums);
+        return this;
+    }
+
+    @Override
+    public DataPenQueue floats(Iterable<? extends Number> numbers, FloatDataWriter floatDataWriter) {
+        DataPen.super.floats(numbers, floatDataWriter);
+        return this;
+    }
+
+    @Override
+    public DataPenQueue floats(DoubleStream doubles, FloatDataWriter floatDataWriter) {
+        DataPen.super.floats(doubles, floatDataWriter);
+        return this;
+    }
+
+    @Override
+    public DataPenQueue floats(Stream<? extends Number> numbers, FloatDataWriter floatDataWriter) {
+        DataPen.super.floats(numbers, floatDataWriter);
         return this;
     }
 
