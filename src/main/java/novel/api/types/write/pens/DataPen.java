@@ -362,6 +362,12 @@ public interface DataPen extends
     }
 
     @Override
+    default DataPen doubles(DoubleStream doubles, DoubleDataWriter doubleDataWriter) {
+        DoublePen.super.doubles(doubles, doubleDataWriter);
+        return this;
+    }
+
+    @Override
     default DataPen doubles(double d, DoubleDataWriter doubleWriter) {
         DoublePen.super.doubles(d, doubleWriter);
         return this;

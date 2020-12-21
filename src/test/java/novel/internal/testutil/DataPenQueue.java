@@ -418,7 +418,7 @@ public class DataPenQueue implements DataPen {
     }
 
     @Override
-    public DataPen doubles(Stream<? extends Number> numbers, DoubleDataWriter doubleDataWriter) {
+    public DataPenQueue doubles(Stream<? extends Number> numbers, DoubleDataWriter doubleDataWriter) {
         DataPen.super.doubles(numbers, doubleDataWriter);
         return this;
     }
@@ -426,6 +426,12 @@ public class DataPenQueue implements DataPen {
     @Override
     public DataPenQueue doubles(DoubleStream doubles) {
         DataPen.super.doubles(doubles);
+        return this;
+    }
+
+    @Override
+    public DataPenQueue doubles(DoubleStream doubles, DoubleDataWriter doubleDataWriter) {
+        DataPen.super.doubles(doubles, doubleDataWriter);
         return this;
     }
 

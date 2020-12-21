@@ -97,6 +97,17 @@ public interface DoublePen {
     }
 
     /**
+     * Writes a {@link DoubleStream} using {@code doubleDataWriter}
+     * @param doubles a {@link DoubleStream}
+     * @param doubleDataWriter a {@link DoubleDataWriter}
+     * @return {@code this}
+     */
+    default DoublePen doubles(DoubleStream doubles, DoubleDataWriter doubleDataWriter) {
+        doubles.forEach(d -> this.doubles(d, doubleDataWriter));
+        return this;
+    }
+
+    /**
      * Writes a {@link double} using the provided {@code doubleWriter}
      * @param d a double.
      * @param doubleWriter a {@link DoubleDataWriter} instance
