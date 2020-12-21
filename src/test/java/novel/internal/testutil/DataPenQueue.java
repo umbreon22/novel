@@ -400,14 +400,26 @@ public class DataPenQueue implements DataPen {
     }
 
     @Override
-    public DataPenQueue doubles(Iterable<Double> doubles) {
-        DataPen.super.doubles(doubles);
+    public DataPenQueue doubles(Iterable<? extends Number> numbers) {
+        DataPen.super.doubles(numbers);
+        return this;
+    }
+
+    @Override
+    public DataPenQueue doubles(Iterable<? extends Number> numbers, DoubleDataWriter doubleDataWriter) {
+        DataPen.super.doubles(numbers, doubleDataWriter);
         return this;
     }
 
     @Override
     public DataPenQueue doubles(Stream<? extends Number> nums) {
         DataPen.super.doubles(nums);
+        return this;
+    }
+
+    @Override
+    public DataPen doubles(Stream<? extends Number> numbers, DoubleDataWriter doubleDataWriter) {
+        DataPen.super.doubles(numbers, doubleDataWriter);
         return this;
     }
 

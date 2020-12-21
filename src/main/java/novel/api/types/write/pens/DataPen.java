@@ -332,14 +332,26 @@ public interface DataPen extends
     }
 
     @Override
-    default DataPen doubles(Iterable<Double> doubles) {
-        DoublePen.super.doubles(doubles);
+    default DataPen doubles(Iterable<? extends Number> numbers) {
+        DoublePen.super.doubles(numbers);
+        return this;
+    }
+
+    @Override
+    default DataPen doubles(Iterable<? extends Number> numbers, DoubleDataWriter doubleDataWriter) {
+        DoublePen.super.doubles(numbers, doubleDataWriter);
         return this;
     }
 
     @Override
     default DataPen doubles(Stream<? extends Number> numbers) {
         DoublePen.super.doubles(numbers);
+        return this;
+    }
+
+    @Override
+    default DataPen doubles(Stream<? extends Number> numbers, DoubleDataWriter doubleDataWriter) {
+        DoublePen.super.doubles(numbers, doubleDataWriter);
         return this;
     }
 
