@@ -46,11 +46,22 @@ public interface LongPen {
 
     /**
      * Writes an {@link Iterable} of chars.
-     * @param longs a {@link Iterable<Character>}
+     * @param numbers a {@link Iterable} of {@link Number}s
      * @return {@code this}
      */
-    default LongPen longs(Iterable<Long> longs) {
-        for(long l : longs) longs(l);
+    default LongPen longs(Iterable<? extends Number> numbers) {
+        for(Number num : numbers) longs(num.longValue());
+        return this;
+    }
+
+    /**
+     * Writes an {@link Iterable} using {@code longDataWriter}
+     * @param numbers a {@link Iterable} of {@link Number}s
+     * @param longDataWriter a {@link LongDataWriter}
+     * @return {@code this}
+     */
+    default LongPen longs(Iterable<? extends Number> numbers, LongDataWriter longDataWriter) {
+        numbers.forEach(num -> this.longs(num.longValue(), longDataWriter));
         return this;
     }
 
@@ -65,12 +76,34 @@ public interface LongPen {
     }
 
     /**
+     * Writes a {@link Stream} using {@code longDataWriter}
+     * @param numbers a {@link Stream} of {@link Number}s
+     * @param longDataWriter a {@link LongDataWriter}
+     * @return {@code this}
+     */
+    default LongPen longs(Stream<? extends Number> numbers, LongDataWriter longDataWriter) {
+        numbers.forEach(num -> this.longs(num.longValue(), longDataWriter));
+        return this;
+    }
+
+    /**
      * Writes a {@link LongStream}.
      * @param longs a {@link LongStream}
      * @return {@code this}
      */
     default LongPen longs(LongStream longs) {
         longs.forEach(this::longs);
+        return this;
+    }
+
+    /**
+     * Writes a {@link LongStream} using {@code longDataWriter}
+     * @param longs a {@link LongStream}
+     * @param longDataWriter a {@link LongDataWriter}
+     * @return {@code this}
+     */
+    default LongPen longs(LongStream longs, LongDataWriter longDataWriter) {
+        longs.forEach(l -> this.longs(l, longDataWriter));
         return this;
     }
 

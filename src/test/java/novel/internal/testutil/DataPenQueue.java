@@ -244,8 +244,14 @@ public class DataPenQueue implements DataPen {
     }
 
     @Override
-    public DataPenQueue longs(Iterable<Long> longs) {
-        DataPen.super.longs(longs);
+    public DataPenQueue longs(Iterable<? extends Number> numbers) {
+        DataPen.super.longs(numbers);
+        return this;
+    }
+
+    @Override
+    public DataPenQueue longs(Iterable<? extends Number> nums, LongDataWriter longDataWriter) {
+        DataPen.super.longs(nums, longDataWriter);
         return this;
     }
 
@@ -256,8 +262,20 @@ public class DataPenQueue implements DataPen {
     }
 
     @Override
+    public DataPenQueue longs(Stream<? extends Number> nums, LongDataWriter longDataWriter) {
+        DataPen.super.longs(nums, longDataWriter);
+        return this;
+    }
+
+    @Override
     public DataPenQueue longs(LongStream longs) {
         DataPen.super.longs(longs);
+        return this;
+    }
+
+    @Override
+    public DataPenQueue longs(LongStream longs, LongDataWriter longDataWriter) {
+        DataPen.super.longs(longs, longDataWriter);
         return this;
     }
 

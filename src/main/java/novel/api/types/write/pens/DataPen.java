@@ -539,8 +539,14 @@ public interface DataPen extends
     }
 
     @Override
-    default DataPen longs(Iterable<Long> longs) {
-        LongPen.super.longs(longs);
+    default DataPen longs(Iterable<? extends Number> numbers) {
+        LongPen.super.longs(numbers);
+        return this;
+    }
+
+    @Override
+    default DataPen longs(Iterable<? extends Number> numbers, LongDataWriter longDataWriter) {
+        LongPen.super.longs(numbers, longDataWriter);
         return this;
     }
 
@@ -549,10 +555,22 @@ public interface DataPen extends
         LongPen.super.longs(numbers);
         return this;
     }
-    
+
+    @Override
+    default DataPen longs(Stream<? extends Number> numbers, LongDataWriter longDataWriter) {
+        LongPen.super.longs(numbers, longDataWriter);
+        return this;
+    }
+
     @Override
     default DataPen longs(LongStream longs) {
         LongPen.super.longs(longs);
+        return this;
+    }
+
+    @Override
+    default DataPen longs(LongStream longs, LongDataWriter longDataWriter) {
+        LongPen.super.longs(longs, longDataWriter);
         return this;
     }
 
