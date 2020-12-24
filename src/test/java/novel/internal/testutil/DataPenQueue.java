@@ -172,8 +172,14 @@ public class DataPenQueue implements DataPen {
     }
 
     @Override
-    public DataPenQueue ints(Iterable<Integer> ints) {
-        DataPen.super.ints(ints);
+    public DataPenQueue ints(Iterable<? extends Number> numbers) {
+        DataPen.super.ints(numbers);
+        return this;
+    }
+
+    @Override
+    public DataPenQueue ints(Iterable<? extends Number> numbers, IntDataWriter intDataWriter) {
+        DataPen.super.ints(numbers, intDataWriter);
         return this;
     }
 
@@ -184,8 +190,20 @@ public class DataPenQueue implements DataPen {
     }
 
     @Override
+    public DataPenQueue ints(Stream<? extends Number> numbers, IntDataWriter intDataWriter) {
+        DataPen.super.ints(numbers, intDataWriter);
+        return this;
+    }
+
+    @Override
     public DataPenQueue ints(IntStream ints) {
         DataPen.super.ints(ints);
+        return this;
+    }
+
+    @Override
+    public DataPenQueue ints(IntStream ints, IntDataWriter intDataWriter) {
+        DataPen.super.ints(ints, intDataWriter);
         return this;
     }
 

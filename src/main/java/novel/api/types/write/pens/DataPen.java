@@ -470,8 +470,14 @@ public interface DataPen extends
     }
 
     @Override
-    default DataPen ints(Iterable<Integer> ints) {
-        IntPen.super.ints(ints);
+    default DataPen ints(Iterable<? extends Number> numbers) {
+        IntPen.super.ints(numbers);
+        return this;
+    }
+
+    @Override
+    default IntPen ints(Iterable<? extends Number> numbers, IntDataWriter intDataWriter) {
+        IntPen.super.ints(numbers, intDataWriter);
         return this;
     }
 
@@ -482,8 +488,20 @@ public interface DataPen extends
     }
 
     @Override
+    default IntPen ints(Stream<? extends Number> numbers, IntDataWriter intDataWriter) {
+        IntPen.super.ints(numbers, intDataWriter);
+        return this;
+    }
+
+    @Override
     default DataPen ints(IntStream ints) {
         IntPen.super.ints(ints);
+        return this;
+    }
+
+    @Override
+    default DataPen ints(IntStream ints, IntDataWriter intDataWriter) {
+        IntPen.super.ints(ints, intDataWriter);
         return this;
     }
 

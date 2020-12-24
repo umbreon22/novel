@@ -46,11 +46,22 @@ public interface IntPen {
 
     /**
      * Writes an {@link Iterable} of int.
-     * @param ints a {@link Iterable<Integer>}
+     * @param numbers a {@link Iterable}
      * @return {@code this}
      */
-    default IntPen ints(Iterable<Integer> ints) {
-        for(int i : ints) ints(i);
+    default IntPen ints(Iterable<? extends Number> numbers) {
+        for(Number num : numbers) ints(num.intValue());
+        return this;
+    }
+
+    /**
+     * Writes an {@link Iterable} of int using {@code intDataWriter}
+     * @param numbers a {@link Iterable}
+     * @param intDataWriter a {@link IntDataWriter}
+     * @return {@code this}
+     */
+    default IntPen ints(Iterable<? extends Number> numbers, IntDataWriter intDataWriter) {
+        for(Number num : numbers) ints(num.intValue(), intDataWriter);
         return this;
     }
 
@@ -60,7 +71,18 @@ public interface IntPen {
      * @return {@code this}
      */
     default IntPen ints(Stream<? extends Number> numbers) {
-        numbers.forEach(number->this.ints(number.byteValue()));
+        numbers.forEach(number->this.ints(number.intValue()));
+        return this;
+    }
+
+    /**
+     * Writes a {@link Stream} using {@code intDataWriter}
+     * @param numbers a {@link Stream} of {@link Number}s.
+     * @param intDataWriter a {@link IntDataWriter}
+     * @return {@code this}
+     */
+    default IntPen ints(Stream<? extends Number> numbers, IntDataWriter intDataWriter) {
+        numbers.forEach(number->this.ints(number.intValue(), intDataWriter));
         return this;
     }
 
@@ -71,6 +93,17 @@ public interface IntPen {
      */
     default IntPen ints(IntStream ints) {
         ints.forEach(this::ints);
+        return this;
+    }
+
+    /**
+     * Writes an {@link IntStream} using {@code intDataWriter}
+     * @param ints a {@link IntStream}
+     * @param intDataWriter a {@link IntDataWriter}
+     * @return {@code this}
+     */
+    default IntPen ints(IntStream ints, IntDataWriter intDataWriter) {
+        ints.forEach(i -> this.ints(i, intDataWriter));
         return this;
     }
 
