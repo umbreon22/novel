@@ -5,84 +5,75 @@ import novel.api.types.write.writers.BoolDataWriter;
 import java.util.Objects;
 import java.util.function.Supplier;
 
-public interface BoolPen<Pen> {
+public interface BoolPen {
 
     /**
      * Writes a boolean.
      * @param b a boolean
-     * @return {@link #parameterizedThis()}
+     * @return {@code this}
      */
-    Pen bools(boolean b);
+    BoolPen bools(boolean b);
 
     /**
      * Writes booleans.
      * @param booleans a varargs array of booleans
-     * @return {@link #parameterizedThis()}
+     * @return {@code this}
      */
-    default Pen bools(boolean... booleans) {
+    default BoolPen bools(boolean... booleans) {
         for(boolean b : booleans) bools(b);
-        return parameterizedThis();
+        return this;
     }
 
     /**
      * Writes {@link boolean[]}s.
      * @param bools a varargs array of {@link boolean[]}s
-     * @return {@link #parameterizedThis()}
+     * @return {@code this}
      */
-    default Pen bools(boolean[]... bools) {
+    default BoolPen bools(boolean[]... bools) {
         for(boolean[] b : bools) bools(b);
-        return parameterizedThis();
+        return this;
     }
 
     /**
      * @see #bools(boolean)
-     * @return {@link #parameterizedThis()}
+     * @return {@code this}
      */
-    default Pen bools(Supplier<Boolean> booleans) {
+    default BoolPen bools(Supplier<Boolean> booleans) {
         return bools(booleans.get());
     }
 
     /**
      * Writes an {@link Iterable} of booleans.
      * @param booleans a {@link Iterable<Boolean>}
-     * @return {@link #parameterizedThis()}
+     * @return {@code this}
      */
-    default Pen bools(Iterable<Boolean> booleans) {
+    default BoolPen bools(Iterable<Boolean> booleans) {
         for(boolean b : booleans) bools(b);
-        return parameterizedThis();
+        return this;
     }
 
     /**
      * Writes a {@link boolean} using the provided {@code booleanWriter}
      * @param b a boolean.
      * @param boolWriter a {@link BoolDataWriter} instance
-     * @return {@code parameterizedThis()}
+     * @return {@code this}
      */
-    default Pen bools(boolean b, BoolDataWriter boolWriter) {
+    default BoolPen bools(boolean b, BoolDataWriter boolWriter) {
         Objects.requireNonNull(boolWriter).write(this, b);
-        return parameterizedThis();
+        return this;
     }
 
     /**
      * Writes a {@link boolean[]} using the provided {@code booleanWriter}
      * @param booleans a boolean array
      * @param boolWriter a {@link BoolDataWriter} instance
-     * @return {@code parameterizedThis()}
+     * @return {@code this}
      */
-    default Pen bools(boolean[] booleans, BoolDataWriter boolWriter) {
+    default BoolPen bools(boolean[] booleans, BoolDataWriter boolWriter) {
         Objects.requireNonNull(boolWriter);
         for(boolean b : booleans) {
             boolWriter.write(this, b);
         }
-        return parameterizedThis();
-    }
-
-    /**
-     * Returns {@code this} cast as your defined type parameter, {@link Pen}
-     * @return {@code this) cast as {@link Pen}
-     */
-    @SuppressWarnings("unchecked")
-    private Pen parameterizedThis() {
-        return (Pen) this;
+        return this;
     }
 }

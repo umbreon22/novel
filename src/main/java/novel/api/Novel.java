@@ -90,12 +90,12 @@ public final class Novel implements Author, Audience {
     }
 
     @Override
-    public <T> void write(DataPen<?> writer, T data, TypeToken<T> token) {
+    public <T> void write(DataPen writer, T data, TypeToken<T> token) {
         contents.writer(token).write(writer, data);
     }
 
     @Override
-    public <T extends Writeable> void write(DataPen<?> writer, T[] data, TypeToken<T[]> token) {
+    public <T extends Writeable> void write(DataPen writer, T[] data, TypeToken<T[]> token) {
         contents.writer(token).write(writer, data);
     }
 

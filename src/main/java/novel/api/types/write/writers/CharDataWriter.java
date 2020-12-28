@@ -10,10 +10,10 @@ import novel.api.types.write.pens.DataPen;
 public interface CharDataWriter extends ObjectDataWriter<Character> {
 
     @Override
-    default void write(DataPen<?> pen, Character object) {
+    default void write(DataPen pen, Character object) {
         write(pen, object.charValue());
     }
 
-    void write(CharPen<?> pen, char object);
+    void write(CharPen pen, char object);
 
 }

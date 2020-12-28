@@ -22,7 +22,7 @@ public class URLAdapter implements ObjectDataAdapter<URL> {
     }
 
     @Override
-    public void write(DataPen<?> pen, URL object) {
+    public void write(DataPen pen, URL object) {
         pen.strings(object.toString());
     }
 }

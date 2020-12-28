@@ -49,7 +49,7 @@ public final class CollectionAdapterFactory extends AdapterFactory {
         }
 
         @Override
-        public void write(DataPen<?> pen, Collection<E> collection) {
+        public void write(DataPen pen, Collection<E> collection) {
             pen.ints(collection.size());
             if(!collection.isEmpty()) {
                 for (var element : collection) {

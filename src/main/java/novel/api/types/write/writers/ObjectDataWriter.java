@@ -7,5 +7,5 @@ import novel.api.types.write.pens.DataPen;
  * @param <T> an object's type parameter
  */
 public interface ObjectDataWriter<T> {
-    void write(DataPen<?> pen, T object);
+    void write(DataPen pen, T object);
 }

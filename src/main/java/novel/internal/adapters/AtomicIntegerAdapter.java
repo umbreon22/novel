@@ -16,7 +16,7 @@ public class AtomicIntegerAdapter implements ObjectDataAdapter<AtomicInteger> {
     }
 
     @Override
-    public void write(DataPen<?> pen, AtomicInteger atomic) {
+    public void write(DataPen pen, AtomicInteger atomic) {
         pen.ints(atomic.get());
     }
 }

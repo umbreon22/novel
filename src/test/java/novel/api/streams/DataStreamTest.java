@@ -37,7 +37,7 @@ public class DataStreamTest {
             System.out.println(printMe);
         }
         @Override
-        public void write(DataPen<?> writer) {
+        public void write(DataPen writer) {
             writer.ints(elligence).strings("I hope you're having a lovely day, whoever took the time to read this test :)");
         }
 

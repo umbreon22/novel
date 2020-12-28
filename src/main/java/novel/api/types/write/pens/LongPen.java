@@ -5,84 +5,76 @@ import novel.api.types.write.writers.LongDataWriter;
 import java.util.Objects;
 import java.util.function.Supplier;
 
-public interface LongPen<Pen> {
+public interface LongPen {
 
     /**
      * Writes a long.
      * @param l a long
-     * @return {@link #parameterizedThis()}
+     * @return {@code this}
      */
-    Pen longs(long l);
+    LongPen longs(long l);
 
     /**
      * Writes longs.
      * @param longs a varargs array of longs
-     * @return {@link #parameterizedThis()}
+     * @return {@code this}
      */
-    default Pen longs(long... longs) {
+    default LongPen longs(long... longs) {
         for(long l : longs) longs(l);
-        return parameterizedThis();
+        return this;
     }
 
     /**
      * Writes {@link long[]}s.
      * @param longs a varargs array of {@link long[]}s
-     * @return {@link #parameterizedThis()}
+     * @return {@code this}
      */
-    default Pen longs(long[]... longs) {
+    default LongPen longs(long[]... longs) {
         for(long[] l : longs) longs(l);
-        return parameterizedThis();
+        return this;
     }
 
     /**
      * @see #longs(long)
-     * @return {@link #parameterizedThis()}
+     * @return {@code this}
      */
-    default Pen longs(Supplier<Long> longs) {
+    default LongPen longs(Supplier<Long> longs) {
         return longs(longs.get());
     }
 
     /**
      * Writes an {@link Iterable} of chars.
      * @param longs a {@link Iterable<Character>}
-     * @return {@link #parameterizedThis()}
+     * @return {@code this}
      */
-    default Pen longs(Iterable<Long> longs) {
+    default LongPen longs(Iterable<Long> longs) {
         for(long l : longs) longs(l);
-        return parameterizedThis();
+        return this;
     }
 
     /**
      * Writes a {@link long} using the provided {@code longWriter}
      * @param l a long.
      * @param longWriter a {@link LongDataWriter} instance
-     * @return {@code parameterizedThis()}
+     * @return {@code this}
      */
-    default Pen longs(long l, LongDataWriter longWriter) {
+    default LongPen longs(long l, LongDataWriter longWriter) {
         Objects.requireNonNull(longWriter).write(this, l);
-        return parameterizedThis();
+        return this;
     }
 
     /**
      * Writes a {@link long[]} using the provided {@code longWriter}
      * @param longs a long array
      * @param longWriter a {@link LongDataWriter} instance
-     * @return {@code parameterizedThis()}
+     * @return {@code this}
      */
-    default Pen longs(long[] longs, LongDataWriter longWriter) {
+    default LongPen longs(long[] longs, LongDataWriter longWriter) {
         Objects.requireNonNull(longWriter);
         for(long l : longs) {
             longWriter.write(this, l);
         }
-        return parameterizedThis();
+        return this;
     }
 
-    /**
-     * Returns {@code this} cast as your defined type parameter, {@link Pen}
-     * @return {@code this) cast as {@link Pen}
-     */
-    @SuppressWarnings("unchecked")
-    private Pen parameterizedThis() {
-        return (Pen) this;
-    }
 }

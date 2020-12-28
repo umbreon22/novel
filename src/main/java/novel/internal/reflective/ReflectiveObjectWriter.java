@@ -20,7 +20,7 @@ public abstract class ReflectiveObjectWriter<T, F> implements ObjectDataWriter<T
     protected abstract Iterable<F> supplyFields(Novel novel, TypeToken<T> source);
 
     @Override
-    public void write(DataPen<?> pen, T object) {
+    public void write(DataPen pen, T object) {
         try {
             for (var field : sourceFields) {
                 writeField(pen, field, memberFrom(field, object));
@@ -37,7 +37,7 @@ public abstract class ReflectiveObjectWriter<T, F> implements ObjectDataWriter<T
      * If the object is not null, serializes the object.
      */
     @SuppressWarnings("unchecked")
-    protected <WriteType> void writeField(DataPen<?> pen, F field, WriteType fieldObject) {
+    protected <WriteType> void writeField(DataPen pen, F field, WriteType fieldObject) {
        if (shouldWrite(pen, field, fieldObject)) {
             if (isAutoWriteable(field)) {
                 pen.objects((AutoWriteable) fieldObject);
@@ -47,7 +47,7 @@ public abstract class ReflectiveObjectWriter<T, F> implements ObjectDataWriter<T
         }
     }
 
-    private <WriteType> boolean shouldWrite(DataPen<?> pen, F field, WriteType fieldObject) {
+    private <WriteType> boolean shouldWrite(DataPen pen, F field, WriteType fieldObject) {
         boolean shouldWrite = isNullsafe(field);
         if(!shouldWrite) {//Nullsafe fields are assumed to NEVER be null, skipping this boolean
             shouldWrite = fieldObject != null;

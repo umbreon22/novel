@@ -27,7 +27,7 @@ public class CalendarAdapter implements ObjectDataAdapter<Calendar> {
     }
 
     @Override
-    public void write(DataPen<?> pen, Calendar calendar) {
+    public void write(DataPen pen, Calendar calendar) {
         for(int field : CALENDAR_FIELDS) {
             pen.ints(calendar.get(field));
         }

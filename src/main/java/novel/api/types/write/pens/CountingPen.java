@@ -3,7 +3,7 @@ package novel.api.types.write.pens;
 /**
  * This {@link DataPen} keeps a running count on how much data you'd output without doing any actual writing.
  */
-public class CountingPen implements DataPen<CountingPen> {
+public class CountingPen implements DataPen {
 
     private int byteCount = 0;
     public int count() {

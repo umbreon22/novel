@@ -26,7 +26,7 @@ final class NullsafeAdapter<T> implements ObjectDataAdapter<T> {
     }
 
     @Override
-    public void write(DataPen<?> pen, T object) {
+    public void write(DataPen pen, T object) {
         boolean isInked = object != null;
         pen.bools(isInked);
         if(isInked) {

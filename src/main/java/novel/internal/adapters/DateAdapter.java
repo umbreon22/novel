@@ -14,7 +14,7 @@ public class DateAdapter implements ObjectDataAdapter<Date> {
     }
 
     @Override
-    public void write(DataPen<?> pen, Date date) {
+    public void write(DataPen pen, Date date) {
         pen.longs(date.getTime());
     }
 }

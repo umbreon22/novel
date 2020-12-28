@@ -17,7 +17,7 @@ public class NullsafeAdapterTest {
     @Test
     void testRecursion() {
         var dummyAdapter = new ObjectDataAdapter<>() {
-            @Override public void write(DataPen<?> pen, Object object) {}
+            @Override public void write(DataPen pen, Object object) {}
             @Override public Object read(DataPaper paper) throws DataPaperReadException {return null;}
         };
         var nullsafe = dummyAdapter.nullSafe();
@@ -40,7 +40,7 @@ public class NullsafeAdapterTest {
     @Test
     void testRegisteredObject() {
         Novel novel = Novel.newBuilder().withAdapter(new ObjectDataAdapter<>(){
-                @Override public void write(DataPen<?> pen, BigInteger object) { pen.strings(object);}
+                @Override public void write(DataPen pen, BigInteger object) { pen.strings(object);}
                 @Override public BigInteger read(DataPaper paper) throws DataPaperReadException {
                     return new BigInteger(paper.strings());
                 }

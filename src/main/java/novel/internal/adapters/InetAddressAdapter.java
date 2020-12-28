@@ -23,7 +23,7 @@ public class InetAddressAdapter implements ObjectDataAdapter<InetAddress> {
     }
 
     @Override
-    public void write(DataPen<?> pen, InetAddress address) {
+    public void write(DataPen pen, InetAddress address) {
         byte[] bytes = address.getAddress();
         pen.shorts((short)bytes.length);
         pen.bytes(bytes);

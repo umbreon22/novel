@@ -56,7 +56,7 @@ public class MapAdapterFactory extends AdapterFactory {
         }
 
         @Override
-        public void write(DataPen<?> pen, Map<K,V> map) {
+        public void write(DataPen pen, Map<K,V> map) {
             pen.ints(map.size());
             if(!map.isEmpty()) {
                 for (Map.Entry<K, V> entry : map.entrySet()) {

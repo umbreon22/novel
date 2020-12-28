@@ -23,7 +23,7 @@ public abstract class ObjectToStringAdapter<T> implements ObjectDataAdapter<T> {
     }
 
     @Override
-    public void write(DataPen<?> pen, T object) {
+    public void write(DataPen pen, T object) {
         pen.strings(object::toString);
     }
 }

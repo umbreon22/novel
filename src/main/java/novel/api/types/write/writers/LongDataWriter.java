@@ -10,10 +10,10 @@ import novel.api.types.write.pens.LongPen;
 public interface LongDataWriter extends ObjectDataWriter<Number> {
 
     @Override
-    default void write(DataPen<?> pen, Number object) {
+    default void write(DataPen pen, Number object) {
         write(pen, object.longValue());
     }
 
-    void write(LongPen<?> pen, long object);
+    void write(LongPen pen, long object);
 
 }

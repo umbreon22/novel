@@ -12,5 +12,5 @@ public interface AutoWriteable extends Writeable {
      * Defines a way to write the implementing class.
      * @param output a {@link DataPen}
      */
-    void write(DataPen<?> output);
+    void write(DataPen output);
 }

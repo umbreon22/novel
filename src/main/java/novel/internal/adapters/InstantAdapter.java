@@ -14,7 +14,7 @@ public class InstantAdapter implements ObjectDataAdapter<Instant> {
     }
 
     @Override
-    public void write(DataPen<?> pen, Instant instant) {
+    public void write(DataPen pen, Instant instant) {
         pen.longs(instant.toEpochMilli());
     }
 }
