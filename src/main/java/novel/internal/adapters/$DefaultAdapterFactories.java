@@ -9,6 +9,7 @@ import novel.internal.factories.NovelWrapperAdapterFactory;
 import novel.internal.factories.ReflectiveAdapterFactory;
 import novel.api.types.adapt.ObjectDataAdapter;
 import novel.api.types.token.TypeToken;
+import novel.internal.factories.StreamAdapterFactory;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -92,6 +93,7 @@ public class $DefaultAdapterFactories {
             new CollectionAdapterFactory(),
             new MapAdapterFactory(),
             new ArrayAdapterFactory(),
+            new StreamAdapterFactory(),
             new NovelWrapperAdapterFactory(),
             new ReflectiveAdapterFactory()//This MUST go last
     );

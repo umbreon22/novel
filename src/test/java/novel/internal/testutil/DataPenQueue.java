@@ -16,6 +16,10 @@ import novel.api.types.write.writers.StringDataWriter;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.function.Supplier;
+import java.util.stream.DoubleStream;
+import java.util.stream.IntStream;
+import java.util.stream.LongStream;
+import java.util.stream.Stream;
 
 public class DataPenQueue implements DataPen {
 
@@ -60,6 +64,12 @@ public class DataPenQueue implements DataPen {
     }
 
     @Override
+    public DataPenQueue objects(Stream<? extends AutoWriteable> objects) {
+        DataPen.super.objects(objects);
+        return this;
+    }
+
+    @Override
     public <T> DataPenQueue objects(T object, ObjectDataWriter<T> writer) {
         DataPen.super.objects(object, writer);
         return this;
@@ -73,6 +83,12 @@ public class DataPenQueue implements DataPen {
 
     @Override
     public <T> DataPenQueue objects(Iterable<T> objects, ObjectDataWriter<T> writer) {
+        DataPen.super.objects(objects, writer);
+        return this;
+    }
+
+    @Override
+    public <T> DataPenQueue objects(Stream<T> objects, ObjectDataWriter<T> writer) {
         DataPen.super.objects(objects, writer);
         return this;
     }
@@ -104,6 +120,18 @@ public class DataPenQueue implements DataPen {
     @Override
     public DataPenQueue bools(Iterable<Boolean> booleans) {
         DataPen.super.bools(booleans);
+        return this;
+    }
+
+    @Override
+    public DataPenQueue bools(Stream<Boolean> booleans) {
+        DataPen.super.bools(booleans);
+        return this;
+    }
+
+    @Override
+    public DataPenQueue bools(Stream<Boolean> booleans, BoolDataWriter boolWriter) {
+        DataPen.super.bools(booleans, boolWriter);
         return this;
     }
 
@@ -144,8 +172,38 @@ public class DataPenQueue implements DataPen {
     }
 
     @Override
-    public DataPenQueue ints(Iterable<Integer> ints) {
+    public DataPenQueue ints(Iterable<? extends Number> numbers) {
+        DataPen.super.ints(numbers);
+        return this;
+    }
+
+    @Override
+    public DataPenQueue ints(Iterable<? extends Number> numbers, IntDataWriter intDataWriter) {
+        DataPen.super.ints(numbers, intDataWriter);
+        return this;
+    }
+
+    @Override
+    public DataPenQueue ints(Stream<? extends Number> numbers) {
+        DataPen.super.ints(numbers);
+        return this;
+    }
+
+    @Override
+    public DataPenQueue ints(Stream<? extends Number> numbers, IntDataWriter intDataWriter) {
+        DataPen.super.ints(numbers, intDataWriter);
+        return this;
+    }
+
+    @Override
+    public DataPenQueue ints(IntStream ints) {
         DataPen.super.ints(ints);
+        return this;
+    }
+
+    @Override
+    public DataPenQueue ints(IntStream ints, IntDataWriter intDataWriter) {
+        DataPen.super.ints(ints, intDataWriter);
         return this;
     }
 
@@ -186,8 +244,38 @@ public class DataPenQueue implements DataPen {
     }
 
     @Override
-    public DataPenQueue longs(Iterable<Long> longs) {
+    public DataPenQueue longs(Iterable<? extends Number> numbers) {
+        DataPen.super.longs(numbers);
+        return this;
+    }
+
+    @Override
+    public DataPenQueue longs(Iterable<? extends Number> nums, LongDataWriter longDataWriter) {
+        DataPen.super.longs(nums, longDataWriter);
+        return this;
+    }
+
+    @Override
+    public DataPenQueue longs(Stream<? extends Number> nums) {
+        DataPen.super.longs(nums);
+        return this;
+    }
+
+    @Override
+    public DataPenQueue longs(Stream<? extends Number> nums, LongDataWriter longDataWriter) {
+        DataPen.super.longs(nums, longDataWriter);
+        return this;
+    }
+
+    @Override
+    public DataPenQueue longs(LongStream longs) {
         DataPen.super.longs(longs);
+        return this;
+    }
+
+    @Override
+    public DataPenQueue longs(LongStream longs, LongDataWriter longDataWriter) {
+        DataPen.super.longs(longs, longDataWriter);
         return this;
     }
 
@@ -228,8 +316,26 @@ public class DataPenQueue implements DataPen {
     }
 
     @Override
-    public DataPenQueue shorts(Iterable<Short> shorts) {
-        DataPen.super.shorts(shorts);
+    public DataPenQueue shorts(Iterable<? extends Number> numbers) {
+        DataPen.super.shorts(numbers);
+        return this;
+    }
+
+    @Override
+    public DataPenQueue shorts(Iterable<? extends Number> numbers, ShortDataWriter shortDataWriter) {
+        DataPen.super.shorts(numbers, shortDataWriter);
+        return this;
+    }
+
+    @Override
+    public DataPenQueue shorts(Stream<? extends Number> numbers) {
+        DataPen.super.shorts(numbers);
+        return this;
+    }
+
+    @Override
+    public DataPenQueue shorts(Stream<? extends Number> numbers, ShortDataWriter shortDataWriter) {
+        DataPen.super.shorts(numbers, shortDataWriter);
         return this;
     }
 
@@ -270,8 +376,38 @@ public class DataPenQueue implements DataPen {
     }
 
     @Override
-    public DataPenQueue floats(Iterable<Float> floats) {
-        DataPen.super.floats(floats);
+    public DataPenQueue floats(Iterable<? extends Number> numbers) {
+        DataPen.super.floats(numbers);
+        return this;
+    }
+
+    @Override
+    public DataPenQueue floats(Stream<? extends Number> nums) {
+        DataPen.super.floats(nums);
+        return this;
+    }
+
+    @Override
+    public DataPenQueue floats(Iterable<? extends Number> numbers, FloatDataWriter floatDataWriter) {
+        DataPen.super.floats(numbers, floatDataWriter);
+        return this;
+    }
+
+    @Override
+    public DataPenQueue floats(DoubleStream doubles, FloatDataWriter floatDataWriter) {
+        DataPen.super.floats(doubles, floatDataWriter);
+        return this;
+    }
+
+    @Override
+    public DataPenQueue floats(Stream<? extends Number> numbers, FloatDataWriter floatDataWriter) {
+        DataPen.super.floats(numbers, floatDataWriter);
+        return this;
+    }
+
+    @Override
+    public DataPenQueue floats(DoubleStream doubles) {
+        DataPen.super.floats(doubles);
         return this;
     }
 
@@ -312,8 +448,38 @@ public class DataPenQueue implements DataPen {
     }
 
     @Override
-    public DataPenQueue doubles(Iterable<Double> doubles) {
+    public DataPenQueue doubles(Iterable<? extends Number> numbers) {
+        DataPen.super.doubles(numbers);
+        return this;
+    }
+
+    @Override
+    public DataPenQueue doubles(Iterable<? extends Number> numbers, DoubleDataWriter doubleDataWriter) {
+        DataPen.super.doubles(numbers, doubleDataWriter);
+        return this;
+    }
+
+    @Override
+    public DataPenQueue doubles(Stream<? extends Number> nums) {
+        DataPen.super.doubles(nums);
+        return this;
+    }
+
+    @Override
+    public DataPenQueue doubles(Stream<? extends Number> numbers, DoubleDataWriter doubleDataWriter) {
+        DataPen.super.doubles(numbers, doubleDataWriter);
+        return this;
+    }
+
+    @Override
+    public DataPenQueue doubles(DoubleStream doubles) {
         DataPen.super.doubles(doubles);
+        return this;
+    }
+
+    @Override
+    public DataPenQueue doubles(DoubleStream doubles, DoubleDataWriter doubleDataWriter) {
+        DataPen.super.doubles(doubles, doubleDataWriter);
         return this;
     }
 
@@ -378,6 +544,24 @@ public class DataPenQueue implements DataPen {
     }
 
     @Override
+    public DataPenQueue strings(Stream<? extends CharSequence> strings) {
+        DataPen.super.strings(strings);
+        return this;
+    }
+
+    @Override
+    public DataPenQueue chars(Iterable<Character> chars, CharDataWriter charWriter) {
+        DataPen.super.chars(chars, charWriter);
+        return this;
+    }
+
+    @Override
+    public DataPenQueue chars(Stream<Character> chars, CharDataWriter charWriter) {
+        DataPen.super.chars(chars, charWriter);
+        return this;
+    }
+
+    @Override
     public DataPenQueue strings(CharSequence s, StringDataWriter stringWriter) {
         DataPen.super.strings(s, stringWriter);
         return this;
@@ -420,6 +604,12 @@ public class DataPenQueue implements DataPen {
     }
 
     @Override
+    public DataPenQueue chars(Stream<Character> chars) {
+        DataPen.super.chars(chars);
+        return this;
+    }
+
+    @Override
     public DataPenQueue chars(char c, CharDataWriter charWriter) {
         DataPen.super.chars(c, charWriter);
         return this;
@@ -456,8 +646,26 @@ public class DataPenQueue implements DataPen {
     }
 
     @Override
-    public DataPenQueue bytes(Iterable<Byte> bytes) {
-        DataPen.super.bytes(bytes);
+    public DataPenQueue bytes(Iterable<? extends Number> numbers) {
+        DataPen.super.bytes(numbers);
+        return this;
+    }
+
+    @Override
+    public DataPenQueue bytes(Iterable<? extends Number> numbers, ByteDataWriter byteDataWriter) {
+        DataPen.super.bytes(numbers, byteDataWriter);
+        return this;
+    }
+
+    @Override
+    public DataPenQueue bytes(Stream<? extends Number> numbers) {
+        DataPen.super.bytes(numbers);
+        return this;
+    }
+
+    @Override
+    public DataPenQueue bytes(Stream<? extends Number> numbers, ByteDataWriter byteWriter) {
+        DataPen.super.bytes(numbers, byteWriter);
         return this;
     }
 
@@ -472,4 +680,5 @@ public class DataPenQueue implements DataPen {
         DataPen.super.bytes(bytes, byteWriter);
         return this;
     }
+
 }

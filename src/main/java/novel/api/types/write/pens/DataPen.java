@@ -14,6 +14,10 @@ import novel.api.types.write.writers.StringDataWriter;
 
 import java.util.Objects;
 import java.util.function.Supplier;
+import java.util.stream.DoubleStream;
+import java.util.stream.IntStream;
+import java.util.stream.LongStream;
+import java.util.stream.Stream;
 
 /**
  * Novel's data output interface. You write on paper with a pen!
@@ -67,12 +71,22 @@ public interface DataPen extends
     }
 
     /**
-     * Writes an {@link Iterable} of autowriteables.
-     * @param objects a {@link Iterable<? extends AutoWriteable>}
+     * Writes an {@link Iterable} of {@link AutoWriteable}s.
+     * @param objects a {@link Iterable}
      * @return {@code this}
      */
     default DataPen objects(Iterable<? extends AutoWriteable> objects) {
         for(AutoWriteable o : objects) objects(o);
+        return this;
+    }
+
+    /**
+     * Writes an {@link Stream} of {@link AutoWriteable}s.
+     * @param objects a {@link Iterable}
+     * @return {@code this}
+     */
+    default DataPen objects(Stream<? extends AutoWriteable> objects) {
+        objects.forEach(this::objects);
         return this;
     }
 
@@ -118,6 +132,19 @@ public interface DataPen extends
         return this;
     }
 
+    /**
+     * Writes a {@link Stream<T>} using the provided {@code writer}
+     * @param objects an iterable of objects of type {@code T}
+     * @param writer a {@link ObjectDataWriter<T>} instance
+     * @param <T> {@code object}'s type
+     * @return {@code this}
+     */
+    default <T> DataPen objects(Stream<T> objects, ObjectDataWriter<T> writer) {
+        Objects.requireNonNull(writer);
+        objects.forEach(object -> writer.write(this, object));
+        return this;
+    }
+
     @Override
     DataPen bools(boolean b);
 
@@ -142,6 +169,18 @@ public interface DataPen extends
     @Override
     default DataPen bools(Iterable<Boolean> booleans) {
         BoolPen.super.bools(booleans);
+        return this;
+    }
+
+    @Override
+    default DataPen bools(Stream<Boolean> booleans) {
+        BoolPen.super.bools(booleans);
+        return this;
+    }
+
+    @Override
+    default DataPen bools(Stream<Boolean> booleans, BoolDataWriter boolWriter) {
+        BoolPen.super.bools(booleans, boolWriter);
         return this;
     }
 
@@ -179,8 +218,26 @@ public interface DataPen extends
     }
 
     @Override
-    default DataPen bytes(Iterable<Byte> bytes) {
-        BytePen.super.bytes(bytes);
+    default DataPen bytes(Iterable<? extends Number> numbers) {
+        BytePen.super.bytes(numbers);
+        return this;
+    }
+
+    @Override
+    default DataPen bytes(Iterable<? extends Number> numbers, ByteDataWriter byteDataWriter) {
+        BytePen.super.bytes(numbers, byteDataWriter);
+        return this;
+    }
+
+    @Override
+    default DataPen bytes(Stream<? extends Number> numbers) {
+        BytePen.super.bytes(numbers);
+        return this;
+    }
+
+    @Override
+    default DataPen bytes(Stream<? extends Number> numbers, ByteDataWriter byteWriter) {
+        BytePen.super.bytes(numbers, byteWriter);
         return this;
     }
 
@@ -218,7 +275,25 @@ public interface DataPen extends
     }
 
     @Override
+    default DataPen chars(Iterable<Character> chars, CharDataWriter charWriter) {
+        CharPen.super.chars(chars, charWriter);
+        return this;
+    }
+
+    @Override
+    default DataPen chars(Stream<Character> chars, CharDataWriter charWriter) {
+        CharPen.super.chars(chars, charWriter);
+        return this;
+    }
+
+    @Override
     default DataPen chars(Iterable<Character> chars) {
+        CharPen.super.chars(chars);
+        return this;
+    }
+
+    @Override
+    default DataPen chars(Stream<Character> chars) {
         CharPen.super.chars(chars);
         return this;
     }
@@ -257,8 +332,38 @@ public interface DataPen extends
     }
 
     @Override
-    default DataPen doubles(Iterable<Double> doubles) {
+    default DataPen doubles(Iterable<? extends Number> numbers) {
+        DoublePen.super.doubles(numbers);
+        return this;
+    }
+
+    @Override
+    default DataPen doubles(Iterable<? extends Number> numbers, DoubleDataWriter doubleDataWriter) {
+        DoublePen.super.doubles(numbers, doubleDataWriter);
+        return this;
+    }
+
+    @Override
+    default DataPen doubles(Stream<? extends Number> numbers) {
+        DoublePen.super.doubles(numbers);
+        return this;
+    }
+
+    @Override
+    default DataPen doubles(Stream<? extends Number> numbers, DoubleDataWriter doubleDataWriter) {
+        DoublePen.super.doubles(numbers, doubleDataWriter);
+        return this;
+    }
+
+    @Override
+    default DataPen doubles(DoubleStream doubles) {
         DoublePen.super.doubles(doubles);
+        return this;
+    }
+
+    @Override
+    default DataPen doubles(DoubleStream doubles, DoubleDataWriter doubleDataWriter) {
+        DoublePen.super.doubles(doubles, doubleDataWriter);
         return this;
     }
 
@@ -296,8 +401,38 @@ public interface DataPen extends
     }
 
     @Override
-    default DataPen floats(Iterable<Float> floats) {
-        FloatPen.super.floats(floats);
+    default DataPen floats(Iterable<? extends Number> numbers) {
+        FloatPen.super.floats(numbers);
+        return this;
+    }
+
+    @Override
+    default DataPen floats(Iterable<? extends Number> numbers, FloatDataWriter floatDataWriter) {
+        FloatPen.super.floats(numbers, floatDataWriter);
+        return this;
+    }
+
+    @Override
+    default DataPen floats(Stream<? extends Number> numbers) {
+        FloatPen.super.floats(numbers);
+        return this;
+    }
+
+    @Override
+    default DataPen floats(Stream<? extends Number> numbers, FloatDataWriter floatDataWriter) {
+        FloatPen.super.floats(numbers, floatDataWriter);
+        return this;
+    }
+
+    @Override
+    default DataPen floats(DoubleStream doubles, FloatDataWriter floatDataWriter) {
+        FloatPen.super.floats(doubles, floatDataWriter);
+        return this;
+    }
+
+    @Override
+    default DataPen floats(DoubleStream doubles) {
+        FloatPen.super.floats(doubles);
         return this;
     }
 
@@ -335,8 +470,38 @@ public interface DataPen extends
     }
 
     @Override
-    default DataPen ints(Iterable<Integer> ints) {
+    default DataPen ints(Iterable<? extends Number> numbers) {
+        IntPen.super.ints(numbers);
+        return this;
+    }
+
+    @Override
+    default IntPen ints(Iterable<? extends Number> numbers, IntDataWriter intDataWriter) {
+        IntPen.super.ints(numbers, intDataWriter);
+        return this;
+    }
+
+    @Override
+    default DataPen ints(Stream<? extends Number> numbers) {
+        IntPen.super.ints(numbers);
+        return this;
+    }
+
+    @Override
+    default IntPen ints(Stream<? extends Number> numbers, IntDataWriter intDataWriter) {
+        IntPen.super.ints(numbers, intDataWriter);
+        return this;
+    }
+
+    @Override
+    default DataPen ints(IntStream ints) {
         IntPen.super.ints(ints);
+        return this;
+    }
+
+    @Override
+    default DataPen ints(IntStream ints, IntDataWriter intDataWriter) {
+        IntPen.super.ints(ints, intDataWriter);
         return this;
     }
 
@@ -374,8 +539,38 @@ public interface DataPen extends
     }
 
     @Override
-    default DataPen longs(Iterable<Long> longs) {
+    default DataPen longs(Iterable<? extends Number> numbers) {
+        LongPen.super.longs(numbers);
+        return this;
+    }
+
+    @Override
+    default DataPen longs(Iterable<? extends Number> numbers, LongDataWriter longDataWriter) {
+        LongPen.super.longs(numbers, longDataWriter);
+        return this;
+    }
+
+    @Override
+    default DataPen longs(Stream<? extends Number> numbers) {
+        LongPen.super.longs(numbers);
+        return this;
+    }
+
+    @Override
+    default DataPen longs(Stream<? extends Number> numbers, LongDataWriter longDataWriter) {
+        LongPen.super.longs(numbers, longDataWriter);
+        return this;
+    }
+
+    @Override
+    default DataPen longs(LongStream longs) {
         LongPen.super.longs(longs);
+        return this;
+    }
+
+    @Override
+    default DataPen longs(LongStream longs, LongDataWriter longDataWriter) {
+        LongPen.super.longs(longs, longDataWriter);
         return this;
     }
 
@@ -413,8 +608,26 @@ public interface DataPen extends
     }
 
     @Override
-    default DataPen shorts(Iterable<Short> shorts) {
-        ShortPen.super.shorts(shorts);
+    default DataPen shorts(Iterable<? extends Number> numbers) {
+        ShortPen.super.shorts(numbers);
+        return this;
+    }
+
+    @Override
+    default DataPen shorts(Iterable<? extends Number> numbers, ShortDataWriter shortDataWriter) {
+        ShortPen.super.shorts(numbers, shortDataWriter);
+        return this;
+    }
+
+    @Override
+    default DataPen shorts(Stream<? extends Number> numbers) {
+        ShortPen.super.shorts(numbers);
+        return this;
+    }
+
+    @Override
+    default DataPen shorts(Stream<? extends Number> numbers, ShortDataWriter shortDataWriter) {
+        ShortPen.super.shorts(numbers, shortDataWriter);
         return this;
     }
 
@@ -471,6 +684,12 @@ public interface DataPen extends
 
     @Override
     default DataPen strings(Iterable<? extends CharSequence> strings) {
+        StringPen.super.strings(strings);
+        return this;
+    }
+
+    @Override
+    default DataPen strings(Stream<? extends CharSequence> strings) {
         StringPen.super.strings(strings);
         return this;
     }

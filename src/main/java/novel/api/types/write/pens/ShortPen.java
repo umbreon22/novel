@@ -4,6 +4,7 @@ import novel.api.types.write.writers.ShortDataWriter;
 
 import java.util.Objects;
 import java.util.function.Supplier;
+import java.util.stream.Stream;
 
 public interface ShortPen {
 
@@ -43,12 +44,43 @@ public interface ShortPen {
     }
 
     /**
-     * Writes an {@link Iterable} of shorts.
-     * @param shorts a {@link Iterable<Short>}
+     * Writes an {@link Iterable} as {@link Number#shortValue()}
+     * @param numbers a {@link Iterable} of {@link Number}s
      * @return {@code this}
      */
-    default ShortPen shorts(Iterable<Short> shorts) {
-        for(short s : shorts) shorts(s);
+    default ShortPen shorts(Iterable<? extends Number> numbers) {
+        for(Number num : numbers) shorts(num.shortValue());
+        return this;
+    }
+
+    /**
+     * Writes an {@link Iterable} using {@code shortDataWriter}
+     * @param numbers a {@link Iterable} of {@link Number}s
+     * @param shortDataWriter a {@link ShortDataWriter}
+     * @return {@code this}
+     */
+    default ShortPen shorts(Iterable<? extends Number> numbers, ShortDataWriter shortDataWriter) {
+        for(Number num : numbers) shorts(num.shortValue(), shortDataWriter);
+        return this;
+    }
+
+    /**
+     * Writes a {@link Stream} as {@link Number#shortValue()}.
+     * @param numbers a {@link Stream} of {@link Number}s.
+     * @return {@code this}
+     */
+    default ShortPen shorts(Stream<? extends Number> numbers) {
+        numbers.forEach(number -> this.shorts(number.shortValue()));
+        return this;
+    }
+    /**
+     * Writes an{@link Stream} using {@code shortDataWriter}
+     * @param numbers a {@link Stream} of {@link Number}s.
+     * @param shortDataWriter a {@link ShortDataWriter}
+     * @return {@code this}
+     */
+    default ShortPen shorts(Stream<? extends Number> numbers, ShortDataWriter shortDataWriter) {
+        numbers.forEach(number -> this.shorts(number.shortValue(), shortDataWriter));
         return this;
     }
 
