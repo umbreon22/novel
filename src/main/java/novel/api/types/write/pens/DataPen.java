@@ -608,14 +608,26 @@ public interface DataPen extends
     }
 
     @Override
-    default DataPen shorts(Iterable<Short> shorts) {
-        ShortPen.super.shorts(shorts);
+    default DataPen shorts(Iterable<? extends Number> numbers) {
+        ShortPen.super.shorts(numbers);
         return this;
     }
 
     @Override
-    default DataPen shorts(Stream<? extends Number> shorts) {
-        ShortPen.super.shorts(shorts);
+    default DataPen shorts(Iterable<? extends Number> numbers, ShortDataWriter shortDataWriter) {
+        ShortPen.super.shorts(numbers, shortDataWriter);
+        return this;
+    }
+
+    @Override
+    default DataPen shorts(Stream<? extends Number> numbers) {
+        ShortPen.super.shorts(numbers);
+        return this;
+    }
+
+    @Override
+    default DataPen shorts(Stream<? extends Number> numbers, ShortDataWriter shortDataWriter) {
+        ShortPen.super.shorts(numbers, shortDataWriter);
         return this;
     }
 

@@ -316,14 +316,26 @@ public class DataPenQueue implements DataPen {
     }
 
     @Override
-    public DataPenQueue shorts(Iterable<Short> shorts) {
-        DataPen.super.shorts(shorts);
+    public DataPenQueue shorts(Iterable<? extends Number> numbers) {
+        DataPen.super.shorts(numbers);
+        return this;
+    }
+
+    @Override
+    public DataPenQueue shorts(Iterable<? extends Number> numbers, ShortDataWriter shortDataWriter) {
+        DataPen.super.shorts(numbers, shortDataWriter);
         return this;
     }
 
     @Override
     public DataPenQueue shorts(Stream<? extends Number> numbers) {
         DataPen.super.shorts(numbers);
+        return this;
+    }
+
+    @Override
+    public DataPenQueue shorts(Stream<? extends Number> numbers, ShortDataWriter shortDataWriter) {
+        DataPen.super.shorts(numbers, shortDataWriter);
         return this;
     }
 
