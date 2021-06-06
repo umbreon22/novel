@@ -4,7 +4,7 @@ import novel.api.types.token.TypeToken;
 import novel.api.types.write.CannotWrite;
 
 /**
- * This class repesents a token's adapter that cannot be adapted.
+ * This class represents a token's adapter that cannot be adapted.
  * @param <T>
  */
 public final class CannotAdapt<T> implements ObjectDataAdapter<T>, CannotRead<T>, CannotWrite<T> {
