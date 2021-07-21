@@ -3,9 +3,13 @@ package novel.api;
 import novel.api.types.adapt.Novelable;
 import novel.api.types.adapt.ObjectDataAdapter;
 import novel.api.types.read.ObjectDataReader;
+import novel.api.types.token.TypeToken;
 import novel.api.types.write.writers.ObjectDataWriter;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import java.util.BitSet;
+import java.util.Collection;
 
 public class BuilderTest {
 
@@ -16,6 +20,25 @@ public class BuilderTest {
     private static ObjectDataReader<StrawDummy> strawDummyEmptyReader() { return paper -> new StrawDummy();}
 
     private static ObjectDataWriter<StrawDummy> strawDummyEmptyWriter() { return (pen, strawDummy) -> {};}
+
+    @Test
+    public void testWithDefaultFactories() {
+        Novel.Builder builder = Novel.newBuilder();
+        var withoutDefaults = builder.build();
+        var withDefaults = builder.withDefaultFactories().build();
+        //todo: test for all expected defaults
+        var defaultJavaToken = TypeToken.get(BitSet.class);
+        Assertions.assertFalse(withoutDefaults.canWrite(defaultJavaToken));
+        Assertions.assertTrue(withDefaults.canWrite(defaultJavaToken));
+    }
+
+    @Test
+    public void testRequiredFactories() {
+        var novel = Novel.newBuilder().build();
+        var requiredToken = TypeToken.get(Collection.class);
+        //todo: test for all expected required tokens
+        Assertions.assertTrue(novel.canWrite(requiredToken));
+    }
 
     @Test
     public void testBuildWithSuper() {
