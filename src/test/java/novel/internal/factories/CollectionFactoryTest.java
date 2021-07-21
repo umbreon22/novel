@@ -16,7 +16,7 @@ public class CollectionFactoryTest {
 
     @Test
     void simpleIOTest() throws IOException {
-        var novel = Novel.newBuilder().build();
+        var novel = Novel.newDefaultInstance();
         var data = new Dummy();
         try(ByteArrayOutputStream baos = new ByteArrayOutputStream();
             var out = new NovelPenStream(baos)) {

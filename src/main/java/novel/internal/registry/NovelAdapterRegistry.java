@@ -3,7 +3,7 @@ package novel.internal.registry;
 import novel.api.AdapterRepository;
 import novel.api.Novel;
 import novel.api.Policies;
-import novel.internal.factories.$DefaultAdapterFactories;
+import novel.internal.factories.DefaultAdapterFactories;
 import novel.api.types.factory.AdapterFactory;
 import novel.api.types.adapt.ObjectDataAdapter;
 import novel.api.types.token.TypeToken;
@@ -12,9 +12,9 @@ import novel.api.types.read.ObjectDataReader;
 import novel.api.types.write.pens.DataPen;
 import novel.api.types.write.writers.ObjectDataWriter;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 import java.util.function.BiConsumer;
 
 public class NovelAdapterRegistry implements AdapterRepository {
@@ -22,7 +22,7 @@ public class NovelAdapterRegistry implements AdapterRepository {
     private final ObjectAdapterRegistry adapterRegistry;
     private final Policies policies;
 
-    public NovelAdapterRegistry(Novel parent, Policies policies, List<AdapterFactory> additionalFactories, Map<Class<?>, ObjectDataAdapter<?>> additionalAdapters, Map<Class<?>, ObjectDataWriter<?>> additionalWriters, Map<Class<?>, ObjectDataReader<?>> additionalReaders) {
+    public NovelAdapterRegistry(Novel parent, Policies policies, Set<AdapterFactory> additionalFactories, Map<Class<?>, ObjectDataAdapter<?>> additionalAdapters, Map<Class<?>, ObjectDataWriter<?>> additionalWriters, Map<Class<?>, ObjectDataReader<?>> additionalReaders) {
         this.adapterRegistry = new ObjectAdapterRegistry(parent);
         this.policies = policies;
         registerPrimitives();
@@ -30,7 +30,7 @@ public class NovelAdapterRegistry implements AdapterRepository {
         if(additionalFactories != null && !additionalFactories.isEmpty()) {
             additionalFactories.forEach(this.adapterRegistry::registerLast);
         }
-        $DefaultAdapterFactories.DEFAULT_JAVA_FACTORIES.forEach(this.adapterRegistry::registerLast);
+        DefaultAdapterFactories.REQUIRED_FACTORIES.forEach(this.adapterRegistry::registerLast);
         if(additionalAdapters != null) {
             //noinspection rawtypes
             additionalAdapters.forEach((BiConsumer<Class, ObjectDataAdapter<?>>) this::register);
@@ -46,7 +46,7 @@ public class NovelAdapterRegistry implements AdapterRepository {
     }
 
     NovelAdapterRegistry(Novel parent) {
-        this(parent, Policies.withDefaults(), null, null, null, null);
+        this(parent, Policies.defaultPolicies(), null, null, null, null);
     }
 
     /**

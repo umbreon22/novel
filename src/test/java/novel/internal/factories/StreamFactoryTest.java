@@ -17,7 +17,7 @@ public class StreamFactoryTest {
 
     @Test
     void simpleIOTest() throws IOException {
-        var novel = Novel.newBuilder().build();
+        var novel = Novel.newDefaultInstance();
         try(ByteArrayOutputStream baos = new ByteArrayOutputStream();
             var out = new NovelPenStream(baos)) {
             novel.write(out, new Dummy());

@@ -3,6 +3,7 @@ package novel.api;
 import novel.api.types.annotations.Folio;
 import novel.api.types.read.Audience;
 import novel.api.types.write.Author;
+import novel.internal.factories.DefaultAdapterFactories;
 import novel.internal.reflective.SortedFieldCollector;
 import novel.api.types.adapt.ObjectDataAdapter;
 import novel.api.types.factory.AdapterFactory;
@@ -21,16 +22,7 @@ import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Takes {@link Writeable} and {@link Readable} types and performs read/write operations
@@ -43,14 +35,14 @@ public final class Novel implements Author, Audience {
     private final AdapterRepository contents;
 
     private Novel(
-        int revision,
-        Iterable<Integer> illegalModifiers,
-        Policies policies,
-        Comparator<Field> fallbackComparator,
-        List<AdapterFactory> additionalFactories,
-        Map<Class<?>, ObjectDataAdapter<?>> additionalAdapters,
-        Map<Class<?>, ObjectDataWriter<?>> additionalWriters,
-        Map<Class<?>, ObjectDataReader<?>> additionalReaders
+            int revision,
+            Iterable<Integer> illegalModifiers,
+            Policies policies,
+            Comparator<Field> fallbackComparator,
+            Set<AdapterFactory> additionalFactories,
+            Map<Class<?>, ObjectDataAdapter<?>> additionalAdapters,
+            Map<Class<?>, ObjectDataWriter<?>> additionalWriters,
+            Map<Class<?>, ObjectDataReader<?>> additionalReaders
     ) {
         this.collector = SortedFieldCollector.usingFolio(this, fallbackComparator);
         this.censor = new FieldCensor(revision, illegalModifiers);//todo: poss in policies with more censor control?
@@ -64,7 +56,10 @@ public final class Novel implements Author, Audience {
     }
 
     public static Novel newDefaultInstance() {
-        return new Novel.Builder().build();
+        return new Novel.Builder()
+                .withDefaultPolicies()
+                .withDefaultFactories()
+                .build();
     }
 
     public FieldCensor fieldCensor() {
@@ -132,7 +127,7 @@ public final class Novel implements Author, Audience {
         @SuppressWarnings("ComparatorMethodParameterNotUsed")
         private static final Comparator<Field> COMPARING_FIELD_FOLIO_THEN_NOTHING = (a, b) -> 1;
 
-        private final List<AdapterFactory> additionalFactories;
+        private final Set<AdapterFactory> additionalFactories;
         private final Map<Class<?>, ObjectDataAdapter<?>> additionalAdapters;
         private final Map<Class<?>, ObjectDataWriter<?>> additionalWriters;
         private final Map<Class<?>, ObjectDataReader<?>> additionalReaders;
@@ -142,7 +137,7 @@ public final class Novel implements Author, Audience {
         private Comparator<Field> fallbackFieldComparator;
 
         private Builder() {
-            this.additionalFactories    = new LinkedList<>();
+            this.additionalFactories    = new LinkedHashSet<>();
             this.additionalAdapters     = new HashMap<>();
             this.additionalWriters      = new HashMap<>();
             this.additionalReaders      = new HashMap<>();
@@ -150,6 +145,15 @@ public final class Novel implements Author, Audience {
             this.revision               = 0;
             this.illegalModifiers       = defaultIllegalModifiers();
             this.fallbackFieldComparator = COMPARING_FIELD_FOLIO_THEN_NAME;
+        }
+
+        public Builder withDefaultPolicies() {
+            return withPolicies(Policies.defaultPolicies());
+        }
+
+        public Builder withDefaultFactories() {
+            withFactories(DefaultAdapterFactories.DEFAULT_JAVA_FACTORIES);
+            return this;
         }
 
         /**
@@ -289,7 +293,7 @@ public final class Novel implements Author, Audience {
             return new Novel(
                 revision,
                 illegalModifiers,
-                policies != null ? policies : Policies.withDefaults(),
+                policies != null ? policies : Policies.defaultPolicies(),
                 fallbackFieldComparator,
                 !additionalFactories.isEmpty() ? additionalFactories : null,
                 !additionalAdapters.isEmpty() ? additionalAdapters : null,

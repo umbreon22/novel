@@ -16,10 +16,10 @@ public class Policies {
         this.wrapAdapters = shouldWrapAdapters;
     }
 
-    private static final Policies DEFAULTS = newBuilder().build();
+    private static final Policies DEFAULT_POLICIES = newBuilder().build();
 
-    public static Policies withDefaults() {
-        return DEFAULTS;
+    public static Policies defaultPolicies() {
+        return DEFAULT_POLICIES;
     }
 
     /**

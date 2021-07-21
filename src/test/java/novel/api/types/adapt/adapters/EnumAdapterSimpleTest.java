@@ -10,6 +10,5 @@ class EnumAdapterSimpleTest extends SimpleGoodBadTest<EnumAdapterSimpleTest.Test
     }
     EnumAdapterSimpleTest() {
         super(new EnumAdapter<>(TestEnum.class), TestEnum.PLEASE, stream->stream.strings("owo whats this?"));
-        TestEnum.PLEASE;
     }
 }

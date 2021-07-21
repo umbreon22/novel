@@ -21,7 +21,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
-public class $DefaultAdapterFactories {
+public class DefaultAdapterFactories {
 
     private static final AdapterFactory
             ATOMIC_BOOLEAN_FACTORY = newFactory(new AtomicBooleanAdapter(), AtomicBoolean.class),
@@ -83,7 +83,10 @@ public class $DefaultAdapterFactories {
             INSTANT_FACTORY,
             STRING_BUFFER_FACTORY, STRING_BUILDER_FACTORY,
             URI_FACTORY, URL_FACTORY,
-            UUID_FACTORY,
+            UUID_FACTORY
+    );
+
+    public static final List<AdapterFactory> REQUIRED_FACTORIES = List.of(
             //todo: migrate remaining adapters to static factories?
             new CollectionAdapterFactory(),
             new MapAdapterFactory(),
