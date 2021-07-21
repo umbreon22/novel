@@ -12,6 +12,7 @@ public final class CannotAdapt<T> implements ObjectDataAdapter<T>, CannotRead<T>
     public CannotAdapt(TypeToken<T> token) {this.token = token;}
     @Override
     public TypeToken<?> token() {
+        int a;
         return token;
     }
 }

@@ -3,7 +3,7 @@ package novel.internal.registry;
 import novel.api.AdapterRepository;
 import novel.api.Novel;
 import novel.api.Policies;
-import novel.internal.adapters.$DefaultAdapterFactories;
+import novel.internal.factories.$DefaultAdapterFactories;
 import novel.api.types.factory.AdapterFactory;
 import novel.api.types.adapt.ObjectDataAdapter;
 import novel.api.types.token.TypeToken;
