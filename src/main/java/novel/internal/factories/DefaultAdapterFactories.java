@@ -12,6 +12,7 @@ import java.net.InetAddress;
 import java.net.URI;
 import java.net.URL;
 import java.time.Instant;
+import java.util.BitSet;
 import java.util.Calendar;
 import java.util.Currency;
 import java.util.List;
@@ -29,6 +30,7 @@ public class DefaultAdapterFactories {
             ATOMIC_LONG_FACTORY = newFactory(new AtomicLongAdapter(), AtomicLong.class),
             BIG_DECIMAL_FACTORY = newFactory(new BigDecimalAdapter(), BigDecimal.class),
             BIG_INTEGER_FACTORY = newFactory(new BigIntegerAdapter(), BigInteger.class),
+            BITSET_FACTORY = newFactory(new BitSetAdapter(), BitSet.class),
             CALENDAR_FACTORY = newFactory(new CalendarAdapter(), Calendar.class),
             CLASS_FACTORY = newFactory(new ClassAdapter(), Class.class),
             CURRENCY_FACTORY = newFactory(new CurrencyAdapter(), Currency.class),
@@ -73,7 +75,7 @@ public class DefaultAdapterFactories {
             //todo: primtiives here first? ~> migrate from registry to here?
             //todo: NumberFactory (?)
             ATOMIC_BOOLEAN_FACTORY, ATOMIC_INTEGER_FACTORY, ATOMIC_LONG_FACTORY,
-            BIG_DECIMAL_FACTORY, BIG_INTEGER_FACTORY,
+            BIG_DECIMAL_FACTORY, BIG_INTEGER_FACTORY, BITSET_FACTORY,
             CALENDAR_FACTORY,
             CLASS_FACTORY,
             CURRENCY_FACTORY,
