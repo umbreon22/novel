@@ -3,7 +3,6 @@ package novel.internal.registry;
 import novel.api.AdapterRepository;
 import novel.api.Novel;
 import novel.api.Policies;
-import novel.internal.adapters.$DefaultAdapterFactories;
 import novel.api.types.factory.AdapterFactory;
 import novel.api.types.adapt.ObjectDataAdapter;
 import novel.api.types.token.TypeToken;
@@ -11,42 +10,24 @@ import novel.api.types.read.DataPaper;
 import novel.api.types.read.ObjectDataReader;
 import novel.api.types.write.pens.DataPen;
 import novel.api.types.write.writers.ObjectDataWriter;
+import novel.internal.adapters.TypeTokenAdapter;
 
-import java.util.List;
-import java.util.Map;
 import java.util.Objects;
-import java.util.function.BiConsumer;
 
 public class NovelAdapterRegistry implements AdapterRepository {
 
     private final ObjectAdapterRegistry adapterRegistry;
     private final Policies policies;
 
-    public NovelAdapterRegistry(Novel parent, Policies policies, List<AdapterFactory> additionalFactories, Map<Class<?>, ObjectDataAdapter<?>> additionalAdapters, Map<Class<?>, ObjectDataWriter<?>> additionalWriters, Map<Class<?>, ObjectDataReader<?>> additionalReaders) {
+    public NovelAdapterRegistry(Novel parent, Policies policies) {
         this.adapterRegistry = new ObjectAdapterRegistry(parent);
         this.policies = policies;
         registerPrimitives();
         registerSpecialTypes();
-        if(additionalFactories != null && !additionalFactories.isEmpty()) {
-            additionalFactories.forEach(this.adapterRegistry::registerLast);
-        }
-        $DefaultAdapterFactories.DEFAULT_JAVA_FACTORIES.forEach(this.adapterRegistry::registerLast);
-        if(additionalAdapters != null) {
-            //noinspection rawtypes
-            additionalAdapters.forEach((BiConsumer<Class, ObjectDataAdapter<?>>) this::register);
-        }
-        if(additionalReaders != null) {
-            //noinspection rawtypes
-            additionalReaders.forEach((BiConsumer<Class, ObjectDataReader<?>>) this::register);
-        }
-        if(additionalWriters != null) {
-            //noinspection rawtypes
-            additionalWriters.forEach((BiConsumer<Class, ObjectDataWriter<?>>) this::register);
-        }
     }
 
     NovelAdapterRegistry(Novel parent) {
-        this(parent, Policies.withDefaults(), null, null, null, null);
+        this(parent, Policies.withDefaults());
     }
 
     /**
@@ -91,19 +72,19 @@ public class NovelAdapterRegistry implements AdapterRepository {
         return adapterRegistry.get(token);
     }
 
-    <T> void register(Class<T> clazz, ObjectDataReader<T> reader) {
+    public <T> void register(Class<T> clazz, ObjectDataReader<T> reader) {
         register(TypeToken.get(clazz), reader);
     }
 
-    <T> void register(Class<T> clazz, ObjectDataWriter<T> writer) {
+    public <T> void register(Class<T> clazz, ObjectDataWriter<T> writer) {
         register(TypeToken.get(clazz), writer);
     }
 
-    <T> void register(Class<T> clazz, ObjectDataAdapter<T> adapter) {
+    public <T> void register(Class<T> clazz, ObjectDataAdapter<T> adapter) {
         register(TypeToken.get(clazz), adapter);
     }
 
-    <T> void register(TypeToken<T> token, ObjectDataReader<T> reader) {
+    public <T> void register(TypeToken<T> token, ObjectDataReader<T> reader) {
         ObjectDataWriter<T> writer = writer(token);
         ObjectDataAdapter<T> wrappedAdapter;
         if(writer != null && policies.shouldMergeReadersAndWriters()) {
@@ -114,7 +95,7 @@ public class NovelAdapterRegistry implements AdapterRepository {
         adapterRegistry.register(token, wrappedAdapter);
     }
 
-    <T> void register(TypeToken<T> token, ObjectDataWriter<T> writer) {
+    public <T> void register(TypeToken<T> token, ObjectDataWriter<T> writer) {
         ObjectDataReader<T> reader = reader(token);
         ObjectDataAdapter<T> wrappedAdapter;
         if(reader != null && policies.shouldMergeReadersAndWriters()) {
@@ -125,16 +106,20 @@ public class NovelAdapterRegistry implements AdapterRepository {
         adapterRegistry.register(token, wrappedAdapter);
     }
 
-    <T> void register(TypeToken<T> token, ObjectDataAdapter<T> adapter) {
+    public <T> void register(TypeToken<T> token, ObjectDataAdapter<T> adapter) {
         adapterRegistry.register(token, adapter);
     }
 
-    <T> void register(ObjectDataReader<T> reader, ObjectDataWriter<T> writer, Class<T> clazz) {
+    public <T> void register(ObjectDataReader<T> reader, ObjectDataWriter<T> writer, Class<T> clazz) {
         register(TypeToken.get(clazz), ObjectDataAdapter.wrappedAdapter(reader, writer));
     }
 
-    <T> void register(TypeToken<T> token, ObjectDataReader<T> reader, ObjectDataWriter<T> writer) {
+    public <T> void register(TypeToken<T> token, ObjectDataReader<T> reader, ObjectDataWriter<T> writer) {
         register(token, ObjectDataAdapter.wrappedAdapter(reader, writer));
+    }
+
+    public void register(AdapterFactory factory) {
+        this.adapterRegistry.registerLast(factory);
     }
 
     @Override
