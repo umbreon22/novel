@@ -50,6 +50,7 @@ public class NovelAdapterRegistry implements AdapterRepository {
     private void registerSpecialTypes() {
         register(DataPaper::strings, DataPen::strings, CharSequence.class);
         register(DataPaper::strings, DataPen::strings, String.class);
+        register(TypeToken.class, new TypeTokenAdapter());
     }
 
     private <Boxed> void registerPrimitive(Class<Boxed> primitiveClass, Class<Boxed> boxedClass, ObjectDataReader<Boxed> reader, ObjectDataWriter<Boxed> writer) {
