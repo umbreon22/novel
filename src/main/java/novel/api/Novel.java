@@ -3,6 +3,7 @@ package novel.api;
 import novel.api.types.annotations.Folio;
 import novel.api.types.read.Audience;
 import novel.api.types.write.Author;
+import novel.internal.adapters.$DefaultAdapterFactories;
 import novel.internal.reflective.SortedFieldCollector;
 import novel.api.types.adapt.ObjectDataAdapter;
 import novel.api.types.factory.AdapterFactory;
@@ -31,6 +32,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.function.BiConsumer;
 
 /**
  * Takes {@link Writeable} and {@link Readable} types and performs read/write operations
@@ -40,7 +42,7 @@ public final class Novel implements Author, Audience {
 
     private final FieldCollector collector;
     private final FieldCensor censor;
-    private final AdapterRepository contents;
+    private final NovelAdapterRegistry contents;
 
     private Novel(
         int revision,
@@ -52,11 +54,29 @@ public final class Novel implements Author, Audience {
         Map<Class<?>, ObjectDataWriter<?>> additionalWriters,
         Map<Class<?>, ObjectDataReader<?>> additionalReaders
     ) {
+        this.contents = new NovelAdapterRegistry(this, policies);
         this.collector = SortedFieldCollector.usingFolio(this, fallbackComparator);
         this.censor = new FieldCensor(revision, illegalModifiers);//todo: poss in policies with more censor control?
-        this.contents = new NovelAdapterRegistry(
-        this, policies, additionalFactories, additionalAdapters, additionalWriters, additionalReaders
-        );
+        this.init(additionalFactories, additionalAdapters, additionalWriters, additionalReaders);
+    }
+
+    private void init(List<AdapterFactory> additionalFactories, Map<Class<?>, ObjectDataAdapter<?>> additionalAdapters, Map<Class<?>, ObjectDataWriter<?>> additionalWriters, Map<Class<?>, ObjectDataReader<?>> additionalReaders) {
+        if(additionalFactories != null && !additionalFactories.isEmpty()) {
+            additionalFactories.forEach(contents::register);
+        }
+        $DefaultAdapterFactories.DEFAULT_JAVA_FACTORIES.forEach(contents::register);
+        if(additionalAdapters != null) {
+            //noinspection rawtypes
+            additionalAdapters.forEach((BiConsumer<Class, ObjectDataAdapter<?>>) contents::register);
+        }
+        if(additionalReaders != null) {
+            //noinspection rawtypes
+            additionalReaders.forEach((BiConsumer<Class, ObjectDataReader<?>>) contents::register);
+        }
+        if(additionalWriters != null) {
+            //noinspection rawtypes
+            additionalWriters.forEach((BiConsumer<Class, ObjectDataWriter<?>>) contents::register);
+        }
     }
 
     public static Novel.Builder newBuilder() {
