@@ -18,7 +18,10 @@ public class Policies {
         this.useDefaultFactories = useDefaultFactories;
     }
 
-    private static final Policies DEFAULTS = newBuilder().build();
+    private static final Policies DEFAULTS = newBuilder()
+            .shouldWrapAdapters(false)
+            .shouldUseDefaultFactories(true)
+            .build();
 
     public static Policies withDefaults() {
         return DEFAULTS;
@@ -56,6 +59,11 @@ public class Policies {
 
         Builder shouldWrapAdapters(boolean enabled) {
             this.shouldWrapAdapters = enabled;
+            return this;
+        }
+
+        Builder shouldUseDefaultFactories(boolean enabled) {
+            this.useDefaultFactories = enabled;
             return this;
         }
 
