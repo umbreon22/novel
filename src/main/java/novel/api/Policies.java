@@ -11,9 +11,11 @@ import novel.internal.registry.NovelAdapterRegistry;
 public class Policies {
 
     private final boolean wrapAdapters;
+    private final boolean useDefaultFactories;//may be stupid but ok for now
 
-    private Policies(boolean shouldWrapAdapters) {
+    private Policies(boolean shouldWrapAdapters, boolean useDefaultFactories) {
         this.wrapAdapters = shouldWrapAdapters;
+        this.useDefaultFactories = useDefaultFactories;
     }
 
     private static final Policies DEFAULTS = newBuilder().build();
@@ -39,9 +41,14 @@ public class Policies {
         return new Builder();
     }
 
-    public static class Builder {
+	public boolean shouldUseDefaultJavaFactories() {
+        return useDefaultFactories;
+	}
+
+	public static class Builder {
 
         private boolean shouldWrapAdapters;
+        private boolean useDefaultFactories;
 
         private Builder() {//defaults
             this.shouldWrapAdapters = true;
@@ -53,7 +60,7 @@ public class Policies {
         }
 
         public Policies build() {
-            return new Policies(shouldWrapAdapters);
+            return new Policies(shouldWrapAdapters, useDefaultFactories);
         }
     }
 }

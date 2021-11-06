@@ -57,14 +57,22 @@ public final class Novel implements Author, Audience {
         this.contents = new NovelAdapterRegistry(this, policies);
         this.collector = SortedFieldCollector.usingFolio(this, fallbackComparator);
         this.censor = new FieldCensor(revision, illegalModifiers);//todo: poss in policies with more censor control?
-        this.init(additionalFactories, additionalAdapters, additionalWriters, additionalReaders);
+        this.init(additionalFactories, additionalAdapters, additionalWriters, additionalReaders, policies);
     }
 
-    private void init(List<AdapterFactory> additionalFactories, Map<Class<?>, ObjectDataAdapter<?>> additionalAdapters, Map<Class<?>, ObjectDataWriter<?>> additionalWriters, Map<Class<?>, ObjectDataReader<?>> additionalReaders) {
+    private void init(
+            List<AdapterFactory> additionalFactories,
+            Map<Class<?>, ObjectDataAdapter<?>> additionalAdapters,
+            Map<Class<?>, ObjectDataWriter<?>> additionalWriters,
+            Map<Class<?>, ObjectDataReader<?>> additionalReaders,
+            Policies policies
+    ) {
         if(additionalFactories != null && !additionalFactories.isEmpty()) {
             additionalFactories.forEach(contents::register);
         }
-        $DefaultAdapterFactories.DEFAULT_JAVA_FACTORIES.forEach(contents::register);
+        if(policies.shouldUseDefaultJavaFactories()) {
+            $DefaultAdapterFactories.DEFAULT_JAVA_FACTORIES.forEach(contents::register);
+        }
         if(additionalAdapters != null) {
             //noinspection rawtypes
             additionalAdapters.forEach((BiConsumer<Class, ObjectDataAdapter<?>>) contents::register);
