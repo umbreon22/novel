@@ -265,11 +265,11 @@ public final class Novel implements Author, Audience {
             return this;
         }
 
-        public <T> Builder withSuperAdapter(ObjectDataReader<T> reader, ObjectDataWriter<T> writer, Class<? super T> clazz) {
+        public <T> Builder withSuperReader(ObjectDataReader<T> reader, ObjectDataWriter<T> writer, Class<? super T> clazz) {
             return withSuperAdapter(ObjectDataAdapter.wrappedAdapter(reader, writer), clazz);
         }
 
-        private <T> Builder withSuperAdapter(ObjectDataAdapter<T> adapter, Class<? super T> clazz) {
+        public <T> Builder withSuperAdapter(ObjectDataAdapter<T> adapter, Class<? super T> clazz) {
             if (clazz != null && clazz != Object.class) {
                 withSuperAdapter(adapter, clazz.getSuperclass());
             }
