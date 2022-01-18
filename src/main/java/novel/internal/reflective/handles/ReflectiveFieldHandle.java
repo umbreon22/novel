@@ -7,7 +7,7 @@ import java.lang.reflect.Field;
  */
 class ReflectiveFieldHandle implements ReflectiveHandle {
 
-    private final Field field;
+    protected final Field field;
     ReflectiveFieldHandle(Field field) {
         this.field = field;
     }
