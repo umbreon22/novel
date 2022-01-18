@@ -68,6 +68,7 @@ public class BuilderTest {
         var novel = Novel.newBuilder()
                 .withReader(strawDummyDummyReader, StrawDummy.class)
                 .withWriter(strawDummyDummyWriter, StrawDummy.class)
+                .withPolicies(Policies.newBuilder().shouldWrapAdapters(true).shouldUseDefaultFactories(true).build())
                 .build();
         var repo = novel.contents();
 
