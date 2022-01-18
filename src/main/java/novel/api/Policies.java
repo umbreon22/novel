@@ -57,12 +57,12 @@ public class Policies {
             this.shouldWrapAdapters = true;
         }
 
-        Builder shouldWrapAdapters(boolean enabled) {
+        public Builder shouldWrapAdapters(boolean enabled) {
             this.shouldWrapAdapters = enabled;
             return this;
         }
 
-        Builder shouldUseDefaultFactories(boolean enabled) {
+        public Builder shouldUseDefaultFactories(boolean enabled) {
             this.useDefaultFactories = enabled;
             return this;
         }
