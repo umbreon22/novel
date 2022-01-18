@@ -14,6 +14,9 @@ final class Handles {
 
     private static final MethodHandles.Lookup LOOKUP = MethodHandles.lookup();
     private static final Module thisModule = Handles.class.getModule();
+
+    private static final ReflectionAccessor ACCESSOR = new UnsafeReflectionAccessor();
+
     private Handles() { throw new UnsupportedOperationException("no"); }
 
     /**
@@ -23,6 +26,10 @@ final class Handles {
     static ReflectiveHandle acquire(Field field) {
         ReflectiveHandle acquiredHandle;
         MethodHandles.Lookup lookup = LOOKUP;
+        if(field.getType().isPrimitive()) {
+            ACCESSOR.makeAccessible(field);
+            return createPrimitiveFieldHandle(field);
+        }
         try {
             if(!thisModule.canUse(field.getType())) {
                 log.warn("Unable to access module. Please use \"{}\" for optimal performance.",
@@ -43,10 +50,74 @@ final class Handles {
                 log.warn("Could not acquire VarHandle or MethodHandle for {}, using the field directly because {}",
                     fullFieldString(field), x.getMessage()
                 );
+                ACCESSOR.makeAccessible(field);
                 acquiredHandle = new ReflectiveFieldHandle(field);
             }
         }
         return acquiredHandle;
+    }
+
+    private static ReflectiveHandle createPrimitiveFieldHandle(Field field) {
+        var type = field.getType();
+        if (int.class.equals(type)) {
+            return new ReflectiveFieldHandle(field) {
+                @Override
+                public void set(Object instance, Object memberValue) throws IllegalAccessException {
+                    this.field.setInt(instance, (int) memberValue);
+                }
+            };
+        } else if(long.class.equals(type)) {
+            return new ReflectiveFieldHandle(field) {
+                @Override
+                public void set(Object instance, Object memberValue) throws IllegalAccessException {
+                    this.field.setLong(instance, (long) memberValue);
+                }
+            };
+        } else if(short.class.equals(type)) {
+            return new ReflectiveFieldHandle(field) {
+                @Override
+                public void set(Object instance, Object memberValue) throws IllegalAccessException {
+                    this.field.setShort(instance, (short) memberValue);
+                }
+            };
+        } else if(byte.class.equals(type)) {
+            return new ReflectiveFieldHandle(field) {
+                @Override
+                public void set(Object instance, Object memberValue) throws IllegalAccessException {
+                    this.field.setByte(instance, (byte) memberValue);
+                }
+            };
+        } else if(char.class.equals(type)) {
+            return new ReflectiveFieldHandle(field) {
+                @Override
+                public void set(Object instance, Object memberValue) throws IllegalAccessException {
+                    this.field.setChar(instance, (char) memberValue);
+                }
+            };
+        } else if(boolean.class.equals(type)) {
+            return new ReflectiveFieldHandle(field) {
+                @Override
+                public void set(Object instance, Object memberValue) throws IllegalAccessException {
+                    this.field.setBoolean(instance, (boolean) memberValue);
+                }
+            };
+        } else if(float.class.equals(type)) {
+            return new ReflectiveFieldHandle(field) {
+                @Override
+                public void set(Object instance, Object memberValue) throws IllegalAccessException {
+                    this.field.setFloat(instance, (float) memberValue);
+                }
+            };
+        } else if(double.class.equals(type)) {
+            return new ReflectiveFieldHandle(field) {
+                @Override
+                public void set(Object instance, Object memberValue) throws IllegalAccessException {
+                    this.field.setDouble(instance, (double) memberValue);
+                }
+            };
+        } else {
+            throw new IllegalArgumentException("Unsupported primitive: " + type);
+        }
     }
 
     private static String fullFieldString(Field field) {

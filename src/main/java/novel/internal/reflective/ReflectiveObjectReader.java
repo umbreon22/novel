@@ -4,22 +4,20 @@ import novel.api.Novel;
 import novel.api.types.read.DataPaper;
 import novel.api.types.read.ObjectDataReader;
 import novel.api.types.token.TypeToken;
-import sun.reflect.ReflectionFactory;
-
-import java.lang.reflect.Constructor;
-import java.util.function.Supplier;
+import novel.internal.reflective.constructor.ReflectiveConstructor;
+import novel.internal.reflective.constructor.UnsafeInstanceConstructor;
 
 public abstract class ReflectiveObjectReader<T, F> implements ObjectDataReader<T> {
 
     protected final Novel novel;
     private final Iterable<F> sourceFields;
-    private final Supplier<T> constructor;
+    private final ReflectiveConstructor<T> constructor;
     private final boolean isClassNullsafe;
 
     public ReflectiveObjectReader(Novel novel, TypeToken<T> source) {
         this.novel = novel;
         this.sourceFields = supplyFields(novel, source);
-        this.constructor = new UnsafeInstanceConstructor(source.getRawType());
+        this.constructor = new UnsafeInstanceConstructor(source.getRawType(), Object.class);
         this.isClassNullsafe = ReflectiveUtil.isNullsafe(source.getRawType());
     }
 
@@ -28,7 +26,7 @@ public abstract class ReflectiveObjectReader<T, F> implements ObjectDataReader<T
     @Override
     public T read(DataPaper paper) {
         try {
-            T instance = constructor.get();
+            T instance = constructor.construct();
             for (var field : sourceFields) {
                 readField(paper, field, instance);
             }
