@@ -13,7 +13,7 @@ import java.util.function.Consumer;
 @Disabled()
 public abstract class SimpleGoodBadTest<T> extends TestWithStreams<T> {
 
-    private final ObjectDataAdapter<T> adapter;
+    protected final ObjectDataAdapter<T> adapter;
     private final T goodWriteMe;
     private final Consumer<NovelPenStream> badWrite;
 
