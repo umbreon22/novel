@@ -3,6 +3,7 @@ package novel.internal.registry;
 
 import novel.api.Novel;
 import novel.api.types.adapt.CannotAdapt;
+import novel.api.types.adapt.SuperAdapter;
 import novel.api.types.factory.AdapterFactory;
 import novel.api.types.adapt.ObjectDataAdapter;
 import novel.api.types.token.TypeToken;
@@ -17,13 +18,35 @@ class ObjectAdapterRegistry extends TokenRegistry<ObjectDataAdapter<?>, AdapterF
 
     @SuppressWarnings("unchecked")
     public <T> ObjectDataAdapter<T> get(TypeToken<T> typeToken) {
-        var adapter = tokenMap.get(typeToken);
+        ObjectDataAdapter<T> adapter = (ObjectDataAdapter<T>) tokenMap.get(typeToken);
         if(adapter != null) {
-            return (ObjectDataAdapter<T>) adapter;
+            return adapter;
         }
-        var newAdapter = findFactoryAndCreate(typeToken).orElse(new CannotAdapt<>(typeToken));
-        register(typeToken, newAdapter);
-        return newAdapter;
+        adapter = findSuperAdapter(typeToken.getRawType());
+        if (adapter == null) {
+            adapter = findFactoryAndCreate(typeToken).orElse(new CannotAdapt<>(typeToken));
+        }
+        register(typeToken, adapter);
+        return adapter;
+    }
+
+    @SuppressWarnings("unchecked")
+    private <T> ObjectDataAdapter<T> findSuperAdapter(Class<? super T> rawType) {
+        var superClass = rawType.getSuperclass();
+        if(superClass == null
+                || superClass == Object.class
+                || rawType.getTypeParameters().length > 0
+        ) {
+            //todo: perhaps transfer type parameters to the parent class if applicable?
+            return null;
+        } else {
+            var adapter = tokenMap.get(TypeToken.get(rawType.getSuperclass()));
+            if(adapter instanceof SuperAdapter) {
+                return (ObjectDataAdapter<T>) adapter;
+            } else {
+                return findSuperAdapter(superClass);
+            }
+        }
     }
 
     private <T> Optional<ObjectDataAdapter<T>> findFactoryAndCreate(TypeToken<T> typeToken) {
