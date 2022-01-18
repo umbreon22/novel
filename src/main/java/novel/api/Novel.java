@@ -273,7 +273,7 @@ public final class Novel implements Author, Audience {
             if (clazz != null && clazz != Object.class) {
                 withSuperAdapter(adapter, clazz.getSuperclass());
             }
-            return withAdapter(adapter, clazz);
+            return withAdapter(adapter.asSuper(), clazz);
         }
 
         public <T> Builder withSuperWriter(ObjectDataWriter<T> writer, Class<? super T> clazz) {

@@ -54,4 +54,14 @@ public interface ObjectDataAdapter<T> extends ObjectDataWriter<T>, ObjectDataRea
             return this;
         } else return new NullsafeAdapter<>(this);
     }
+
+    /**
+     * Wraps the current adapter around a {@link SuperAdapter} if possible.
+     * @return a {@link SuperAdapter} or {@code this}
+     */
+    default ObjectDataAdapter<T> asSuper() {
+        if(this instanceof SuperAdapter) {
+            return this;
+        } else return new SuperAdapter<>(this);
+    }
 }
