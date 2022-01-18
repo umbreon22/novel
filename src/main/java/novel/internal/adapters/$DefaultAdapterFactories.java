@@ -6,6 +6,7 @@ import novel.internal.factories.ArrayAdapterFactory;
 import novel.internal.factories.CollectionAdapterFactory;
 import novel.internal.factories.MapAdapterFactory;
 import novel.internal.factories.NovelWrapperAdapterFactory;
+import novel.internal.factories.RecordAdapterFactory;
 import novel.internal.factories.ReflectiveAdapterFactory;
 import novel.api.types.adapt.ObjectDataAdapter;
 import novel.api.types.token.TypeToken;
@@ -90,6 +91,7 @@ public class $DefaultAdapterFactories {
             URI_FACTORY, URL_FACTORY,
             UUID_FACTORY,
             //todo: migrate remaining adapters to static factories?
+            new RecordAdapterFactory(),
             new CollectionAdapterFactory(),
             new MapAdapterFactory(),
             new ArrayAdapterFactory(),
